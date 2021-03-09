@@ -1,4 +1,4 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:unified="sap.ui.unified" controllerName="dma.zcockpit.controller.Home">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:unified="sap.ui.unified" controllerName="dma.zfichatec.controller.Home">
 	<App id="homeId">
 		<pages>
 			<Page title="Ficha Técnica" enableScrolling="false">

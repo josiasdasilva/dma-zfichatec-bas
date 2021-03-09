@@ -14,7 +14,7 @@
             "version": "0.0.0"
         },
         "dataSources": {
-            "ZCOCKPIT_COMERCIAL_SRV": {
+            "ZCOCKPIT_FICHATEC_SRV": {
                 "uri": "/sap/opu/odata/sap/ZCOCKPIT_FICHATEC_SRV/",
                 "type": "OData",
                 "settings": {
@@ -64,7 +64,7 @@
             "i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
                 "settings": {
-                    "bundleName": "dma.zcockpit.i18n.i18n"
+                    "bundleName": "dma.zfichatec.i18n.i18n"
                 }
             },
             "": {
@@ -91,7 +91,7 @@
             "config": {
                 "routerClass": "sap.m.routing.Router",
                 "viewType": "XML",
-                "viewPath": "dma.zcockpit.view",
+                "viewPath": "dma.zfichatec.view",
                 "controlId": "homeId",
                 "controlAggregation": "pages",
                 "async": true,
