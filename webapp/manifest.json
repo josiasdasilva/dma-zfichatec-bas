@@ -1,0 +1,119 @@
+{
+    "_version": "1.8.0",
+    "sap.app": {
+        "id": "dma.zfichatec",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "sourceTemplate": {
+            "id": "servicecatalog.connectivityComponentForManifest",
+            "version": "0.0.0"
+        },
+        "dataSources": {
+            "ZCOCKPIT_COMERCIAL_SRV": {
+                "uri": "/sap/opu/odata/sap/ZCOCKPIT_FICHATEC_SRV/",
+                "type": "OData",
+                "settings": {
+                    "localUri": "localService/metadata.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "sap-icon://detail-view",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": false,
+            "phone": false
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_bluecrystal"
+        ]
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "dma.zfichatec.view.Home",
+            "type": "XML"
+        },
+        "dependencies": {
+            "minUI5Version": "1.38.0",
+            "libs": {
+                "sap.ui.layout": {},
+                "sap.ui.core": {},
+                "sap.m": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "dma.zcockpit.i18n.i18n"
+                }
+            },
+            "": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "OneWay",
+                    "defaultCountMode": "Request",
+                    "defaultUpdateMethod": "PUT"
+                },
+                "dataSource": "ZCOCKPIT_FICHATEC_SRV",
+                "preload": true
+            }
+        },
+        "resources": {
+            "css": [{
+                "uri": "css/style.css"
+            }],
+            "js": [{
+                "uri": "model/jspdf.min.js"
+            }]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "dma.zcockpit.view",
+                "controlId": "homeId",
+                "controlAggregation": "pages",
+                "async": true,
+                "clearControlAggregation": false,
+                "transition": "slide"
+            },
+            "routes": [{
+                    "pattern": "",
+                    "name": "home",
+                    "target": "home"
+                }
+            ],
+            "targets": {
+                "home": {
+                    "viewName": "Home",
+                    "viewLevel": 1
+                }
+            }
+        }
+    },
+    "sap.platform.abap": {
+        "uri": "/sap/bc/ui5_ui5/sap/zfichatec/webapp",
+        "_version": "1.1.0"
+    }
+}

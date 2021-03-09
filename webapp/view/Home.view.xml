@@ -1,0 +1,22 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:unified="sap.ui.unified" controllerName="dma.zcockpit.controller.Home">
+	<App id="homeId">
+		<pages>
+			<Page title="Ficha Técnica" enableScrolling="false">
+				<FlexBox width="100%" direction="Column" fitContainer="true">
+					<items>
+						<FlexBox width="100%" direction="Column" fitContainer="true">
+							<items>
+								<FlexBox width="100%" justifyContent="Center" height="auto" fitContainer="true" alignContent="Center">
+									<items>
+										<Image width="auto" height="470px" id="img_epa" src="img/background_cockpit.png" densityAware="false"/>
+									</items>
+								</FlexBox>
+							</items>
+						</FlexBox>
+					</items>
+				</FlexBox>
+				<content/>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
