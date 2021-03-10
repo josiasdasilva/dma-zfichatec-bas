@@ -1,7 +1,19 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:unified="sap.ui.unified" controllerName="dma.zfichatec.controller.Home">
+<mvc:View
+    controllerName="dma.zfichatec.controller.Home"
+    xmlns="sap.m"
+    xmlns:control="sap.gantt.control"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:unified="sap.ui.unified" >
 	<App id="homeId">
-		<pages>
-			<Page title="Ficha Técnica" enableScrolling="false">
+        <NavContainer id="idWizardNavContainer1">
+            <pages>
+                <Page
+                    id="idWizardContentPage1"
+                    showHeader="false"
+                    title="{i18n>appTitle}"
+                    enableScrolling="false">
+<!--
 				<FlexBox width="100%" direction="Column" fitContainer="true">
 					<items>
 						<FlexBox width="100%" direction="Column" fitContainer="true">
@@ -16,7 +28,233 @@
 					</items>
 				</FlexBox>
 				<content/>
-			</Page>
-		</pages>
+-->
+                    <content>
+
+                        <Wizard
+                            id="idWizard01"
+                            finishButtonText="{i18n>pesquisar_lbl}"
+                            complete="completedHandlerWizard01">
+
+                            <WizardStep id="idWizardStep1"
+                                        title="{i18n>tela_inicial_tit}"
+                                        validated="true">
+
+                                <HBox
+                                    alignItems="Start"
+                                    justifyContent="Start"
+                                    width="50%">
+                                    <Label
+                                        text="{i18n>comprador_lbl}:"
+                                        width="76px"
+                                        class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                    <Input
+                                        id="idInputCompradorCod1"
+                                        maxLength="3"
+                                        width="85px"
+                                        showValueHelp="true" />
+                                    <Input
+                                        id="idInputCompradorDescr1"
+                                        enabled="false" value="placeholder"
+                                        class="sapUiSmallMarginBegin" />
+                                </HBox>
+                                    
+                                <HBox
+                                    alignItems="Start"
+                                    justifyContent="Start"
+                                    width="50%">
+                                    <Label
+                                        text="{i18n>fornecedor_lbl}:"
+                                        width="76px"
+                                        class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                    <Input
+                                        id="idInputFornecedorCod1"
+                                        maxLength="10"
+                                        width="140px"
+                                        showValueHelp="true" />
+                                    <Input
+                                        id="idInputFornecedorDescr1"
+                                        enabled="false" value="placeholder"
+                                        class="sapUiSmallMarginBegin" />
+                                </HBox>
+                                    
+                                <HBox
+                                    alignItems="Start"
+                                    justifyContent="Start"
+                                    width="50%">
+                                    <Label
+                                        text="{i18n>contrato_lbl}:"
+                                        width="76px"
+                                        class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                    <Input
+                                        id="idInputContrato1"
+                                        maxLength="10"
+                                        width="140px"
+                                        showValueHelp="true" />
+                                </HBox>
+
+                            </WizardStep>
+
+                            <WizardStep id="idWizardStep2"
+                                        title="{i18n>vis_relat_tit}"
+                                        validated="true">
+                                <HBox
+                                    alignItems="Start"
+                                    justifyContent="Start"
+                                    width="50%">
+                                    <RadioButton groupName="GroupVisRelat" text="{i18n>uf_lbl}" selected="true" class="sapUiMediumMarginEnd" />
+                                    <RadioButton groupName="GroupVisRelat" text="{i18n>grp_precos_lbl}" class="sapUiMediumMarginEnd" />
+                                    <RadioButton groupName="GroupVisRelat" text="{i18n>fonte_supr_lbl}" class="sapUiMediumMarginEnd" />
+                                </HBox>
+
+                                <HBox
+                                    alignItems="Start"
+                                    justifyContent="Start"
+                                    width="50%">
+                                    <RadioButton groupName="GroupVisRelat" text="{i18n>loja_lbl}" class="sapUiMediumMarginEnd" />
+                                    <RadioButton groupName="GroupVisRelat" text="{i18n>sortim_lbl}" />
+                                </HBox>
+                            </WizardStep>
+
+                            <WizardStep id="idWizardStep3"
+                                        title="{i18n>filtros_tit}"
+                                        validated="true">
+                                <HBox
+                                    alignItems="Start"
+                                    justifyContent="Start"
+                                    width="50%"
+                                    class="sapUiLargeMarginEnd" >
+                                    
+                                    <VBox>
+                                        <CheckBox
+                                            id="idCheckBoxSomenteMatXdock1"
+                                            text="{i18n>somente_mat_xdock_lbl}"
+                                            selected="false" />
+                                        
+                                        <HBox
+                                            class="sapUiSmallMarginTop" >
+                                            <Label
+                                                text="{i18n>fonte_de_lbl}:"
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                            <Input
+                                                id="idInputFonteDe1"
+                                                maxLength="10"
+                                                width="140px"
+                                                showValueHelp="true" />
+                                        </HBox>
+
+                                        <HBox
+                                            class="sapUiTinyMarginTop" >
+                                            <Label
+                                                text="{i18n>status_mat_lbl}: ="
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                            <Input
+                                                id="idInputStatusMat1"
+                                                maxLength="3"
+                                                width="85px"
+                                                showValueHelp="true" />
+                                        </HBox>
+
+                                        <HBox
+                                            class="sapUiTinyMarginTop" >
+                                            <Label
+                                                text="{i18n>depart_lbl}:"
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                            <Input
+                                                id="idInputDepart1"
+                                                maxLength="5"
+                                                width="100px"
+                                                showValueHelp="true" />
+                                        </HBox>
+
+                                        <HBox
+                                            class="sapUiTinyMarginTop" >
+                                            <Label
+                                                text="{i18n>no_de_lbl}:"
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                            <Input
+                                                id="idInputNoDe1"
+                                                maxLength="12"
+                                                width="160px"
+                                                showValueHelp="true" />
+                                        </HBox>
+
+                                    </VBox>
+
+                                    <VBox
+                                        class="sapUiLargeMarginBegin" >
+                                        <Label text="{i18n>bandeira_lbl}:" />
+                                        <HBox>
+                                            <RadioButton groupName="GroupBandeira" text="{i18n>atacado_lbl}" selected="true" class="sapUiMediumMarginEnd" />
+                                            <RadioButton groupName="GroupBandeira" text="{i18n>varejo_lbl}" />
+                                        </HBox>
+
+                                        <Label
+                                            text="{i18n>filtros_visoes_lbl}:"
+                                            class="sapUiSmallMarginTop" />
+                                        <HBox
+                                            class="sapUiTinyMarginTop" >
+                                            <Label
+                                                text="{i18n>uf_lbl}:"
+                                                width="50px"
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                            <Input
+                                                id="idInputUf1"
+                                                maxLength="2"
+                                                width="85px"
+                                                showValueHelp="true" />
+
+                                            <Label
+                                                text="{i18n>grp_precos_lbl}:"
+                                                width="110px"
+                                                class="sapUiSmallMarginTop sapUiSmallMarginBegin" />
+                                            <Input
+                                                id="idInputGrpPrecos1"
+                                                maxLength="3"
+                                                width="85px"
+                                                showValueHelp="true"
+                                                class="sapUiTinyMarginBegin" />
+                                        </HBox>
+
+                                        <HBox
+                                            class="sapUiTinyMarginTop" >
+                                            <Label
+                                                text="{i18n>loja_lbl}:"
+                                                width="50px"
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                            <Input
+                                                id="idInputLoja1"
+                                                maxLength="4"
+                                                width="85px"
+                                                showValueHelp="true" />
+
+                                            <Label
+                                                text="{i18n>sortim_lbl}:"
+                                                width="110px"
+                                                class="sapUiSmallMarginTop sapUiSmallMarginBegin" />
+                                            <Input
+                                                id="idInputSortim1"
+                                                maxLength="8"
+                                                width="140px"
+                                                showValueHelp="true"
+                                                class="sapUiTinyMarginBegin" />
+                                        </HBox>
+                                    </VBox>
+
+                                </HBox>
+                            </WizardStep>
+                        </Wizard>
+                    </content>
+<!-- 
+                    <footer>
+                        <OverflowToolbar>
+                            <ToolbarSpacer/>
+                            <Button text="Cancel" press="handleWizardCancel"/>
+                        </OverflowToolbar>
+                    </footer>
+ -->
+                </Page>
+            </pages>
+        </NavContainer>
 	</App>
 </mvc:View>

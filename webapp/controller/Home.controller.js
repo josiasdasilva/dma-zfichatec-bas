@@ -14,11 +14,16 @@ sap.ui.define([
 		_aDialogTypes: null,
 		sUname: '',
 		sEkgrp: '',
-		// _idAppntOverSeven: null,
+        // _idAppntOverSeven: null,
+
 		onInit: function () {
 			var sRootPath = jQuery.sap.getModulePath("dma.zfichatec");
 			var sImagePath = sRootPath + "/img/background_cockpit.png";
-			this.byId("img_epa").setSrc(sImagePath); /* popula dados da Agenda */
-		}
+			// this.byId("img_epa").setSrc(sImagePath); /* popula dados da Agenda */
+        },
+        
+        completedHandlerWizard01: function(oEvt){
+            sap.m.MessageToast.show("Em desenvolvimento (Placeholder)");
+        }
 	});
 });
