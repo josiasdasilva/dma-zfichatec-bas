@@ -51,11 +51,15 @@
                                     <Input
                                         id="idInputCompradorCod1"
                                         maxLength="3"
+                                        value="{modelScreenParams>/screen1/idInputCompradorCod1}"
+                                        valueLiveUpdate="true"
                                         width="85px"
-                                        showValueHelp="true" />
+                                        showValueHelp="true"
+                                        valueHelpRequest="onValueHelpComprador" />
                                     <Input
                                         id="idInputCompradorDescr1"
-                                        enabled="false" value="placeholder"
+                                        value="{modelScreenParams>/screen1/idInputCompradorDescr1}"
+                                        enabled="false"
                                         class="sapUiSmallMarginBegin" />
                                 </HBox>
                                     
@@ -70,11 +74,14 @@
                                     <Input
                                         id="idInputFornecedorCod1"
                                         maxLength="10"
+                                        value="{modelScreenParams>/screen1/idInputFornecedorCod1}"
                                         width="140px"
-                                        showValueHelp="true" />
+                                        showValueHelp="true"
+                                        valueHelpRequest="onValueHelpFornecedor" />
                                     <Input
                                         id="idInputFornecedorDescr1"
-                                        enabled="false" value="placeholder"
+                                        value="{modelScreenParams>/screen1/idInputFornecedorDescr1}"
+                                        enabled="false"
                                         class="sapUiSmallMarginBegin" />
                                 </HBox>
                                     
@@ -89,8 +96,10 @@
                                     <Input
                                         id="idInputContrato1"
                                         maxLength="10"
+                                        value="{modelScreenParams>/screen1/idInputContrato1}"
                                         width="140px"
-                                        showValueHelp="true" />
+                                        showValueHelp="true"
+                                        valueHelpRequest="onValueHelpContrato" />
                                 </HBox>
 
                             </WizardStep>
@@ -102,17 +111,17 @@
                                     alignItems="Start"
                                     justifyContent="Start"
                                     width="50%">
-                                    <RadioButton groupName="GroupVisRelat" text="{i18n>uf_lbl}" selected="true" class="sapUiMediumMarginEnd" />
-                                    <RadioButton groupName="GroupVisRelat" text="{i18n>grp_precos_lbl}" class="sapUiMediumMarginEnd" />
-                                    <RadioButton groupName="GroupVisRelat" text="{i18n>fonte_supr_lbl}" class="sapUiMediumMarginEnd" />
+                                    <RadioButton groupName="GroupVisRelat" text="{i18n>uf_lbl}" class="sapUiMediumMarginEnd" selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '1' }" />
+                                    <RadioButton groupName="GroupVisRelat" text="{i18n>grp_precos_lbl}" class="sapUiMediumMarginEnd" selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '2' }" />
+                                    <RadioButton groupName="GroupVisRelat" text="{i18n>fonte_supr_lbl}" class="sapUiMediumMarginEnd" selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '3' }" />
                                 </HBox>
 
                                 <HBox
                                     alignItems="Start"
                                     justifyContent="Start"
                                     width="50%">
-                                    <RadioButton groupName="GroupVisRelat" text="{i18n>loja_lbl}" class="sapUiMediumMarginEnd" />
-                                    <RadioButton groupName="GroupVisRelat" text="{i18n>sortim_lbl}" />
+                                    <RadioButton groupName="GroupVisRelat" text="{i18n>loja_lbl}" class="sapUiMediumMarginEnd" selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '4' }" />
+                                    <RadioButton groupName="GroupVisRelat" text="{i18n>sortim_lbl}" selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '5' }" />
                                 </HBox>
                             </WizardStep>
 
@@ -129,7 +138,7 @@
                                         <CheckBox
                                             id="idCheckBoxSomenteMatXdock1"
                                             text="{i18n>somente_mat_xdock_lbl}"
-                                            selected="false" />
+                                            selected="{= ${modelScreenParams>/screen1/idCheckBoxSomenteMatXdock1} === true }" />
                                         
                                         <HBox
                                             class="sapUiSmallMarginTop" >
@@ -139,6 +148,7 @@
                                             <Input
                                                 id="idInputFonteDe1"
                                                 maxLength="10"
+                                                value="{modelScreenParams>/screen1/idInputFonteDe1}"
                                                 width="140px"
                                                 showValueHelp="true" />
                                         </HBox>
@@ -151,6 +161,7 @@
                                             <Input
                                                 id="idInputStatusMat1"
                                                 maxLength="3"
+                                                value="{modelScreenParams>/screen1/idInputStatusMat1}"
                                                 width="85px"
                                                 showValueHelp="true" />
                                         </HBox>
@@ -163,6 +174,7 @@
                                             <Input
                                                 id="idInputDepart1"
                                                 maxLength="5"
+                                                value="{modelScreenParams>/screen1/idInputDepart1}"
                                                 width="100px"
                                                 showValueHelp="true" />
                                         </HBox>
@@ -175,6 +187,7 @@
                                             <Input
                                                 id="idInputNoDe1"
                                                 maxLength="12"
+                                                value="{modelScreenParams>/screen1/idInputNoDe1}"
                                                 width="160px"
                                                 showValueHelp="true" />
                                         </HBox>
@@ -185,8 +198,14 @@
                                         class="sapUiLargeMarginBegin" >
                                         <Label text="{i18n>bandeira_lbl}:" />
                                         <HBox>
-                                            <RadioButton groupName="GroupBandeira" text="{i18n>atacado_lbl}" selected="true" class="sapUiMediumMarginEnd" />
-                                            <RadioButton groupName="GroupBandeira" text="{i18n>varejo_lbl}" />
+                                            <CheckBox
+                                                id="idCheckBoxAtacado1"
+                                                text="{i18n>atacado_lbl}"
+                                                selected="{= ${modelScreenParams>/screen1/idCheckBoxAtacado1} === true }" />
+                                            <CheckBox
+                                                id="idCheckBoxVarejo1"
+                                                text="{i18n>varejo_lbl}"
+                                                selected="{= ${modelScreenParams>/screen1/idCheckBoxVarejo1} === true }" />
                                         </HBox>
 
                                         <Label
@@ -201,6 +220,7 @@
                                             <Input
                                                 id="idInputUf1"
                                                 maxLength="2"
+                                                value="{modelScreenParams>/screen1/idInputUf1}"
                                                 width="85px"
                                                 showValueHelp="true" />
 
@@ -211,6 +231,7 @@
                                             <Input
                                                 id="idInputGrpPrecos1"
                                                 maxLength="3"
+                                                value="{modelScreenParams>/screen1/idInputGrpPrecos1}"
                                                 width="85px"
                                                 showValueHelp="true"
                                                 class="sapUiTinyMarginBegin" />
@@ -225,6 +246,7 @@
                                             <Input
                                                 id="idInputLoja1"
                                                 maxLength="4"
+                                                value="{modelScreenParams>/screen1/idInputLoja1}"
                                                 width="85px"
                                                 showValueHelp="true" />
 
@@ -235,6 +257,7 @@
                                             <Input
                                                 id="idInputSortim1"
                                                 maxLength="8"
+                                                value="{modelScreenParams>/screen1/idInputSortim1}"
                                                 width="140px"
                                                 showValueHelp="true"
                                                 class="sapUiTinyMarginBegin" />

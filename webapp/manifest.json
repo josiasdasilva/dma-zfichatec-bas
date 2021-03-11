@@ -61,12 +61,6 @@
             "cozy": true
         },
         "models": {
-            "i18n": {
-                "type": "sap.ui.model.resource.ResourceModel",
-                "settings": {
-                    "bundleName": "dma.zfichatec.i18n.i18n"
-                }
-            },
             "": {
                 "type": "sap.ui.model.odata.v2.ODataModel",
                 "settings": {
@@ -77,7 +71,18 @@
                 },
                 "dataSource": "ZCOCKPIT_FICHATEC_SRV",
                 "preload": true
-            }
+            },
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "dma.zfichatec.i18n.i18n"
+                }
+            },
+            "modelScreenParams": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			}
         },
         "resources": {
             "css": [{

@@ -1,0 +1,32 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
+<!--
+	<Dialog
+		id="idFragmentShComprador"
+		title="Hello ">
+		<beginButton>
+			<Button
+				text="{i18n>cancel_button_txt}"
+                press="onCancelDialog"
+                customData:dialogViewName="ShComprador" />
+		</beginButton>
+	</Dialog>
+-->
+	<SelectDialog
+		title="Comprador"
+		class="sapUiPopupWithPadding"
+		items="{/CompradorSet}"
+		liveChange="onCompradorSearch"
+		confirm="onCompradorClose"
+		cancel="onCompradorClose">
+		<StandardListItem
+			icon=""
+			iconDensityAware="false"
+			iconInset="false"
+			title="{Ekgrp}"
+			description="{Nome}"
+			info="{Uname}" />
+	</SelectDialog>
+</core:FragmentDefinition>

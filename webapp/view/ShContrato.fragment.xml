@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
+	<SelectDialog
+		title="Contrato"
+		class="sapUiPopupWithPadding"
+		items="{/ContratoSet}"
+		liveChange="onContratoSearch"
+		confirm="onContratoClose"
+		cancel="onContratoClose">
+		<StandardListItem
+			icon=""
+			iconDensityAware="false"
+			iconInset="false"
+			title="{Ebeln}"
+			description="{Mcod1}"
+			info="{Ekgrp}" />
+	</SelectDialog>
+</core:FragmentDefinition>
