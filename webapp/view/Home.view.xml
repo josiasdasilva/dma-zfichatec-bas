@@ -111,17 +111,46 @@
                                     alignItems="Start"
                                     justifyContent="Start"
                                     width="50%">
-                                    <RadioButton groupName="GroupVisRelat" text="{i18n>uf_lbl}" class="sapUiMediumMarginEnd" selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '1' }" />
-                                    <RadioButton groupName="GroupVisRelat" text="{i18n>grp_precos_lbl}" class="sapUiMediumMarginEnd" selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '2' }" />
-                                    <RadioButton groupName="GroupVisRelat" text="{i18n>fonte_supr_lbl}" class="sapUiMediumMarginEnd" selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '3' }" />
+                                    <RadioButton
+                                        id="idRadioButtonVisRelatUf"
+                                        groupName="GroupVisRelat"
+                                        text="{i18n>uf_lbl}"
+                                        class="sapUiMediumMarginEnd"
+                                        selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '1' }"
+                                        select="onRadioButtonSelect" />
+                                    <RadioButton
+                                        id="idRadioButtonVisRelatGrpPrecos"
+                                        groupName="GroupVisRelat"
+                                        text="{i18n>grp_precos_lbl}"
+                                        class="sapUiMediumMarginEnd"
+                                        selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '2' }"
+                                        select="onRadioButtonSelect" />
+                                    <RadioButton
+                                        id="idRadioButtonVisRelatFonteSupr"
+                                        groupName="GroupVisRelat"
+                                        text="{i18n>fonte_supr_lbl}"
+                                        class="sapUiMediumMarginEnd"
+                                        selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '3' }"
+                                        select="onRadioButtonSelect" />
                                 </HBox>
 
                                 <HBox
                                     alignItems="Start"
                                     justifyContent="Start"
                                     width="50%">
-                                    <RadioButton groupName="GroupVisRelat" text="{i18n>loja_lbl}" class="sapUiMediumMarginEnd" selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '4' }" />
-                                    <RadioButton groupName="GroupVisRelat" text="{i18n>sortim_lbl}" selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '5' }" />
+                                    <RadioButton
+                                        id="idRadioButtonVisRelatLoja"
+                                        groupName="GroupVisRelat"
+                                        text="{i18n>loja_lbl}"
+                                        class="sapUiMediumMarginEnd"
+                                        selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '4' }"
+                                        select="onRadioButtonSelect" />
+                                    <RadioButton
+                                        id="idRadioButtonVisRelatSortim"
+                                        groupName="GroupVisRelat"
+                                        text="{i18n>sortim_lbl}"
+                                        selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '5' }"
+                                        select="onRadioButtonSelect" />
                                 </HBox>
                             </WizardStep>
 
@@ -138,7 +167,8 @@
                                         <CheckBox
                                             id="idCheckBoxSomenteMatXdock1"
                                             text="{i18n>somente_mat_xdock_lbl}"
-                                            selected="{= ${modelScreenParams>/screen1/idCheckBoxSomenteMatXdock1} === true }" />
+                                            selected="{= ${modelScreenParams>/screen1/idCheckBoxSomenteMatXdock1} === true }"
+                                            select="onCheckBoxSelect" />
                                         
                                         <HBox
                                             class="sapUiSmallMarginTop" >
@@ -201,11 +231,13 @@
                                             <CheckBox
                                                 id="idCheckBoxAtacado1"
                                                 text="{i18n>atacado_lbl}"
-                                                selected="{= ${modelScreenParams>/screen1/idCheckBoxAtacado1} === true }" />
+                                                selected="{= ${modelScreenParams>/screen1/idCheckBoxAtacado1} === true }"
+                                                select="onCheckBoxSelect" />
                                             <CheckBox
                                                 id="idCheckBoxVarejo1"
                                                 text="{i18n>varejo_lbl}"
-                                                selected="{= ${modelScreenParams>/screen1/idCheckBoxVarejo1} === true }" />
+                                                selected="{= ${modelScreenParams>/screen1/idCheckBoxVarejo1} === true }"
+                                                select="onCheckBoxSelect" />
                                         </HBox>
 
                                         <Label
@@ -222,7 +254,8 @@
                                                 maxLength="2"
                                                 value="{modelScreenParams>/screen1/idInputUf1}"
                                                 width="85px"
-                                                showValueHelp="true" />
+                                                showValueHelp="true"
+                                                valueHelpRequest="onValueHelpUf" />
 
                                             <Label
                                                 text="{i18n>grp_precos_lbl}:"
@@ -234,6 +267,7 @@
                                                 value="{modelScreenParams>/screen1/idInputGrpPrecos1}"
                                                 width="85px"
                                                 showValueHelp="true"
+                                                valueHelpRequest="onValueHelpGrupoPrecos"
                                                 class="sapUiTinyMarginBegin" />
                                         </HBox>
 
@@ -248,7 +282,8 @@
                                                 maxLength="4"
                                                 value="{modelScreenParams>/screen1/idInputLoja1}"
                                                 width="85px"
-                                                showValueHelp="true" />
+                                                showValueHelp="true"
+                                                valueHelpRequest="onValueHelpLojas" />
 
                                             <Label
                                                 text="{i18n>sortim_lbl}:"
@@ -261,6 +296,20 @@
                                                 width="140px"
                                                 showValueHelp="true"
                                                 class="sapUiTinyMarginBegin" />
+                                                <!-- valueHelpRequest="onValueHelpHierarquia" -->
+                                        </HBox>
+
+                                        <HBox>
+                                            <CheckBox
+                                                id="idCheckBoxTotUf1"
+                                                text="{i18n>tot_uf_lbl}"
+                                                selected="{= ${modelScreenParams>/screen1/idCheckBoxTotUf1} === true }"
+                                                select="onCheckBoxSelect" />
+                                            <CheckBox
+                                                id="idCheckBoxTotGrp1"
+                                                text="{i18n>tot_grp_lbl}"
+                                                selected="{= ${modelScreenParams>/screen1/idCheckBoxTotGrp1} === true }"
+                                                select="onCheckBoxSelect" />
                                         </HBox>
                                     </VBox>
 

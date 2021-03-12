@@ -6,31 +6,86 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("dma.zfichatec.controller.BaseController", {
-		/**
-		 * Convenience method for accessing the router in every controller of the application.
-		 * @public
-		 * @returns {sap.ui.core.routing.Router} the router for this component
-		 */
-		getRouter: function () {
-			return this.getOwnerComponent().getRouter();
-		},
+        /**
+         * 
+         * 
+         */
+        initScreenParams: function(){
+            let oModelScreenParams = this.getModel("modelScreenParams");
+            
+            let oJson = {
+                "screen1": {
+                    "idInputCompradorCod1"          : "",
+                    "idInputCompradorDescr1"        : "",
+                    "idInputFornecedorCod1"         : "",
+                    "idInputFornecedorDescr1"       : "",
+                    "idInputContrato1"              : "",
+                    "GroupVisRelat"                 : "1",
+                    "idCheckBoxSomenteMatXdock1"    : false,
+                    "idInputFonteDe1"               : "",
+                    "idInputStatusMat1"             : "",
+                    "idInputDepart1"                : "",
+                    "idInputNoDe1"                  : "",
+                    "idCheckBoxAtacado1"            : true,
+                    "idCheckBoxVarejo1"             : true,
+                    "idInputUf1"                    : "",
+                    "idInputGrpPrecos1"             : "",
+                    "idInputLoja1"                  : "",
+                    "idInputSortim1"                : "",
+                    "idCheckBoxTotUf1"              : false,
+                    "idCheckBoxTotGrp1"             : false
+                }
+            };
 
-		/**
-		 * Convenience method for getting the view model by name in every controller of the application.
-		 * @public
-		 * @param {string} sName the model name
-		 * @returns {sap.ui.model.Model} the model instance
-		 */
-		getModel: function (sName) {
-			return this.getView().getModel(sName);
-		},
+            oModelScreenParams.setData(oJson);
+        },
+
+        /**
+         * 
+         * 
+         */
+        getScreenParam: function(sScreenName, sProperty){
+            return this.getModel("modelScreenParams").getData()[sScreenName][sProperty];
+        },
+
+        /**
+         * 
+         * 
+         */
+        getScreenParams: function(sScreenName){
+            return this.getModel("modelScreenParams").getData()[sScreenName];
+        },
+
+        /**
+         * 
+         * 
+         */
+        refreshScreenModel: function(){
+            this.getModel("modelScreenParams").refresh(true);
+        },
+
+        /**
+         * 
+         * 
+         */
+        getRadioButtonVisRelatOptions: function(){
+            return {
+                "UF"            : "1",
+                "GRP_PRECOS"    : "2",
+                "FONTE_SUPR"    : "3",
+                "LOJA"          : "4",
+                "SORTIM"        : "5"
+            }
+        },
+
 		onValueHelpGenericCancelPress: function (oEvt) {
 			oEvt.oSource.close();
 		},
 		onValueHelpGenericAfterClose: function (oEvt) {
 			oEvt.oSource.destroy();
         },
-		_createFilterForSelectionSet: function (aSelectionSet) {
+
+        _createFilterForSelectionSet: function (aSelectionSet) {
 			let aFilters = [];
 			for (let itemFilter of aSelectionSet) {
 
@@ -45,7 +100,27 @@ sap.ui.define([
 			}
 			return aFilters;
 		},        
-		/**
+
+        /**
+		 * Convenience method for accessing the router in every controller of the application.
+		 * @public
+		 * @returns {sap.ui.core.routing.Router} the router for this component
+		 */
+		getRouter: function () {
+			return this.getOwnerComponent().getRouter();
+		},
+
+        /**
+		 * Convenience method for getting the view model by name in every controller of the application.
+		 * @public
+		 * @param {string} sName the model name
+		 * @returns {sap.ui.model.Model} the model instance
+		 */
+		getModel: function (sName) {
+			return this.getView().getModel(sName);
+		},
+
+        /**
 		 * Convenience method for setting the view model in every controller of the application.
 		 * @public
 		 * @param {sap.ui.model.Model} oModel the model instance
@@ -64,13 +139,16 @@ sap.ui.define([
 		getResourceBundle: function () {
 			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
 		},
-		getText: function(sText){
+
+        getText: function(sText){
 			return this.getResourceBundle().getText(sText);
 		},
-		getTextWithParams: function(sText, aParams){
+
+        getTextWithParams: function(sText, aParams){
 			return this.getResourceBundle().getText(sText,aParams);
 		},
-		/**
+
+        /**
 		 * Event handler for navigating back.
 		 * It there is a history entry we go one step back in the browser history
 		 * If not, it will replace the current entry of the browser history with the master route.

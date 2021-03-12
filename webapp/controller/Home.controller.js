@@ -46,38 +46,6 @@ sap.ui.define([
             sap.m.MessageToast.show("Em desenvolvimento (Placeholder)");
         },
 
-        /**
-         * 
-         * 
-         */
-        initScreenParams: function(){
-            let oModelScreenParams = this.getView().getModel("modelScreenParams");
-            
-            let oJson = {
-                "screen1": {
-                    "idInputCompradorCod1"          : "",
-                    "idInputCompradorDescr1"        : "",
-                    "idInputFornecedorCod1"         : "",
-                    "idInputFornecedorDescr1"       : "",
-                    "idInputContrato1"              : "",
-                    "GroupVisRelat"                 : "1",
-                    "idCheckBoxSomenteMatXdock1"    : false,
-                    "idInputFonteDe1"               : "",
-                    "idInputStatusMat1"             : "",
-                    "idInputDepart1"                : "",
-                    "idInputNoDe1"                  : "",
-                    "idCheckBoxAtacado1"            : true,
-                    "idCheckBoxVarejo1"             : true,
-                    "idInputUf1"                    : "",
-                    "idInputGrpPrecos1"             : "",
-                    "idInputLoja1"                  : "",
-                    "idInputSortim1"                : ""
-                }
-            };
-
-            oModelScreenParams.setData(oJson);
-        },
-
 /*
         onCancelDialog: function(sDialogId){
             this.byId(sDialogId).close();
@@ -108,6 +76,57 @@ sap.ui.define([
          * 
          * 
          */
+        onCheckBoxSelect: function(oEvt){
+            let sId = oEvt.getParameter("id");
+            let bSelected = oEvt.getParameter("selected");
+            
+            if(sId.search("idCheckBoxSomenteMatXdock1") >= 0){
+                this.getScreenParams("screen1").idCheckBoxSomenteMatXdock1 = bSelected;
+            }else if(sId.search("idCheckBoxAtacado1") >= 0){
+                this.getScreenParams("screen1").idCheckBoxAtacado1 = bSelected;
+            }else if(sId.search("idCheckBoxVarejo1") >= 0){
+                this.getScreenParams("screen1").idCheckBoxVarejo1 = bSelected;
+            }else if(sId.search("idCheckBoxTotUf1") >= 0){
+                this.getScreenParams("screen1").idCheckBoxTotUf1 = bSelected;
+            }else if(sId.search("idCheckBoxTotGrp1") >= 0){
+                this.getScreenParams("screen1").idCheckBoxTotGrp1 = bSelected;
+            }
+
+            this.refreshScreenModel();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onRadioButtonSelect: function(oEvt){
+            let sId = oEvt.getParameter("id");
+            let bSelected = oEvt.getParameter("selected");
+
+            // Return is the Radio Button isn't selected
+            if(!bSelected){
+                return 1;
+            }
+            
+            if(sId.search("idRadioButtonVisRelatUf") >= 0){
+                this.getScreenParams("screen1").GroupVisRelat = this.getRadioButtonVisRelatOptions().UF;
+            }else if(sId.search("idRadioButtonVisRelatGrpPrecos") >= 0){
+                this.getScreenParams("screen1").GroupVisRelat = this.getRadioButtonVisRelatOptions().GRP_PRECOS;
+            }else if(sId.search("idRadioButtonVisRelatFonteSupr") >= 0){
+                this.getScreenParams("screen1").GroupVisRelat = this.getRadioButtonVisRelatOptions().FONTE_SUPR;
+            }else if(sId.search("idRadioButtonVisRelatLoja") >= 0){
+                this.getScreenParams("screen1").GroupVisRelat = this.getRadioButtonVisRelatOptions().LOJA;
+            }else if(sId.search("idRadioButtonVisRelatSortim") >= 0){
+                this.getScreenParams("screen1").GroupVisRelat = this.getRadioButtonVisRelatOptions().SORTIM;
+            }
+
+            this.refreshScreenModel();
+        },
+
+        /**
+         * 
+         * 
+         */
         onCancelDialog: function(oEvt){
             let sDialogViewName = oEvt.getSource().data("dialogViewName");
             this._getDialog(sDialogViewName).close();
@@ -119,7 +138,7 @@ sap.ui.define([
          */
         _getDialog: function (sDialogViewName) {
             if (!this._oDialog) {
-                this._oDialog = sap.ui.xmlfragment(`dma.zfichatec.view.${sDialogViewName}`, this);
+                this._oDialog = sap.ui.xmlfragment(`dma.zfichatec.view.fragments.${sDialogViewName}`, this);
                 this.getView().addDependent(this._oDialog);
             }
             return this._oDialog;
@@ -139,7 +158,29 @@ sap.ui.define([
          * 
          */
         onValueHelpContrato: function(){
-            this._getDialog("ShContrato").open();
+            let oDialog = this._getDialog("ShContrato"),
+                oFilter = {};
+            let aFilters = [];
+            let sValue;
+
+            // set previous filter - if "Comprador" is filled
+            sValue = this.getScreenParam("screen1", "idInputCompradorCod1");
+            if (sValue) {
+                oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
+                aFilters.push(oFilter);
+            }
+
+            // set previous filter - if "Fornecedor" is filled
+            sValue = this.getScreenParam("screen1", "idInputFornecedorCod1");
+            if (sValue) {
+                oFilter = new sap.ui.model.Filter("Lifnr", sap.ui.model.FilterOperator.EQ, sValue);
+                aFilters.push(oFilter);
+            }
+
+            // open value help dialog filtered by the input value
+            oDialog.getBinding("items").filter(aFilters);
+
+            oDialog.open();
         },
 
         /**
@@ -147,7 +188,75 @@ sap.ui.define([
          * 
          */
         onValueHelpFornecedor: function(){
-            this._getDialog("ShFornecedor").open();
+            let oDialog = this._getDialog("ShFornecedor"),
+                oFilter = {};
+            let sValue;
+
+            // set previous filter - if "Comprador" is filled
+            sValue = this.getScreenParam("screen1", "idInputCompradorCod1");
+            if (sValue) {
+                oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
+                // open value help dialog filtered by the input value
+                oDialog.getBinding("items").filter([oFilter]);
+            }
+
+            oDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpGrupoPrecos: function(){
+            let oDialog = this._getDialog("ShGrupoPrecos"),
+                oFilter = {};
+            let sValue;
+
+            // set previous filter - if "UF" is filled
+            sValue = this.getScreenParam("screen1", "idInputUf1");
+            if (sValue) {
+                oFilter = new sap.ui.model.Filter("UF", sap.ui.model.FilterOperator.EQ, sValue);
+                // open value help dialog filtered by the input value
+                oDialog.getBinding("items").filter([oFilter]);
+            }
+
+            oDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpHierarquia: function(){
+            this._getDialog("ShHierarquia").open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpLojas: function(){
+            let oDialog = this._getDialog("ShLojas"),
+                oFilter = {};
+            let sValue;
+
+            // set previous filter - if "UF" is filled
+            sValue = this.getScreenParam("screen1", "idInputUf1");
+            if (sValue) {
+                oFilter = new sap.ui.model.Filter("UF", sap.ui.model.FilterOperator.EQ, sValue);
+                // open value help dialog filtered by the input value
+                oDialog.getBinding("items").filter([oFilter]);
+            }
+
+            oDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpUf: function(){
+            this._getDialog("ShUf").open();
         },
 
         /**
@@ -155,12 +264,25 @@ sap.ui.define([
          * 
          */
         onCompradorClose: function (oEvt) {
-            let oSelectedItem = oEvt.getParameter("selectedItem");
+            let oSelectedItem   = oEvt.getParameter("selectedItem");
+            let sValue;
+
             if (oSelectedItem) {
-                var sEkgrp = oSelectedItem.getTitle();
-                let oModel = this.getView().getModel("modelScreenParams");
-                oModel.getData().screen1.idInputCompradorCod1 = sEkgrp;
-                oModel.refresh(true);
+                // Ekgrp
+                sValue = oSelectedItem.getTitle().toUpperCase();
+                this.getScreenParams("screen1").idInputCompradorCod1 = sValue;
+                // Nome
+                sValue = oSelectedItem.getDescription().toUpperCase();
+                this.getScreenParams("screen1").idInputCompradorDescr1 = sValue;
+
+                // Fornecedor (Clear)
+                this.getScreenParams("screen1").idInputFornecedorCod1 = "";
+                this.getScreenParams("screen1").idInputFornecedorDescr1 = "";
+                // Contrato (Clear)
+                this.getScreenParams("screen1").idInputContrato1 = "";
+
+                // Refresh screen model
+                this.refreshScreenModel();
             }
             oEvt.getSource().getBinding("items").filter([]);
             this._oDialog = undefined;
@@ -172,11 +294,15 @@ sap.ui.define([
          */
         onContratoClose: function (oEvt) {
             let oSelectedItem = oEvt.getParameter("selectedItem");
+            let sValue;
+
             if (oSelectedItem) {
-                var sEbeln = oSelectedItem.getTitle();
-                let oModel = this.getView().getModel("modelScreenParams");
-                oModel.getData().screen1.idInputContrato1 = sEbeln;
-                oModel.refresh(true);
+                // Ebeln
+                sValue = oSelectedItem.getTitle().toUpperCase();
+                this.getScreenParams("screen1").idInputContrato1 = sValue;
+
+                // Refresh screen model
+                this.refreshScreenModel();
             }
             oEvt.getSource().getBinding("items").filter([]);
             this._oDialog = undefined;
@@ -187,12 +313,107 @@ sap.ui.define([
          * 
          */
         onFornecedorClose: function (oEvt) {
-            let oSelectedItem = oEvt.getParameter("selectedItem");
+            let oSelectedItem   = oEvt.getParameter("selectedItem");
+            let sValue;
+
             if (oSelectedItem) {
-                var sLifnr = oSelectedItem.getTitle();
-                let oModel = this.getView().getModel("modelScreenParams");
-                oModel.getData().screen1.idInputFornecedorCod1 = sLifnr;
-                oModel.refresh(true);
+                // Lifnr
+                sValue = oSelectedItem.getTitle().toUpperCase();
+                this.getScreenParams("screen1").idInputFornecedorCod1 = sValue;
+                // Mcod1
+                sValue = oSelectedItem.getDescription().toUpperCase();
+                this.getScreenParams("screen1").idInputFornecedorDescr1 = sValue;
+
+                // Contrato (Clear)
+                this.getScreenParams("screen1").idInputContrato1 = "";
+
+                // Refresh screen model
+                this.refreshScreenModel();
+            }
+            oEvt.getSource().getBinding("items").filter([]);
+            this._oDialog = undefined;
+        },
+
+        /**
+         * 
+         * 
+         */
+        onGrupoPrecosClose: function (oEvt) {
+            let oSelectedItem = oEvt.getParameter("selectedItem");
+            let sValue;
+
+            if (oSelectedItem) {
+                // Clint
+                sValue = oSelectedItem.getTitle().toUpperCase();
+                this.getScreenParams("screen1").idInputGrpPrecos1 = sValue;
+
+                // Refresh screen model
+                this.refreshScreenModel();
+            }
+            oEvt.getSource().getBinding("items").filter([]);
+            this._oDialog = undefined;
+        },
+
+        /**
+         * 
+         * 
+         */
+        onHierarquiaClose: function (oEvt) {
+            let oSelectedItem = oEvt.getParameter("selectedItem");
+            let sValue;
+
+            if (oSelectedItem) {
+                // Node6
+                sValue = oSelectedItem.getTitle().toUpperCase();
+                this.getScreenParams("screen1").idInputSortim1 = sValue;
+
+                // Refresh screen model
+                this.refreshScreenModel();
+            }
+            oEvt.getSource().getBinding("items").filter([]);
+            this._oDialog = undefined;
+        },
+
+        /**
+         * 
+         * 
+         */
+        onLojasClose: function (oEvt) {
+            let oSelectedItem = oEvt.getParameter("selectedItem");
+            let sValue;
+
+            if (oSelectedItem) {
+                // Werks
+                sValue = oSelectedItem.getTitle().toUpperCase();
+                this.getScreenParams("screen1").idInputLoja1 = sValue;
+
+                // Refresh screen model
+                this.refreshScreenModel();
+            }
+            oEvt.getSource().getBinding("items").filter([]);
+            this._oDialog = undefined;
+        },
+
+        /**
+         * 
+         * 
+         */
+        onUfClose: function (oEvt) {
+            let oSelectedItem = oEvt.getParameter("selectedItem");
+            let sValue;
+
+            if (oSelectedItem) {
+                // Bland
+                sValue = oSelectedItem.getTitle().toUpperCase();
+                this.getScreenParams("screen1").idInputUf1 = sValue;
+
+                // Grupo de Preços (Clear)
+                this.getScreenParams("screen1").idInputGrpPrecos1 = "";
+                // Lojas (Clear)
+                this.getScreenParams("screen1").idInputLoja1 = "";
+
+                // Refresh screen model
+                this.refreshScreenModel();
             }
             oEvt.getSource().getBinding("items").filter([]);
             this._oDialog = undefined;
@@ -203,11 +424,22 @@ sap.ui.define([
          * 
          */
         onCompradorSearch: function(oEvt){
-			let sValue = oEvt.getParameter("value");
+            let aFilters    = [];
+			let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue      = oEvt.getParameter("value").toUpperCase();
+/*
+            oFilter = new Filter("Nome", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter);
+            oFilter = new Filter("Uname", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter);
+			oBinding.filter(new Filter(aFilters, false)); // Use OR (false parameter)
+*/
 			// let oFilter = new Filter("Ekgrp", FilterOperator.Contains, sValue);
-			let oFilter = new Filter("Nome", FilterOperator.Contains, sValue);
-			let oBinding = oEvt.getSource().getBinding("items");
-			oBinding.filter([oFilter]);
+            oFilter = new Filter("Nome", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter);
+			// oBinding.filter([oFilter]);
+			oBinding.filter(aFilters);
         },
 
         /**
@@ -215,12 +447,10 @@ sap.ui.define([
          * 
          */
         onContratoSearch: function(oEvt){
-/*
-            let sValue = oEvt.getParameter("value");
-			let oFilter = new Filter("", FilterOperator.Contains, sValue);
+            let sValue = oEvt.getParameter("value").toUpperCase();
+			let oFilter = new Filter("Ebeln", FilterOperator.Contains, sValue);
 			let oBinding = oEvt.getSource().getBinding("items");
 			oBinding.filter([oFilter]);
-*/
         },
 
         /**
@@ -228,12 +458,42 @@ sap.ui.define([
          * 
          */
         onFornecedorSearch: function(oEvt){
-/*
-            let sValue = oEvt.getParameter("value");
-			let oFilter = new Filter("", FilterOperator.Contains, sValue);
+            let sValue = oEvt.getParameter("value").toUpperCase();
+			let oFilter = new Filter("Lifnr", FilterOperator.Contains, sValue);
 			let oBinding = oEvt.getSource().getBinding("items");
 			oBinding.filter([oFilter]);
-*/
+        },
+
+        /**
+         * 
+         * 
+         */
+        onGrupoPrecosSearch: function (oEvt) {
+            
+        },
+
+        /**
+         * 
+         * 
+         */
+        onHierarquiaSearch: function (oEvt) {
+            
+        },
+
+        /**
+         * 
+         * 
+         */
+        onLojasSearch: function (oEvt) {
+            
+        },
+
+        /**
+         * 
+         * 
+         */
+        onUfSearch: function (oEvt) {
+            
         },
     });
 });

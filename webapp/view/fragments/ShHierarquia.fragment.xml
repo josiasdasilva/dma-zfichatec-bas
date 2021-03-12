@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
+	<SelectDialog
+		title="Hierarquia"
+		class="sapUiPopupWithPadding"
+		items="{/HierarquiaSet}"
+		liveChange="onHierarquiaSearch"
+		confirm="onHierarquiaClose"
+		cancel="onHierarquiaClose">
+		<StandardListItem
+			icon=""
+			iconDensityAware="false"
+			iconInset="false"
+			title="{Node6}"
+			description="{Lifnr}"
+			info="{Ekgrp}" />
+	</SelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
+	<SelectDialog
+		title="UF"
+		class="sapUiPopupWithPadding"
+		items="{/UFSet}"
+		liveChange="onUfSearch"
+		confirm="onUfClose"
+		cancel="onUfClose">
+		<StandardListItem
+			icon=""
+			iconDensityAware="false"
+			iconInset="false"
+			title="{Bland}"
+			description="{Bezei}"
+			info="" />
+	</SelectDialog>
+</core:FragmentDefinition>
