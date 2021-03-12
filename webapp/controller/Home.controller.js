@@ -43,6 +43,25 @@ sap.ui.define([
          * 
          */
         completedHandlerWizard01: function(oEvt){
+            let sValueState;
+
+            if(!this.getView().byId("idInputCompradorCod1").getValue() &&
+               !this.getView().byId("idInputFornecedorCod1").getValue() &&
+               !this.getView().byId("idInputContrato1").getValue()){
+                sValueState = sap.ui.core.ValueState.Error;
+            }else{
+                sValueState = sap.ui.core.ValueState.None;
+            }
+            this.getView().byId("idInputCompradorCod1").setValueState(sValueState);
+            this.getView().byId("idInputFornecedorCod1").setValueState(sValueState);
+            this.getView().byId("idInputContrato1").setValueState(sValueState);
+
+            if(sValueState === sap.ui.core.ValueState.Error){
+                this.getView().byId("idInputCompradorCod1").focus();
+                sap.m.MessageToast.show("É necessário preencher pelo menos um dos campos.");
+                return 1;
+            }
+
             sap.m.MessageToast.show("Em desenvolvimento (Placeholder)");
         },
 
@@ -71,6 +90,23 @@ sap.ui.define([
 			}
         }
 */
+
+        /**
+         * 
+         * 
+         */
+        onChangeInputField: function(oEvt){
+            let sId = oEvt.getParameter("id");
+            
+            if(sId.search("idInputCompradorCod1") >= 0){
+                this.getScreenParams("screen1").idInputCompradorDescr1 = "";
+            }else if(sId.search("idInputFornecedorCod1") >= 0){
+                this.getScreenParams("screen1").idInputFornecedorDescr1 = "";
+            }
+            // TODO: Implement internal search to fill description field's
+
+            this.refreshScreenModel();
+        },
 
         /**
          * 
@@ -177,9 +213,10 @@ sap.ui.define([
                 aFilters.push(oFilter);
             }
 
-            // open value help dialog filtered by the input value
+            // Define filters
             oDialog.getBinding("items").filter(aFilters);
-
+            
+            // open value help dialog filtered by the input value
             oDialog.open();
         },
 
@@ -447,10 +484,32 @@ sap.ui.define([
          * 
          */
         onContratoSearch: function(oEvt){
-            let sValue = oEvt.getParameter("value").toUpperCase();
-			let oFilter = new Filter("Ebeln", FilterOperator.Contains, sValue);
-			let oBinding = oEvt.getSource().getBinding("items");
-			oBinding.filter([oFilter]);
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items"),
+                oFilter = {};
+            let sValue;
+
+            // Main value used on Search Help
+            sValue = oEvt.getParameter("value").toUpperCase();
+			oFilter = new Filter("Ebeln", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter);
+            
+            // set previous filter - if "Comprador" is filled
+            sValue = this.getScreenParam("screen1", "idInputCompradorCod1");
+            if (sValue) {
+                oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
+                aFilters.push(oFilter);
+            }
+            
+            // set previous filter - if "Fornecedor" is filled
+            sValue = this.getScreenParam("screen1", "idInputFornecedorCod1");
+            if (sValue) {
+                oFilter = new sap.ui.model.Filter("Lifnr", sap.ui.model.FilterOperator.EQ, sValue);
+                aFilters.push(oFilter);
+            }
+
+            // Define filters
+            oBinding.filter(aFilters);
         },
 
         /**
@@ -458,10 +517,24 @@ sap.ui.define([
          * 
          */
         onFornecedorSearch: function(oEvt){
-            let sValue = oEvt.getParameter("value").toUpperCase();
-			let oFilter = new Filter("Lifnr", FilterOperator.Contains, sValue);
-			let oBinding = oEvt.getSource().getBinding("items");
-			oBinding.filter([oFilter]);
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items"),
+                oFilter = {};
+            let sValue;
+            
+            // Main value used on Search Help
+            sValue = oEvt.getParameter("value").toUpperCase();
+            oFilter = new Filter("Lifnr", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter);
+
+            // set previous filter - if "Comprador" is filled
+            sValue = this.getScreenParam("screen1", "idInputCompradorCod1");
+            if (sValue) {
+                oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
+                aFilters.push(oFilter);
+            }
+            
+			oBinding.filter(aFilters);
         },
 
         /**
@@ -469,7 +542,24 @@ sap.ui.define([
          * 
          */
         onGrupoPrecosSearch: function (oEvt) {
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items"),
+                oFilter = {};
+            let sValue;
             
+            // Main value used on Search Help
+            sValue = oEvt.getParameter("value").toUpperCase();
+            oFilter = new Filter("Bandeira", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter);
+
+            // set previous filter - if "UF" is filled
+            sValue = this.getScreenParam("screen1", "idInputUf1");
+            if (sValue) {
+                oFilter = new sap.ui.model.Filter("UF", sap.ui.model.FilterOperator.EQ, sValue);
+                aFilters.push(oFilter);
+            }
+            
+			oBinding.filter(aFilters);
         },
 
         /**
@@ -485,7 +575,24 @@ sap.ui.define([
          * 
          */
         onLojasSearch: function (oEvt) {
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items"),
+                oFilter = {};
+            let sValue;
             
+            // Main value used on Search Help
+            sValue = oEvt.getParameter("value").toUpperCase();
+            oFilter = new Filter("Werks", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter);
+
+            // set previous filter - if "UF" is filled
+            sValue = this.getScreenParam("screen1", "idInputUf1");
+            if (sValue) {
+                oFilter = new sap.ui.model.Filter("UF", sap.ui.model.FilterOperator.EQ, sValue);
+                aFilters.push(oFilter);
+            }
+            
+			oBinding.filter(aFilters);
         },
 
         /**
@@ -493,7 +600,10 @@ sap.ui.define([
          * 
          */
         onUfSearch: function (oEvt) {
-            
+            let sValue = oEvt.getParameter("value").toUpperCase();
+			let oFilter = new Filter("Bland", FilterOperator.Contains, sValue);
+			let oBinding = oEvt.getSource().getBinding("items");
+			oBinding.filter([oFilter]);
         },
     });
 });

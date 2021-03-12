@@ -55,7 +55,8 @@
                                         valueLiveUpdate="true"
                                         width="85px"
                                         showValueHelp="true"
-                                        valueHelpRequest="onValueHelpComprador" />
+                                        valueHelpRequest="onValueHelpComprador"
+                                        change="onChangeInputField" />
                                     <Input
                                         id="idInputCompradorDescr1"
                                         value="{modelScreenParams>/screen1/idInputCompradorDescr1}"
@@ -77,7 +78,8 @@
                                         value="{modelScreenParams>/screen1/idInputFornecedorCod1}"
                                         width="140px"
                                         showValueHelp="true"
-                                        valueHelpRequest="onValueHelpFornecedor" />
+                                        valueHelpRequest="onValueHelpFornecedor"
+                                        change="onChangeInputField" />
                                     <Input
                                         id="idInputFornecedorDescr1"
                                         value="{modelScreenParams>/screen1/idInputFornecedorDescr1}"
