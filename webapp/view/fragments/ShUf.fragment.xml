@@ -6,7 +6,8 @@
 		title="UF"
 		class="sapUiPopupWithPadding"
 		items="{/UFSet}"
-		liveChange="onUfSearch"
+        multiSelect="true"
+		search="onUfSearch"
 		confirm="onUfClose"
 		cancel="onUfClose">
 		<StandardListItem

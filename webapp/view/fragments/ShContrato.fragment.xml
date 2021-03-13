@@ -6,7 +6,8 @@
 		title="Contrato"
 		class="sapUiPopupWithPadding"
 		items="{/ContratoSet}"
-		liveChange="onContratoSearch"
+        multiSelect="true"
+		search="onContratoSearch"
 		confirm="onContratoClose"
 		cancel="onContratoClose">
 		<StandardListItem

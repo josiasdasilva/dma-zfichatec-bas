@@ -12,7 +12,8 @@ sap.ui.define([
          */
         initScreenParams: function(){
             let oModelScreenParams = this.getModel("modelScreenParams");
-            
+/*
+            // Old model used on Input Selection
             let oJson = {
                 "screen1": {
                     "idInputCompradorCod1"          : "",
@@ -22,16 +23,39 @@ sap.ui.define([
                     "idInputContrato1"              : "",
                     "GroupVisRelat"                 : "1",
                     "idCheckBoxSomenteMatXdock1"    : false,
-                    "idInputFonteDe1"               : "",
+                    "idInputFonteSuprimento1"       : "",
                     "idInputStatusMat1"             : "",
                     "idInputDepart1"                : "",
-                    "idInputNoDe1"                  : "",
+                    "idInputNoHierarquia1"          : "",
                     "idCheckBoxAtacado1"            : true,
                     "idCheckBoxVarejo1"             : true,
                     "idInputUf1"                    : "",
                     "idInputGrpPrecos1"             : "",
                     "idInputLoja1"                  : "",
                     "idInputSortim1"                : "",
+                    "idCheckBoxTotUf1"              : false,
+                    "idCheckBoxTotGrp1"             : false
+                }
+            };
+*/
+            // New model used on MultiInput Selection
+            let oJson = {
+                "screen1": {
+                    "idMultiInputCompradorCod1"     : [],
+                    "idMultiInputFornecedorCod1"    : [],
+                    "idMultiInputContrato1"         : [],
+                    "GroupVisRelat"                 : "1",
+                    "idCheckBoxSomenteMatXdock1"    : false,
+                    "idMultiInputFonteSuprimento1"  : [],
+                    "idMultiInputStatusMat1"        : [],
+                    "idMultiInputDepart1"           : [],
+                    "idMultiInputNoHierarquia1"     : [],
+                    "idCheckBoxAtacado1"            : true,
+                    "idCheckBoxVarejo1"             : true,
+                    "idMultiInputUf1"               : [],
+                    "idMultiInputGrpPrecos1"        : [],
+                    "idMultiInputLoja1"             : [],
+                    "idMultiInputSortim1"           : [],
                     "idCheckBoxTotUf1"              : false,
                     "idCheckBoxTotGrp1"             : false
                 }

@@ -6,7 +6,8 @@
 		title="Fornecedor"
 		class="sapUiPopupWithPadding"
 		items="{/FornecedorSet}"
-		liveChange="onFornecedorSearch"
+        multiSelect="true"
+		search="onFornecedorSearch"
 		confirm="onFornecedorClose"
 		cancel="onFornecedorClose">
 		<StandardListItem

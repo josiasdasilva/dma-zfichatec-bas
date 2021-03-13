@@ -18,9 +18,10 @@
 		title="Comprador"
 		class="sapUiPopupWithPadding"
 		items="{/CompradorSet}"
-		liveChange="onCompradorSearch"
+        multiSelect="true"
+		search="onCompradorSearch"
 		confirm="onCompradorClose"
-		cancel="onCompradorClose">
+		cancel="onCompradorClose" >
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"

@@ -3,12 +3,13 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
 	"sap/m/Label",
-	"sap/m/Popover",
+    "sap/m/Popover",
+    "sap/m/Token",
 	"sap/ui/core/format/DateFormat",
 	"sap/ui/core/Fragment",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (BaseController, Filter, FilterOperator, Label, Popover, DateFormat, Fragment, JSONModel, MessageToast) {
+], function (BaseController, Filter, FilterOperator, Label, Popover, Token, DateFormat, Fragment, JSONModel, MessageToast) {
 	"use strict";
 	//var sResponsivePaddingClasses = "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer";
 	return BaseController.extend("dma.zfichatec.controller.Home", {
@@ -108,6 +109,64 @@ sap.ui.define([
             this.refreshScreenModel();
         },
 
+        onTokenChangeMultiInput: function(oEvt){
+            let aRemovedTokens  = [],
+                aValues         = [];
+            let sId = oEvt.getSource().getId();
+
+            if(typeof oEvt.getParameter("removedTokens") !== "undefined" && oEvt.getParameter("removedTokens").length > 0){
+                aRemovedTokens = oEvt.getParameter("removedTokens");
+                if(sId.search("idMultiInputCompradorCod1") >= 0){
+                    aValues = this.getScreenParams("screen1").idMultiInputCompradorCod1;
+                    for(var iIndexOut in aRemovedTokens){
+                        for(var iIndexIn in aValues){
+                            if(aValues[iIndexIn].Ekgrp === aRemovedTokens[iIndexOut].getProperty("key")){
+                                aValues.splice(iIndexIn, 1);
+                            }
+                        }
+                    }
+                    // Fornecedor (Clear)
+                    this.getScreenParams("screen1").idMultiInputFornecedorCod1 = [];
+                    // Contrato (Clear)
+                    this.getScreenParams("screen1").idMultiInputContrato1 = [];
+                }else if(sId.search("idMultiInputContrato1") >= 0){
+                    aValues = this.getScreenParams("screen1").idMultiInputContrato1;
+                    for(var iIndexOut in aRemovedTokens){
+                        for(var iIndexIn in aValues){
+                            if(aValues[iIndexIn].Ebeln === aRemovedTokens[iIndexOut].getProperty("key")){
+                                aValues.splice(iIndexIn, 1);
+                            }
+                        }
+                    }
+                }else if(sId.search("idMultiInputFornecedorCod1") >= 0){
+                    aValues = this.getScreenParams("screen1").idMultiInputFornecedorCod1;
+                    for(var iIndexOut in aRemovedTokens){
+                        for(var iIndexIn in aValues){
+                            if(aValues[iIndexIn].Lifnr === aRemovedTokens[iIndexOut].getProperty("key")){
+                                aValues.splice(iIndexIn, 1);
+                            }
+                        }
+                    }
+                     // Contrato (Clear)
+                    this.getScreenParams("screen1").idMultiInputContrato1 = [];
+                }
+
+                // Refresh screen model
+                this.refreshScreenModel();
+/*
+                if(aValues.length > 0){
+                    for(var iIndexOut in aRemovedTokens){
+                        for(var iIndexIn in aValues){
+                            if(aValues[iIndexIn].Ekgrp === aRemovedTokens[iIndexOut].getProperty("key")){
+                                aValues.splice(iIndexIn, 1);
+                            }
+                        }
+                    }
+                }
+*/
+            }
+        },
+
         /**
          * 
          * 
@@ -194,19 +253,22 @@ sap.ui.define([
          * 
          */
         onValueHelpContrato: function(){
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
             let oDialog = this._getDialog("ShContrato"),
                 oFilter = {};
-            let aFilters = [];
             let sValue;
 
-            // set previous filter - if "Comprador" is filled
+/*
+            // set previous filter - if "Comprador" is filled (Single)
             sValue = this.getScreenParam("screen1", "idInputCompradorCod1");
             if (sValue) {
                 oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
                 aFilters.push(oFilter);
             }
 
-            // set previous filter - if "Fornecedor" is filled
+            // set previous filter - if "Fornecedor" is filled (Single)
             sValue = this.getScreenParam("screen1", "idInputFornecedorCod1");
             if (sValue) {
                 oFilter = new sap.ui.model.Filter("Lifnr", sap.ui.model.FilterOperator.EQ, sValue);
@@ -215,6 +277,32 @@ sap.ui.define([
 
             // Define filters
             oDialog.getBinding("items").filter(aFilters);
+*/
+
+            // set previous filter - if "Comprador" is filled (Multiple)
+            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // set previous filter - if "Fornecedor" is filled (Multiple)
+            aValues = this.getScreenParam("screen1", "idMultiInputFornecedorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Lifnr);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // Define filters
+            oDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
             
             // open value help dialog filtered by the input value
             oDialog.open();
@@ -225,17 +313,34 @@ sap.ui.define([
          * 
          */
         onValueHelpFornecedor: function(){
-            let oDialog = this._getDialog("ShFornecedor"),
-                oFilter = {};
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oDialog     = this._getDialog("ShFornecedor"),
+                oFilter     = {};
             let sValue;
 
-            // set previous filter - if "Comprador" is filled
+/*
+            // set previous filter - if "Comprador" is filled (Single)
             sValue = this.getScreenParam("screen1", "idInputCompradorCod1");
             if (sValue) {
                 oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
                 // open value help dialog filtered by the input value
                 oDialog.getBinding("items").filter([oFilter]);
             }
+*/
+            // set previous filter - if "Comprador" is filled (Multiple)
+            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+			oDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
 
             oDialog.open();
         },
@@ -244,7 +349,7 @@ sap.ui.define([
          * 
          * 
          */
-        onValueHelpGrupoPrecos: function(){
+        onValueHelpGrpPrecos: function(){
             let oDialog = this._getDialog("ShGrupoPrecos"),
                 oFilter = {};
             let sValue;
@@ -272,7 +377,7 @@ sap.ui.define([
          * 
          * 
          */
-        onValueHelpLojas: function(){
+        onValueHelpLoja: function(){
             let oDialog = this._getDialog("ShLojas"),
                 oFilter = {};
             let sValue;
@@ -301,6 +406,8 @@ sap.ui.define([
          * 
          */
         onCompradorClose: function (oEvt) {
+/*
+            // Single Selection
             let oSelectedItem   = oEvt.getParameter("selectedItem");
             let sValue;
 
@@ -322,6 +429,45 @@ sap.ui.define([
                 this.refreshScreenModel();
             }
             oEvt.getSource().getBinding("items").filter([]);
+
+            // Release fragment
+            this._oDialog = undefined;
+*/
+/*
+            // Multi Selection
+			let aSelectedItems = oEvt.getParameter("selectedItems"),
+				oMultiInput = this.byId("idMultiInputCompradorCod1");
+
+			if (aSelectedItems && aSelectedItems.length > 0) {
+				aSelectedItems.forEach(function (oItem) {
+					oMultiInput.addToken(new Token({
+						text: oItem.getTitle()
+					}));
+				});
+			}
+*/
+            // Multi Selection with Model
+			let aSelectedItems = oEvt.getParameter("selectedItems");
+            let oScreenMulti = [];
+
+            if(aSelectedItems && aSelectedItems.length > 0){
+                for(var oIndex in aSelectedItems){
+                    oScreenMulti.push({
+                        "Ekgrp" : aSelectedItems[oIndex].getTitle()
+                    });
+                }
+                this.getScreenParams("screen1").idMultiInputCompradorCod1 = oScreenMulti;
+
+                // Fornecedor (Clear)
+                this.getScreenParams("screen1").idMultiInputFornecedorCod1 = [];
+                // Contrato (Clear)
+                this.getScreenParams("screen1").idMultiInputContrato1 = [];
+			}
+            
+            // Refresh screen model
+            this.refreshScreenModel();
+            
+            // Release fragment
             this._oDialog = undefined;
         },
 
@@ -330,6 +476,7 @@ sap.ui.define([
          * 
          */
         onContratoClose: function (oEvt) {
+/*
             let oSelectedItem = oEvt.getParameter("selectedItem");
             let sValue;
 
@@ -343,6 +490,25 @@ sap.ui.define([
             }
             oEvt.getSource().getBinding("items").filter([]);
             this._oDialog = undefined;
+*/
+            // Multi Selection with Model
+			let aSelectedItems = oEvt.getParameter("selectedItems");
+            let oScreenMulti = [];
+
+            if(aSelectedItems && aSelectedItems.length > 0){
+                for(var oIndex in aSelectedItems){
+                    oScreenMulti.push({
+                        "Ebeln" : aSelectedItems[oIndex].getTitle()
+                    });
+                }
+                this.getScreenParams("screen1").idMultiInputContrato1 = oScreenMulti;
+			}
+
+            // Refresh screen model
+            this.refreshScreenModel();
+
+            // Release fragment
+            this._oDialog = undefined;
         },
 
         /**
@@ -350,6 +516,8 @@ sap.ui.define([
          * 
          */
         onFornecedorClose: function (oEvt) {
+/*
+            // Single Selection
             let oSelectedItem   = oEvt.getParameter("selectedItem");
             let sValue;
 
@@ -368,6 +536,30 @@ sap.ui.define([
                 this.refreshScreenModel();
             }
             oEvt.getSource().getBinding("items").filter([]);
+
+            // Release fragment
+            this._oDialog = undefined;
+*/
+            // Multi Selection with Model
+			let aSelectedItems = oEvt.getParameter("selectedItems");
+            let oScreenMulti = [];
+
+            if(aSelectedItems && aSelectedItems.length > 0){
+                for(var oIndex in aSelectedItems){
+                    oScreenMulti.push({
+                        "Lifnr" : aSelectedItems[oIndex].getTitle()
+                    });
+                }
+                this.getScreenParams("screen1").idMultiInputFornecedorCod1 = oScreenMulti;
+
+                // Contrato (Clear)
+                this.getScreenParams("screen1").idMultiInputContrato1 = [];
+			}
+
+            // Refresh screen model
+            this.refreshScreenModel();
+
+            // Release fragment
             this._oDialog = undefined;
         },
 
@@ -517,11 +709,13 @@ sap.ui.define([
          * 
          */
         onFornecedorSearch: function(oEvt){
-            let aFilters = [];
-            let oBinding = oEvt.getSource().getBinding("items"),
-                oFilter = {};
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
             let sValue;
-            
+/*
             // Main value used on Search Help
             sValue = oEvt.getParameter("value").toUpperCase();
             oFilter = new Filter("Lifnr", FilterOperator.Contains, sValue);
@@ -533,8 +727,22 @@ sap.ui.define([
                 oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
                 aFilters.push(oFilter);
             }
-            
-			oBinding.filter(aFilters);
+*/
+            sValue = oEvt.getParameter("value").toUpperCase();
+            oFilter = new Filter("Lifnr", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
+
+            // set previous filter - if "Comprador" is filled
+            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
         /**

@@ -6,7 +6,8 @@
 		title="Lojas"
 		class="sapUiPopupWithPadding"
 		items="{/LojasSet}"
-		liveChange="onLojasSearch"
+        multiSelect="true"
+		search="onLojasSearch"
 		confirm="onLojasClose"
 		cancel="onLojasClose">
 		<StandardListItem

@@ -6,7 +6,8 @@
 		title="Grupo de Preços"
 		class="sapUiPopupWithPadding"
 		items="{/GrupoPrecosSet}"
-		liveChange="onGrupoPrecosSearch"
+        multiSelect="true"
+		search="onGrupoPrecosSearch"
 		confirm="onGrupoPrecosClose"
 		cancel="onGrupoPrecosClose">
 		<StandardListItem

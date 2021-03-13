@@ -2,6 +2,7 @@
     controllerName="dma.zfichatec.controller.Home"
     xmlns="sap.m"
     xmlns:control="sap.gantt.control"
+    xmlns:core="sap.ui.core"
     xmlns:form="sap.ui.layout.form"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:unified="sap.ui.unified" >
@@ -48,6 +49,7 @@
                                         text="{i18n>comprador_lbl}:"
                                         width="76px"
                                         class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+<!--
                                     <Input
                                         id="idInputCompradorCod1"
                                         maxLength="3"
@@ -62,6 +64,21 @@
                                         value="{modelScreenParams>/screen1/idInputCompradorDescr1}"
                                         enabled="false"
                                         class="sapUiSmallMarginBegin" />
+-->
+                                    <MultiInput
+                                        width="350px"
+                                        id="idMultiInputCompradorCod1"
+                                        tokens="{
+                                            path: 'modelScreenParams>/screen1/idMultiInputCompradorCod1'
+                                        }"
+                                        tokenChange="onTokenChangeMultiInput"
+                                        valueHelpRequest="onValueHelpComprador" >
+                                        <tokens>
+                                            <Token
+                                                key="{modelScreenParams>Ekgrp}"
+                                                text="{modelScreenParams>Ekgrp}" />
+                                        </tokens>
+                                    </MultiInput>
                                 </HBox>
                                     
                                 <HBox
@@ -72,6 +89,7 @@
                                         text="{i18n>fornecedor_lbl}:"
                                         width="76px"
                                         class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+<!-- 
                                     <Input
                                         id="idInputFornecedorCod1"
                                         maxLength="10"
@@ -85,6 +103,19 @@
                                         value="{modelScreenParams>/screen1/idInputFornecedorDescr1}"
                                         enabled="false"
                                         class="sapUiSmallMarginBegin" />
+ -->
+                                    <MultiInput
+                                        width="350px"
+                                        id="idMultiInputFornecedorCod1"
+                                        tokens="{
+                                            path: 'modelScreenParams>/screen1/idMultiInputFornecedorCod1'
+                                        }"
+                                        tokenChange="onTokenChangeMultiInput"
+                                        valueHelpRequest="onValueHelpFornecedor" >
+                                        <tokens>
+                                            <Token key="{modelScreenParams>Lifnr}" text="{modelScreenParams>Lifnr}" />
+                                        </tokens>
+                                    </MultiInput>
                                 </HBox>
                                     
                                 <HBox
@@ -95,6 +126,7 @@
                                         text="{i18n>contrato_lbl}:"
                                         width="76px"
                                         class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+<!-- 
                                     <Input
                                         id="idInputContrato1"
                                         maxLength="10"
@@ -102,6 +134,19 @@
                                         width="140px"
                                         showValueHelp="true"
                                         valueHelpRequest="onValueHelpContrato" />
+ -->
+                                    <MultiInput
+                                        width="350px"
+                                        id="idMultiInputContrato1"
+                                        tokens="{
+                                            path: 'modelScreenParams>/screen1/idMultiInputContrato1'
+                                        }"
+                                        tokenChange="onTokenChangeMultiInput"
+                                        valueHelpRequest="onValueHelpContrato" >
+                                        <tokens>
+                                            <Token key="{modelScreenParams>Ebeln}" text="{modelScreenParams>Ebeln}" />
+                                        </tokens>
+                                    </MultiInput>
                                 </HBox>
 
                             </WizardStep>
@@ -177,12 +222,25 @@
                                             <Label
                                                 text="{i18n>fonte_de_lbl}:"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+<!-- 
                                             <Input
-                                                id="idInputFonteDe1"
+                                                id="idInputFonteSuprimento1"
                                                 maxLength="10"
-                                                value="{modelScreenParams>/screen1/idInputFonteDe1}"
+                                                value="{modelScreenParams>/screen1/idInputFonteSuprimento1}"
                                                 width="140px"
                                                 showValueHelp="true" />
+ -->
+                                            <MultiInput
+                                                width="200px"
+                                                id="idMultiInputFonteSuprimento1"
+                                                tokens="{
+                                                    path: 'modelScreenParams>/screen1/idMultiInputFonteSuprimento1'
+                                                }"
+                                                valueHelpRequest="onValueHelpFonteSuprimento">
+                                                <tokens>
+                                                    <Token key="{modelScreenParams>}" text="{modelScreenParams>}" />
+                                                </tokens>
+                                            </MultiInput>
                                         </HBox>
 
                                         <HBox
@@ -190,12 +248,25 @@
                                             <Label
                                                 text="{i18n>status_mat_lbl}: ="
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+<!-- 
                                             <Input
                                                 id="idInputStatusMat1"
                                                 maxLength="3"
                                                 value="{modelScreenParams>/screen1/idInputStatusMat1}"
                                                 width="85px"
                                                 showValueHelp="true" />
+ -->
+                                            <MultiInput
+                                                width="130px"
+                                                id="idMultiInputStatusMat1"
+                                                tokens="{
+                                                    path: 'modelScreenParams>/screen1/idMultiInputStatusMat1'
+                                                }"
+                                                valueHelpRequest="onValueHelpStatusMat">
+                                                <tokens>
+                                                    <Token key="{modelScreenParams>}" text="{modelScreenParams>}" />
+                                                </tokens>
+                                            </MultiInput>
                                         </HBox>
 
                                         <HBox
@@ -203,12 +274,25 @@
                                             <Label
                                                 text="{i18n>depart_lbl}:"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+<!-- 
                                             <Input
                                                 id="idInputDepart1"
                                                 maxLength="5"
                                                 value="{modelScreenParams>/screen1/idInputDepart1}"
                                                 width="100px"
                                                 showValueHelp="true" />
+ -->
+                                            <MultiInput
+                                                width="167px"
+                                                id="idMultiInputDepart1"
+                                                tokens="{
+                                                    path: 'modelScreenParams>/screen1/idMultiInputDepart1'
+                                                }"
+                                                valueHelpRequest="onValueHelpDepart">
+                                                <tokens>
+                                                    <Token key="{modelScreenParams>}" text="{modelScreenParams>}" />
+                                                </tokens>
+                                            </MultiInput>
                                         </HBox>
 
                                         <HBox
@@ -216,12 +300,25 @@
                                             <Label
                                                 text="{i18n>no_de_lbl}:"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+<!-- 
                                             <Input
-                                                id="idInputNoDe1"
+                                                id="idInputNoHierarquia1"
                                                 maxLength="12"
-                                                value="{modelScreenParams>/screen1/idInputNoDe1}"
+                                                value="{modelScreenParams>/screen1/idInputNoHierarquia1}"
                                                 width="160px"
                                                 showValueHelp="true" />
+ -->
+                                            <MultiInput
+                                                width="220px"
+                                                id="idMultiInputNoHierarquia1"
+                                                tokens="{
+                                                    path: 'modelScreenParams>/screen1/idMultiInputNoHierarquia1'
+                                                }"
+                                                valueHelpRequest="onValueHelpNoHierarquia">
+                                                <tokens>
+                                                    <Token key="{modelScreenParams>}" text="{modelScreenParams>}" />
+                                                </tokens>
+                                            </MultiInput>
                                         </HBox>
 
                                     </VBox>
@@ -251,6 +348,7 @@
                                                 text="{i18n>uf_lbl}:"
                                                 width="50px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+<!-- 
                                             <Input
                                                 id="idInputUf1"
                                                 maxLength="2"
@@ -258,19 +356,44 @@
                                                 width="85px"
                                                 showValueHelp="true"
                                                 valueHelpRequest="onValueHelpUf" />
+ -->
+                                            <MultiInput
+                                                width="150px"
+                                                id="idMultiInputUf1"
+                                                tokens="{
+                                                    path: 'modelScreenParams>/screen1/idMultiInputUf1'
+                                                }"
+                                                valueHelpRequest="onValueHelpUf">
+                                                <tokens>
+                                                    <Token key="{modelScreenParams>Bland}" text="{modelScreenParams>Bezei}" />
+                                                </tokens>
+                                            </MultiInput>
 
                                             <Label
                                                 text="{i18n>grp_precos_lbl}:"
                                                 width="110px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginBegin" />
+<!-- 
                                             <Input
                                                 id="idInputGrpPrecos1"
                                                 maxLength="3"
                                                 value="{modelScreenParams>/screen1/idInputGrpPrecos1}"
                                                 width="85px"
                                                 showValueHelp="true"
-                                                valueHelpRequest="onValueHelpGrupoPrecos"
+                                                valueHelpRequest="onValueHelpGrpPrecos"
                                                 class="sapUiTinyMarginBegin" />
+ -->
+                                            <MultiInput
+                                                width="150px"
+                                                id="idMultiInputGrpPrecos1"
+                                                tokens="{
+                                                    path: 'modelScreenParams>/screen1/idMultiInputGrpPrecos1'
+                                                }"
+                                                valueHelpRequest="onValueHelpGrpPrecos">
+                                                <tokens>
+                                                    <Token key="{modelScreenParams>Bandeira}" text="{modelScreenParams>Descricao}" />
+                                                </tokens>
+                                            </MultiInput>
                                         </HBox>
 
                                         <HBox
@@ -279,18 +402,32 @@
                                                 text="{i18n>loja_lbl}:"
                                                 width="50px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+<!-- 
                                             <Input
                                                 id="idInputLoja1"
                                                 maxLength="4"
                                                 value="{modelScreenParams>/screen1/idInputLoja1}"
                                                 width="85px"
                                                 showValueHelp="true"
-                                                valueHelpRequest="onValueHelpLojas" />
+                                                valueHelpRequest="onValueHelpLoja" />
+ -->
+                                            <MultiInput
+                                                width="150px"
+                                                id="idMultiInputLoja1"
+                                                tokens="{
+                                                    path: 'modelScreenParams>/screen1/idMultiInputLoja1'
+                                                }"
+                                                valueHelpRequest="onValueHelpLoja">
+                                                <tokens>
+                                                    <Token key="{modelScreenParams>Werks}" text="{modelScreenParams>Nome}" />
+                                                </tokens>
+                                            </MultiInput>
 
                                             <Label
                                                 text="{i18n>sortim_lbl}:"
                                                 width="110px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginBegin" />
+<!-- 
                                             <Input
                                                 id="idInputSortim1"
                                                 maxLength="8"
@@ -298,7 +435,18 @@
                                                 width="140px"
                                                 showValueHelp="true"
                                                 class="sapUiTinyMarginBegin" />
-                                                <!-- valueHelpRequest="onValueHelpHierarquia" -->
+ -->
+                                            <MultiInput
+                                                width="150px"
+                                                id="idMultiInputSortim1"
+                                                tokens="{
+                                                    path: 'modelScreenParams>/screen1/idMultiInputSortim1'
+                                                }"
+                                                valueHelpRequest="onValueHelpSortim">
+                                                <tokens>
+                                                    <Token key="{modelScreenParams>}" text="{modelScreenParams>}" />
+                                                </tokens>
+                                            </MultiInput>
                                         </HBox>
 
                                         <HBox>
