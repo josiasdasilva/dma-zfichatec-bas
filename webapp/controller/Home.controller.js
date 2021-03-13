@@ -313,14 +313,12 @@ sap.ui.define([
          * 
          */
         onValueHelpFornecedor: function(){
-            let aFilters    = [],
-                aOrFilters  = [],
-                aValues     = [];
+/*
+            // Single Selection
             let oDialog     = this._getDialog("ShFornecedor"),
                 oFilter     = {};
             let sValue;
 
-/*
             // set previous filter - if "Comprador" is filled (Single)
             sValue = this.getScreenParam("screen1", "idInputCompradorCod1");
             if (sValue) {
@@ -328,7 +326,16 @@ sap.ui.define([
                 // open value help dialog filtered by the input value
                 oDialog.getBinding("items").filter([oFilter]);
             }
+            
+            oDialog.open();
 */
+            // Multi Selection
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oDialog     = this._getDialog("ShFornecedor"),
+                oFilter     = {};
+
             // set previous filter - if "Comprador" is filled (Multiple)
             aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
             if (aValues.length) {
@@ -350,6 +357,8 @@ sap.ui.define([
          * 
          */
         onValueHelpGrpPrecos: function(){
+/*
+            // Single Selection
             let oDialog = this._getDialog("ShGrupoPrecos"),
                 oFilter = {};
             let sValue;
@@ -361,6 +370,28 @@ sap.ui.define([
                 // open value help dialog filtered by the input value
                 oDialog.getBinding("items").filter([oFilter]);
             }
+
+            oDialog.open();
+*/
+            // Multi Selection
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oDialog     = this._getDialog("ShGrupoPrecos"),
+                oFilter     = {};
+
+            // set previous filter - if "UF" is filled (Multiple)
+            aValues = this.getScreenParam("screen1", "idMultiInputUf1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("UF", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Bland);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+			oDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
 
             oDialog.open();
         },
@@ -378,6 +409,7 @@ sap.ui.define([
          * 
          */
         onValueHelpLoja: function(){
+/*
             let oDialog = this._getDialog("ShLojas"),
                 oFilter = {};
             let sValue;
@@ -389,6 +421,28 @@ sap.ui.define([
                 // open value help dialog filtered by the input value
                 oDialog.getBinding("items").filter([oFilter]);
             }
+
+            oDialog.open();
+*/
+            // Multi Selection
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oDialog     = this._getDialog("ShLojas"),
+                oFilter     = {};
+
+            // set previous filter - if "UF" is filled (Multiple)
+            aValues = this.getScreenParam("screen1", "idMultiInputUf1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("UF", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Bland);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+			oDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
 
             oDialog.open();
         },
@@ -568,6 +622,7 @@ sap.ui.define([
          * 
          */
         onGrupoPrecosClose: function (oEvt) {
+/*
             let oSelectedItem = oEvt.getParameter("selectedItem");
             let sValue;
 
@@ -580,6 +635,27 @@ sap.ui.define([
                 this.refreshScreenModel();
             }
             oEvt.getSource().getBinding("items").filter([]);
+
+            // Release fragment
+            this._oDialog = undefined;
+*/
+            // Multi Selection with Model
+			let aSelectedItems = oEvt.getParameter("selectedItems");
+            let oScreenMulti = [];
+
+            if(aSelectedItems && aSelectedItems.length > 0){
+                for(var oIndex in aSelectedItems){
+                    oScreenMulti.push({
+                        "Bandeira" : aSelectedItems[oIndex].getTitle()
+                    });
+                }
+                this.getScreenParams("screen1").idMultiInputGrpPrecos1 = oScreenMulti;
+			}
+
+            // Refresh screen model
+            this.refreshScreenModel();
+
+            // Release fragment
             this._oDialog = undefined;
         },
 
@@ -608,6 +684,7 @@ sap.ui.define([
          * 
          */
         onLojasClose: function (oEvt) {
+/*
             let oSelectedItem = oEvt.getParameter("selectedItem");
             let sValue;
 
@@ -620,6 +697,27 @@ sap.ui.define([
                 this.refreshScreenModel();
             }
             oEvt.getSource().getBinding("items").filter([]);
+
+            // Release fragment
+            this._oDialog = undefined;
+*/
+            // Multi Selection with Model
+			let aSelectedItems = oEvt.getParameter("selectedItems");
+            let oScreenMulti = [];
+
+            if(aSelectedItems && aSelectedItems.length > 0){
+                for(var oIndex in aSelectedItems){
+                    oScreenMulti.push({
+                        "Werks" : aSelectedItems[oIndex].getTitle()
+                    });
+                }
+                this.getScreenParams("screen1").idMultiInputLoja1 = oScreenMulti;
+			}
+
+            // Refresh screen model
+            this.refreshScreenModel();
+
+            // Release fragment
             this._oDialog = undefined;
         },
 
@@ -628,6 +726,8 @@ sap.ui.define([
          * 
          */
         onUfClose: function (oEvt) {
+/*
+            // Single Selection
             let oSelectedItem = oEvt.getParameter("selectedItem");
             let sValue;
 
@@ -645,6 +745,30 @@ sap.ui.define([
                 this.refreshScreenModel();
             }
             oEvt.getSource().getBinding("items").filter([]);
+            this._oDialog = undefined;
+*/
+            // Multi Selection with Model
+			let aSelectedItems = oEvt.getParameter("selectedItems");
+            let oScreenMulti = [];
+
+            if(aSelectedItems && aSelectedItems.length > 0){
+                for(var oIndex in aSelectedItems){
+                    oScreenMulti.push({
+                        "Bland" : aSelectedItems[oIndex].getTitle()
+                    });
+                }
+                this.getScreenParams("screen1").idMultiInputUf1 = oScreenMulti;
+
+                // Grupo de Preços (Clear)
+                this.getScreenParams("screen1").idMultiInputGrpPrecos1 = [];
+                // Lojas (Clear)
+                this.getScreenParams("screen1").idMultiInputLoja1 = [];
+			}
+            
+            // Refresh screen model
+            this.refreshScreenModel();
+            
+            // Release fragment
             this._oDialog = undefined;
         },
 
@@ -709,13 +833,12 @@ sap.ui.define([
          * 
          */
         onFornecedorSearch: function(oEvt){
-            let aFilters    = [],
-                aOrFilters  = [],
-                aValues     = [];
+/*
+            let aFilters    = [];
             let oBinding    = oEvt.getSource().getBinding("items"),
                 oFilter     = {};
             let sValue;
-/*
+
             // Main value used on Search Help
             sValue = oEvt.getParameter("value").toUpperCase();
             oFilter = new Filter("Lifnr", FilterOperator.Contains, sValue);
@@ -727,7 +850,16 @@ sap.ui.define([
                 oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
                 aFilters.push(oFilter);
             }
+
+            oBinding.filter(aFilters);
 */
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue;
+
             sValue = oEvt.getParameter("value").toUpperCase();
             oFilter = new Filter("Lifnr", FilterOperator.Contains, sValue);
             aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
@@ -750,11 +882,12 @@ sap.ui.define([
          * 
          */
         onGrupoPrecosSearch: function (oEvt) {
+/*
             let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items"),
                 oFilter = {};
             let sValue;
-            
+
             // Main value used on Search Help
             sValue = oEvt.getParameter("value").toUpperCase();
             oFilter = new Filter("Bandeira", FilterOperator.Contains, sValue);
@@ -767,7 +900,30 @@ sap.ui.define([
                 aFilters.push(oFilter);
             }
             
-			oBinding.filter(aFilters);
+            oBinding.filter(aFilters);
+*/
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue;
+
+            sValue = oEvt.getParameter("value").toUpperCase();
+            oFilter = new Filter("Bandeira", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
+
+            // set previous filter - if "UF" is filled
+            aValues = this.getScreenParam("screen1", "idMultiInputUf1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("UF", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
         /**
@@ -783,6 +939,7 @@ sap.ui.define([
          * 
          */
         onLojasSearch: function (oEvt) {
+/*
             let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items"),
                 oFilter = {};
@@ -800,7 +957,30 @@ sap.ui.define([
                 aFilters.push(oFilter);
             }
             
-			oBinding.filter(aFilters);
+            oBinding.filter(aFilters);
+*/
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue;
+
+            sValue = oEvt.getParameter("value").toUpperCase();
+            oFilter = new Filter("Werks", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
+
+            // set previous filter - if "UF" is filled
+            aValues = this.getScreenParam("screen1", "idMultiInputUf1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("UF", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
         /**
@@ -808,10 +988,21 @@ sap.ui.define([
          * 
          */
         onUfSearch: function (oEvt) {
+/*
             let sValue = oEvt.getParameter("value").toUpperCase();
-			let oFilter = new Filter("Bland", FilterOperator.Contains, sValue);
-			let oBinding = oEvt.getSource().getBinding("items");
-			oBinding.filter([oFilter]);
+            let oFilter = new Filter("Bland", FilterOperator.Contains, sValue);
+            let oBinding = oEvt.getSource().getBinding("items");
+            oBinding.filter([oFilter]);
+*/
+            let aFilters    = [];
+			let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue      = oEvt.getParameter("value").toUpperCase();
+
+            oFilter = new Filter("Bland", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter);
+			// oBinding.filter([oFilter]);
+			oBinding.filter(aFilters);
         },
     });
 });

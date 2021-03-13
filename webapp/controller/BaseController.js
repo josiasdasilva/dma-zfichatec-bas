@@ -94,10 +94,10 @@ sap.ui.define([
          */
         getRadioButtonVisRelatOptions: function(){
             return {
-                "UF"            : "1",
+                "LOJA"          : "1",
                 "GRP_PRECOS"    : "2",
                 "FONTE_SUPR"    : "3",
-                "LOJA"          : "4",
+                "UF"            : "4",
                 "SORTIM"        : "5"
             }
         },
