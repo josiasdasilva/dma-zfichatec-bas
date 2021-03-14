@@ -43,7 +43,7 @@ sap.ui.define([
          * 
          * 
          */
-        completedHandlerWizard01: function(oEvt){
+        handleWizardCompleted: function(oEvt){
             let sValueState;
 
             if(!this.getView().byId("idInputCompradorCod1").getValue() &&
@@ -64,6 +64,20 @@ sap.ui.define([
             }
 
             sap.m.MessageToast.show("Em desenvolvimento (Placeholder)");
+        },
+
+        /**
+         * 
+         * 
+         */
+        handleWizardResetFilters: function(oEvt){
+            // Reset model attached to screen fields
+            this.initScreenParams();
+
+            // Refresh screen model
+            this.refreshScreenModel();
+
+            this.getView().byId("idInputCompradorCod1").focus();
         },
 
 /*
@@ -129,6 +143,10 @@ sap.ui.define([
                     this.getScreenParams("screen1").idMultiInputFornecedorCod1 = [];
                     // Contrato (Clear)
                     this.getScreenParams("screen1").idMultiInputContrato1 = [];
+                    // Departamento (Clear)
+                    this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
+                    // Hierarquia (Clear)
+                    this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
                 }else if(sId.search("idMultiInputContrato1") >= 0){
                     aValues = this.getScreenParams("screen1").idMultiInputContrato1;
                     for(var iIndexOut in aRemovedTokens){
@@ -138,6 +156,10 @@ sap.ui.define([
                             }
                         }
                     }
+                    // Departamento (Clear)
+                    this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
+                    // Hierarquia (Clear)
+                    this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
                 }else if(sId.search("idMultiInputFornecedorCod1") >= 0){
                     aValues = this.getScreenParams("screen1").idMultiInputFornecedorCod1;
                     for(var iIndexOut in aRemovedTokens){
@@ -149,6 +171,10 @@ sap.ui.define([
                     }
                      // Contrato (Clear)
                     this.getScreenParams("screen1").idMultiInputContrato1 = [];
+                    // Departamento (Clear)
+                    this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
+                    // Hierarquia (Clear)
+                    this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
                 }
 
                 // Refresh screen model
@@ -253,14 +279,12 @@ sap.ui.define([
          * 
          */
         onValueHelpContrato: function(){
-            let aFilters    = [],
-                aOrFilters  = [],
-                aValues     = [];
+/*
+            let aFilters    = [];
             let oDialog = this._getDialog("ShContrato"),
                 oFilter = {};
             let sValue;
 
-/*
             // set previous filter - if "Comprador" is filled (Single)
             sValue = this.getScreenParam("screen1", "idInputCompradorCod1");
             if (sValue) {
@@ -278,6 +302,11 @@ sap.ui.define([
             // Define filters
             oDialog.getBinding("items").filter(aFilters);
 */
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oDialog = this._getDialog("ShContrato"),
+                oFilter = {};
 
             // set previous filter - if "Comprador" is filled (Multiple)
             aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
@@ -295,6 +324,58 @@ sap.ui.define([
             if (aValues.length) {
                 for(var iIndex in aValues){
                     oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Lifnr);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // Define filters
+            oDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            
+            // open value help dialog filtered by the input value
+            oDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpDepartamento: function(){
+            // this._getDialog("ShDepartamento").open();
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oDialog = this._getDialog("ShDepartamento"),
+                oFilter = {};
+
+            // set previous filter - if "Comprador" is filled (Multiple)
+            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // set previous filter - if "Fornecedor" is filled (Multiple)
+            aValues = this.getScreenParam("screen1", "idMultiInputFornecedorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Lifnr);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // set previous filter - if "Contrato" is filled (Multiple)
+            aValues = this.getScreenParam("screen1", "idMultiInputContrato1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ebeln", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ebeln);
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
@@ -401,7 +482,62 @@ sap.ui.define([
          * 
          */
         onValueHelpHierarquia: function(){
-            this._getDialog("ShHierarquia").open();
+            // this._getDialog("ShHierarquia").open();
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oDialog = this._getDialog("ShHierarquia"),
+                oFilter = {};
+
+            // set previous filter - if "Comprador" is filled (Multiple)
+            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // set previous filter - if "Fornecedor" is filled (Multiple)
+            aValues = this.getScreenParam("screen1", "idMultiInputFornecedorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Lifnr);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // set previous filter - if "Contrato" is filled (Multiple)
+            aValues = this.getScreenParam("screen1", "idMultiInputContrato1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ebeln", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ebeln);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // set previous filter - if "Departamento" is filled (Multiple)
+            aValues = this.getScreenParam("screen1", "idMultiInputDepartamento1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Node3", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Node3);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // Define filters
+            oDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            
+            // open value help dialog filtered by the input value
+            oDialog.open();
         },
 
         /**
@@ -516,6 +652,10 @@ sap.ui.define([
                 this.getScreenParams("screen1").idMultiInputFornecedorCod1 = [];
                 // Contrato (Clear)
                 this.getScreenParams("screen1").idMultiInputContrato1 = [];
+                // Departamento (Clear)
+                this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
+                // Hierarquia (Clear)
+                this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
 			}
             
             // Refresh screen model
@@ -556,7 +696,12 @@ sap.ui.define([
                     });
                 }
                 this.getScreenParams("screen1").idMultiInputContrato1 = oScreenMulti;
-			}
+
+                // Departamento (Clear)
+                this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
+                // Hierarquia (Clear)
+                this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
+            }
 
             // Refresh screen model
             this.refreshScreenModel();
@@ -608,6 +753,35 @@ sap.ui.define([
 
                 // Contrato (Clear)
                 this.getScreenParams("screen1").idMultiInputContrato1 = [];
+                // Departamento (Clear)
+                this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
+                // Hierarquia (Clear)
+                this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
+			}
+
+            // Refresh screen model
+            this.refreshScreenModel();
+
+            // Release fragment
+            this._oDialog = undefined;
+        },
+
+        /**
+         * 
+         * 
+         */
+        onDepartamentoClose: function (oEvt) {
+            // Multi Selection with Model
+			let aSelectedItems = oEvt.getParameter("selectedItems");
+            let oScreenMulti = [];
+
+            if(aSelectedItems && aSelectedItems.length > 0){
+                for(var oIndex in aSelectedItems){
+                    oScreenMulti.push({
+                        "Node3" : aSelectedItems[oIndex].getTitle()
+                    });
+                }
+                this.getScreenParams("screen1").idMultiInputDepartamento1 = oScreenMulti;
 			}
 
             // Refresh screen model
@@ -664,6 +838,8 @@ sap.ui.define([
          * 
          */
         onHierarquiaClose: function (oEvt) {
+/*
+            // Single Selection
             let oSelectedItem = oEvt.getParameter("selectedItem");
             let sValue;
 
@@ -676,6 +852,25 @@ sap.ui.define([
                 this.refreshScreenModel();
             }
             oEvt.getSource().getBinding("items").filter([]);
+            this._oDialog = undefined;
+*/
+            // Multi Selection with Model
+			let aSelectedItems = oEvt.getParameter("selectedItems");
+            let oScreenMulti = [];
+
+            if(aSelectedItems && aSelectedItems.length > 0){
+                for(var oIndex in aSelectedItems){
+                    oScreenMulti.push({
+                        "Node6" : aSelectedItems[oIndex].getTitle()
+                    });
+                }
+                this.getScreenParams("screen1").idMultiInputNoHierarquia1 = oScreenMulti;
+			}
+
+            // Refresh screen model
+            this.refreshScreenModel();
+
+            // Release fragment
             this._oDialog = undefined;
         },
 
@@ -800,6 +995,7 @@ sap.ui.define([
          * 
          */
         onContratoSearch: function(oEvt){
+/*
             let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items"),
                 oFilter = {};
@@ -826,6 +1022,39 @@ sap.ui.define([
 
             // Define filters
             oBinding.filter(aFilters);
+*/
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue;
+
+            sValue = oEvt.getParameter("value").toUpperCase();
+            oFilter = new Filter("Ebeln", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
+
+            // set previous filter - if "Comprador" is filled
+            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+            // set previous filter - if "Fornecedor" is filled
+            aValues = this.getScreenParam("screen1", "idMultiInputFornecedorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Lifnr);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
         /**
@@ -869,6 +1098,55 @@ sap.ui.define([
             if (aValues.length) {
                 for(var iIndex in aValues){
                     oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+        },
+
+        /**
+         * 
+         * 
+         */
+        onDepartamentoSearch: function(oEvt){
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue;
+
+            sValue = oEvt.getParameter("value").toUpperCase();
+            oFilter = new Filter("Node3", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
+
+            // set previous filter - if "Comprador" is filled
+            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+            // set previous filter - if "Fornecedor" is filled
+            aValues = this.getScreenParam("screen1", "idMultiInputFornecedorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Lifnr);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+            // set previous filter - if "Contrato" is filled
+            aValues = this.getScreenParam("screen1", "idMultiInputContrato1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ebeln", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ebeln);
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
@@ -931,7 +1209,58 @@ sap.ui.define([
          * 
          */
         onHierarquiaSearch: function (oEvt) {
-            
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue;
+
+            sValue = oEvt.getParameter("value").toUpperCase();
+            oFilter = new Filter("Node3", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
+
+            // set previous filter - if "Comprador" is filled
+            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+            // set previous filter - if "Fornecedor" is filled
+            aValues = this.getScreenParam("screen1", "idMultiInputFornecedorCod1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Lifnr);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+            // set previous filter - if "Contrato" is filled
+            aValues = this.getScreenParam("screen1", "idMultiInputContrato1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ebeln", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ebeln);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+            // set previous filter - if "Departamento" is filled
+            aValues = this.getScreenParam("screen1", "idMultiInputDepartamento1");
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Node3", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Node3);
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
         /**

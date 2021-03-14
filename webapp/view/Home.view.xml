@@ -35,7 +35,7 @@
                         <Wizard
                             id="idWizard01"
                             finishButtonText="{i18n>pesquisar_lbl}"
-                            complete="completedHandlerWizard01">
+                            complete="handleWizardCompleted">
 
                             <WizardStep id="idWizardStep1"
                                         title="{i18n>tela_inicial_tit}"
@@ -272,25 +272,25 @@
                                         <HBox
                                             class="sapUiTinyMarginTop" >
                                             <Label
-                                                text="{i18n>depart_lbl}:"
+                                                text="{i18n>departamento_lbl}:"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
 <!-- 
                                             <Input
-                                                id="idInputDepart1"
+                                                id="idInputDepartamento1"
                                                 maxLength="5"
-                                                value="{modelScreenParams>/screen1/idInputDepart1}"
+                                                value="{modelScreenParams>/screen1/idInputDepartamento1}"
                                                 width="100px"
                                                 showValueHelp="true" />
  -->
                                             <MultiInput
                                                 width="242px"
-                                                id="idMultiInputDepart1"
+                                                id="idMultiInputDepartamento1"
                                                 tokens="{
-                                                    path: 'modelScreenParams>/screen1/idMultiInputDepart1'
+                                                    path: 'modelScreenParams>/screen1/idMultiInputDepartamento1'
                                                 }"
-                                                valueHelpRequest="onValueHelpDepart">
+                                                valueHelpRequest="onValueHelpDepartamento">
                                                 <tokens>
-                                                    <Token key="{modelScreenParams>}" text="{modelScreenParams>}" />
+                                                    <Token key="{modelScreenParams>Node3}" text="{modelScreenParams>Node3}" />
                                                 </tokens>
                                             </MultiInput>
                                         </HBox>
@@ -314,9 +314,9 @@
                                                 tokens="{
                                                     path: 'modelScreenParams>/screen1/idMultiInputNoHierarquia1'
                                                 }"
-                                                valueHelpRequest="onValueHelpNoHierarquia">
+                                                valueHelpRequest="onValueHelpHierarquia">
                                                 <tokens>
-                                                    <Token key="{modelScreenParams>}" text="{modelScreenParams>}" />
+                                                    <Token key="{modelScreenParams>Node6}" text="{modelScreenParams>Node6}" />
                                                 </tokens>
                                             </MultiInput>
                                         </HBox>
@@ -470,14 +470,14 @@
                             </WizardStep>
                         </Wizard>
                     </content>
-<!-- 
+
                     <footer>
                         <OverflowToolbar>
                             <ToolbarSpacer/>
-                            <Button text="Cancel" press="handleWizardCancel"/>
+                            <Button text="{i18n>reiniciar_pesquisa_lbl}" press="handleWizardResetFilters"/>
                         </OverflowToolbar>
                     </footer>
- -->
+
                 </Page>
             </pages>
         </NavContainer>

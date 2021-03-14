@@ -3,18 +3,18 @@
 	xmlns:core="sap.ui.core"
     xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
 	<SelectDialog
-		title="Hierarquia"
+		title="Departamento"
 		class="sapUiPopupWithPadding"
-		items="{/HierarquiaSet}"
+		items="{/DepartamentoSet}"
         multiSelect="true"
-		search="onHierarquiaSearch"
-		confirm="onHierarquiaClose"
-		cancel="onHierarquiaClose">
+		search="onDepartamentoSearch"
+		confirm="onDepartamentoClose"
+		cancel="onDepartamentoClose">
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"
 			iconInset="false"
-			title="{Node6}"
+			title="{Node3}"
 			description="{Ltext}"
 			info="" />
 	</SelectDialog>
