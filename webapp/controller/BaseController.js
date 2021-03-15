@@ -54,7 +54,7 @@ sap.ui.define([
                     "idCheckBoxVarejo1"             : true,
                     "idMultiInputUf1"               : [],
                     "idMultiInputGrpPrecos1"        : [],
-                    "idMultiInputLoja1"             : [],
+                    "idMultiInputLojas1"            : [],
                     "idMultiInputSortim1"           : [],
                     "idCheckBoxTotUf1"              : false,
                     "idCheckBoxTotGrp1"             : false

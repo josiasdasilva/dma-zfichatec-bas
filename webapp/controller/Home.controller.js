@@ -94,6 +94,10 @@ sap.ui.define([
 			);
         },
 
+        /**
+         * 
+         * 
+         */
         resetFilters: function(sButton){
             if(sButton === MessageBox.Action.YES){
                 // Reset model attached to screen fields
@@ -101,6 +105,23 @@ sap.ui.define([
 
                 // Refresh screen model
                 this.refreshScreenModel();
+
+                // Comprador (Clear)
+                this.byId("idMultiInputCompradorCod1").removeAllTokens();
+                // Fornecedor (Clear)
+                this.byId("idMultiInputFornecedorCod1").removeAllTokens();
+                // Contrato (Clear)
+                this.byId("idMultiInputContrato1").removeAllTokens();
+                // Departamento (Clear)
+                this.byId("idMultiInputDepartamento1").removeAllTokens();
+                // Hierarquia (Clear)
+                this.byId("idMultiInputNoHierarquia1").removeAllTokens();
+                // UF (Clear)
+                this.byId("idMultiInputUf1").removeAllTokens();
+                // Grupo de Preços (Clear)
+                this.byId("idMultiInputGrpPrecos1").removeAllTokens();
+                // Lojas (Clear)
+                this.byId("idMultiInputLojas1").removeAllTokens();
 
                 this.getView().byId("idMultiInputCompradorCod1").focus();
             }
@@ -150,141 +171,56 @@ sap.ui.define([
         },
 
         onTokenChangeMultiInput: function(oEvt){
-            let aRemovedTokens  = [],
-                aValues         = [];
             let sId = oEvt.getSource().getId();
 
-            if(typeof oEvt.getParameter("removedTokens") !== "undefined" && oEvt.getParameter("removedTokens").length > 0){
-                aRemovedTokens = oEvt.getParameter("removedTokens");
-                
-                // Comprador
-                if(sId.search("idMultiInputCompradorCod1") >= 0){
-                    aValues = this.getScreenParams("screen1").idMultiInputCompradorCod1;
-                    for(var iIndexOut in aRemovedTokens){
-                        for(var iIndexIn in aValues){
-                            if(aValues[iIndexIn].Ekgrp === aRemovedTokens[iIndexOut].getProperty("key")){
-                                aValues.splice(iIndexIn, 1);
-                            }
-                        }
-                    }
-                    // Fornecedor (Clear)
-                    this.getScreenParams("screen1").idMultiInputFornecedorCod1 = [];
-                    // Contrato (Clear)
-                    this.getScreenParams("screen1").idMultiInputContrato1 = [];
-                    // Departamento (Clear)
-                    this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
-                    // Hierarquia (Clear)
-                    this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
-                
-                // Contrato
-                }else if(sId.search("idMultiInputContrato1") >= 0){
-                    aValues = this.getScreenParams("screen1").idMultiInputContrato1;
-                    for(var iIndexOut in aRemovedTokens){
-                        for(var iIndexIn in aValues){
-                            if(aValues[iIndexIn].Ebeln === aRemovedTokens[iIndexOut].getProperty("key")){
-                                aValues.splice(iIndexIn, 1);
-                            }
-                        }
-                    }
-                    // Departamento (Clear)
-                    this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
-                    // Hierarquia (Clear)
-                    this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
-                
-                // Departamento
-                }else if(sId.search("idMultiInputDepartamento1") >= 0){
-                    aValues = this.getScreenParams("screen1").idMultiInputDepartamento1;
-                    for(var iIndexOut in aRemovedTokens){
-                        for(var iIndexIn in aValues){
-                            if(aValues[iIndexIn].Node3 === aRemovedTokens[iIndexOut].getProperty("key")){
-                                aValues.splice(iIndexIn, 1);
-                            }
-                        }
-                    }
-                    // Hierarquia (Clear)
-                    this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
+            // Comprador
+            if(sId.search("idMultiInputCompradorCod1") >= 0){
+                // Fornecedor (Clear)
+                this.byId("idMultiInputFornecedorCod1").removeAllTokens();
+                // Contrato (Clear)
+                this.byId("idMultiInputContrato1").removeAllTokens();
+                // Departamento (Clear)
+                this.byId("idMultiInputDepartamento1").removeAllTokens();
+                // Hierarquia (Clear)
+                this.byId("idMultiInputNoHierarquia1").removeAllTokens();
 
+            // Contrato
+            }else if(sId.search("idMultiInputContrato1") >= 0){
+                // Departamento (Clear)
+                this.byId("idMultiInputDepartamento1").removeAllTokens();
+                // Hierarquia (Clear)
+                this.byId("idMultiInputNoHierarquia1").removeAllTokens();
+            
+            // Departamento
+            }else if(sId.search("idMultiInputDepartamento1") >= 0){
+                // Hierarquia (Clear)
+                this.byId("idMultiInputNoHierarquia1").removeAllTokens();
 
-                // Fornecedor
-                }else if(sId.search("idMultiInputFornecedorCod1") >= 0){
-                    aValues = this.getScreenParams("screen1").idMultiInputFornecedorCod1;
-                    for(var iIndexOut in aRemovedTokens){
-                        for(var iIndexIn in aValues){
-                            if(aValues[iIndexIn].Lifnr === aRemovedTokens[iIndexOut].getProperty("key")){
-                                aValues.splice(iIndexIn, 1);
-                            }
-                        }
-                    }
-                     // Contrato (Clear)
-                    this.getScreenParams("screen1").idMultiInputContrato1 = [];
-                    // Departamento (Clear)
-                    this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
-                    // Hierarquia (Clear)
-                    this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
+            // Fornecedor
+            }else if(sId.search("idMultiInputFornecedorCod1") >= 0){
+                // Contrato (Clear)
+                this.byId("idMultiInputContrato1").removeAllTokens();
+                // Departamento (Clear)
+                this.byId("idMultiInputDepartamento1").removeAllTokens();
+                // Hierarquia (Clear)
+                this.byId("idMultiInputNoHierarquia1").removeAllTokens();
 
-                // Grupo de Preços
-                }else if(sId.search("idMultiInputGrpPrecos1") >= 0){
-                    aValues = this.getScreenParams("screen1").idMultiInputGrpPrecos1;
-                    for(var iIndexOut in aRemovedTokens){
-                        for(var iIndexIn in aValues){
-                            if(aValues[iIndexIn].Bandeira === aRemovedTokens[iIndexOut].getProperty("key")){
-                                aValues.splice(iIndexIn, 1);
-                            }
-                        }
-                    }
+            // Grupo de Preços
+            }else if(sId.search("idMultiInputGrpPrecos1") >= 0){
 
-                // Hierarquia
-                }else if(sId.search("idMultiInputNoHierarquia1") >= 0){
-                    aValues = this.getScreenParams("screen1").idMultiInputNoHierarquia1;
-                    for(var iIndexOut in aRemovedTokens){
-                        for(var iIndexIn in aValues){
-                            if(aValues[iIndexIn].Node6 === aRemovedTokens[iIndexOut].getProperty("key")){
-                                aValues.splice(iIndexIn, 1);
-                            }
-                        }
-                    }
+            // Hierarquia
+            }else if(sId.search("idMultiInputNoHierarquia1") >= 0){
 
-                // Lojas
-                }else if(sId.search("idMultiInputLoja1") >= 0){
-                    aValues = this.getScreenParams("screen1").idMultiInputLoja1;
-                    for(var iIndexOut in aRemovedTokens){
-                        for(var iIndexIn in aValues){
-                            if(aValues[iIndexIn].Werks === aRemovedTokens[iIndexOut].getProperty("key")){
-                                aValues.splice(iIndexIn, 1);
-                            }
-                        }
-                    }
+            // Lojas
+            }else if(sId.search("idMultiInputLojas1") >= 0){
 
-                // UF
-                }else if(sId.search("idMultiInputUf1") >= 0){
-                    aValues = this.getScreenParams("screen1").idMultiInputUf1;
-                    for(var iIndexOut in aRemovedTokens){
-                        for(var iIndexIn in aValues){
-                            if(aValues[iIndexIn].Bland === aRemovedTokens[iIndexOut].getProperty("key")){
-                                aValues.splice(iIndexIn, 1);
-                            }
-                        }
-                    }
-                     // Grupo de Preços (Clear)
-                    this.getScreenParams("screen1").idMultiInputGrpPrecos1 = [];
-                     // Lojas (Clear)
-                    this.getScreenParams("screen1").idMultiInputLoja1 = [];
+            // UF
+            }else if(sId.search("idMultiInputUf1") >= 0){
+                // Grupo de Preços (Clear)
+                this.byId("idMultiInputGrpPrecos1").removeAllTokens();
+                // Lojas (Clear)
+                this.byId("idMultiInputLojas1").removeAllTokens();
 
-                }
-
-                // Refresh screen model
-                this.refreshScreenModel();
-/*
-                if(aValues.length > 0){
-                    for(var iIndexOut in aRemovedTokens){
-                        for(var iIndexIn in aValues){
-                            if(aValues[iIndexIn].Ekgrp === aRemovedTokens[iIndexOut].getProperty("key")){
-                                aValues.splice(iIndexIn, 1);
-                            }
-                        }
-                    }
-                }
-*/
             }
         },
 
@@ -364,15 +300,6 @@ sap.ui.define([
          * 
          * 
          */
-        onValueHelpComprador: function(){
-            this._getDialog("ShComprador").open();
-            // this.onOpenDialog("idFragmentShComprador", "ShComprador");
-        },
-
-        /**
-         * 
-         * 
-         */
         onEnviarEmailDetalhe: function(oEvt){
             MessageToast.show(this.getResourceBundle().getText("em_desenv_msg"));
         },
@@ -382,14 +309,18 @@ sap.ui.define([
          * 
          */
         onImprimirDetalheOpen: function(oEvt){
-            let oDialog = this._getDialog("imprimirDetalhe");
-            // let oIframe = oDialog.byId("idFrame01");
-            let oIframe = oDialog.getAggregation("content")[0];
+            // Create value help dialog
+            if (!this._imprimirDetalheDialog) {
+                this._imprimirDetalheDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.imprimirDetalhe", this);
+                this.getView().addDependent(this._imprimirDetalheDialog);
+            }
+
+            let oIframe = this._imprimirDetalheDialog.getAggregation("content")[0];
             oIframe.setContent(
                 "<iframe src='https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf' " +
                 "height='100%' width='100%' style='border: none;'></iframe>");
-            
-            oDialog.open();
+
+            this._imprimirDetalheDialog.open();
         },
 
         /**
@@ -397,764 +328,163 @@ sap.ui.define([
          * 
          */
         onImprimirDetalheClose: function(oEvt){
+/*
             let oDialog = this._getDialog("imprimirDetalhe");
             // Release fragment
             // oDialog.close();
             oDialog = undefined;
+*/
+            this._imprimirDetalheDialog.close();
+        },
+
+
+//----------------------------------------------------------------------//
+// Comprador                                                            //
+//----------------------------------------------------------------------//
+        /**
+         * 
+         * 
+         */
+        onValueHelpCompradorOpen: function(oEvt){
+            // this._getDialog("ShComprador").open();
+
+            // Create value help dialog
+            if (!this._ShCompradorDialog) {
+                this._ShCompradorDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShComprador", this);
+                this.getView().addDependent(this._ShCompradorDialog);
+            }
+
+            this.onValueHelpCompradorPreFilter(oEvt);
+
+            this._ShCompradorDialog.open();
         },
 
         /**
          * 
          * 
          */
-        onValueHelpContrato: function(){
-/*
-            let aFilters    = [];
-            let oDialog = this._getDialog("ShContrato"),
-                oFilter = {};
-            let sValue;
-
-            // set previous filter - if "Comprador" is filled (Single)
-            sValue = this.getScreenParam("screen1", "idInputCompradorCod1");
-            if (sValue) {
-                oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
-                aFilters.push(oFilter);
-            }
-
-            // set previous filter - if "Fornecedor" is filled (Single)
-            sValue = this.getScreenParam("screen1", "idInputFornecedorCod1");
-            if (sValue) {
-                oFilter = new sap.ui.model.Filter("Lifnr", sap.ui.model.FilterOperator.EQ, sValue);
-                aFilters.push(oFilter);
-            }
-
-            // Define filters
-            oDialog.getBinding("items").filter(aFilters);
-*/
-            let aFilters    = [],
-                aOrFilters  = [],
-                aValues     = [];
-            let oDialog = this._getDialog("ShContrato"),
-                oFilter = {};
-
-            // set previous filter - if "Comprador" is filled (Multiple)
-            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-                aOrFilters = [];
-            }
-
-            // set previous filter - if "Fornecedor" is filled (Multiple)
-            aValues = this.getScreenParam("screen1", "idMultiInputFornecedorCod1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Lifnr);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-                aOrFilters = [];
-            }
-
-            // Define filters
-            oDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+        onValueHelpCompradorPreFilter: function(oEvt){
             
-            // open value help dialog filtered by the input value
-            oDialog.open();
         },
 
         /**
          * 
          * 
          */
-        onValueHelpDepartamento: function(){
-            // this._getDialog("ShDepartamento").open();
-            let aFilters    = [],
-                aOrFilters  = [],
-                aValues     = [];
-            let oDialog = this._getDialog("ShDepartamento"),
-                oFilter = {};
+        onValueHelpCompradorClose: function (oEvt) {
+            let aSelectedItems = oEvt.getParameter("selectedItems"),
+                oMultiInput = this.byId("idMultiInputCompradorCod1");
 
-            // set previous filter - if "Comprador" is filled (Multiple)
-            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-                aOrFilters = [];
+            oMultiInput.removeAllTokens();
+
+            if (aSelectedItems && aSelectedItems.length > 0) {
+                aSelectedItems.forEach(function (oItem) {
+                    oMultiInput.addToken(new Token({
+                        key: oItem.getTitle(),
+                        text: oItem.getDescription()
+                    }));
+                });
             }
-
-            // set previous filter - if "Fornecedor" is filled (Multiple)
-            aValues = this.getScreenParam("screen1", "idMultiInputFornecedorCod1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Lifnr);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-                aOrFilters = [];
-            }
-
-            // set previous filter - if "Contrato" is filled (Multiple)
-            aValues = this.getScreenParam("screen1", "idMultiInputContrato1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Ebeln", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ebeln);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-                aOrFilters = [];
-            }
-
-            // Define filters
-            oDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
-            
-            // open value help dialog filtered by the input value
-            oDialog.open();
         },
 
         /**
          * 
          * 
          */
-        onValueHelpFornecedor: function(){
-/*
-            // Single Selection
-            let oDialog     = this._getDialog("ShFornecedor"),
-                oFilter     = {};
-            let sValue;
-
-            // set previous filter - if "Comprador" is filled (Single)
-            sValue = this.getScreenParam("screen1", "idInputCompradorCod1");
-            if (sValue) {
-                oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
-                // open value help dialog filtered by the input value
-                oDialog.getBinding("items").filter([oFilter]);
-            }
-            
-            oDialog.open();
-*/
-            // Multi Selection
-            let aFilters    = [],
-                aOrFilters  = [],
-                aValues     = [];
-            let oDialog     = this._getDialog("ShFornecedor"),
-                oFilter     = {};
-
-            // set previous filter - if "Comprador" is filled (Multiple)
-            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-                aOrFilters = [];
-            }
-
-			oDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
-
-            oDialog.open();
-        },
-
-        /**
-         * 
-         * 
-         */
-        onValueHelpGrpPrecos: function(){
-/*
-            // Single Selection
-            let oDialog = this._getDialog("ShGrupoPrecos"),
-                oFilter = {};
-            let sValue;
-
-            // set previous filter - if "UF" is filled
-            sValue = this.getScreenParam("screen1", "idInputUf1");
-            if (sValue) {
-                oFilter = new sap.ui.model.Filter("UF", sap.ui.model.FilterOperator.EQ, sValue);
-                // open value help dialog filtered by the input value
-                oDialog.getBinding("items").filter([oFilter]);
-            }
-
-            oDialog.open();
-*/
-            // Multi Selection
-            let aFilters    = [],
-                aOrFilters  = [],
-                aValues     = [];
-            let oDialog     = this._getDialog("ShGrupoPrecos"),
-                oFilter     = {};
-
-            // set previous filter - if "UF" is filled (Multiple)
-            aValues = this.getScreenParam("screen1", "idMultiInputUf1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("UF", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Bland);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-                aOrFilters = [];
-            }
-
-			oDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
-
-            oDialog.open();
-        },
-
-        /**
-         * 
-         * 
-         */
-        onValueHelpHierarquia: function(){
-            // this._getDialog("ShHierarquia").open();
-            let aFilters    = [],
-                aOrFilters  = [],
-                aValues     = [];
-            let oDialog = this._getDialog("ShHierarquia"),
-                oFilter = {};
-
-            // set previous filter - if "Comprador" is filled (Multiple)
-            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-                aOrFilters = [];
-            }
-
-            // set previous filter - if "Fornecedor" is filled (Multiple)
-            aValues = this.getScreenParam("screen1", "idMultiInputFornecedorCod1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Lifnr);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-                aOrFilters = [];
-            }
-
-            // set previous filter - if "Contrato" is filled (Multiple)
-            aValues = this.getScreenParam("screen1", "idMultiInputContrato1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Ebeln", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ebeln);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-                aOrFilters = [];
-            }
-
-            // set previous filter - if "Departamento" is filled (Multiple)
-            aValues = this.getScreenParam("screen1", "idMultiInputDepartamento1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Node3", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Node3);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-                aOrFilters = [];
-            }
-
-            // Define filters
-            oDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
-            
-            // open value help dialog filtered by the input value
-            oDialog.open();
-        },
-
-        /**
-         * 
-         * 
-         */
-        onValueHelpLoja: function(){
-/*
-            let oDialog = this._getDialog("ShLojas"),
-                oFilter = {};
-            let sValue;
-
-            // set previous filter - if "UF" is filled
-            sValue = this.getScreenParam("screen1", "idInputUf1");
-            if (sValue) {
-                oFilter = new sap.ui.model.Filter("UF", sap.ui.model.FilterOperator.EQ, sValue);
-                // open value help dialog filtered by the input value
-                oDialog.getBinding("items").filter([oFilter]);
-            }
-
-            oDialog.open();
-*/
-            // Multi Selection
-            let aFilters    = [],
-                aOrFilters  = [],
-                aValues     = [];
-            let oDialog     = this._getDialog("ShLojas"),
-                oFilter     = {};
-
-            // set previous filter - if "UF" is filled (Multiple)
-            aValues = this.getScreenParam("screen1", "idMultiInputUf1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("UF", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Bland);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-                aOrFilters = [];
-            }
-
-			oDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
-
-            oDialog.open();
-        },
-
-        /**
-         * 
-         * 
-         */
-        onValueHelpUf: function(){
-            this._getDialog("ShUf").open();
-        },
-
-        /**
-         * 
-         * 
-         */
-        onCompradorClose: function (oEvt) {
-/*
-            // Single Selection
-            let oSelectedItem   = oEvt.getParameter("selectedItem");
-            let sValue;
-
-            if (oSelectedItem) {
-                // Ekgrp
-                sValue = oSelectedItem.getTitle().toUpperCase();
-                this.getScreenParams("screen1").idInputCompradorCod1 = sValue;
-                // Nome
-                sValue = oSelectedItem.getDescription().toUpperCase();
-                this.getScreenParams("screen1").idInputCompradorDescr1 = sValue;
-
-                // Fornecedor (Clear)
-                this.getScreenParams("screen1").idInputFornecedorCod1 = "";
-                this.getScreenParams("screen1").idInputFornecedorDescr1 = "";
-                // Contrato (Clear)
-                this.getScreenParams("screen1").idInputContrato1 = "";
-
-                // Refresh screen model
-                this.refreshScreenModel();
-            }
-            oEvt.getSource().getBinding("items").filter([]);
-
-            // Release fragment
-            this._oDialog = undefined;
-*/
-/*
-            // Multi Selection
-			let aSelectedItems = oEvt.getParameter("selectedItems"),
-				oMultiInput = this.byId("idMultiInputCompradorCod1");
-
-			if (aSelectedItems && aSelectedItems.length > 0) {
-				aSelectedItems.forEach(function (oItem) {
-					oMultiInput.addToken(new Token({
-						text: oItem.getTitle()
-					}));
-				});
-			}
-*/
-            // Multi Selection with Model
-			let aSelectedItems = oEvt.getParameter("selectedItems");
-            let oScreenMulti = [];
-
-            if(aSelectedItems && aSelectedItems.length > 0){
-                for(var oIndex in aSelectedItems){
-                    oScreenMulti.push({
-                        "Ekgrp" : aSelectedItems[oIndex].getTitle()
-                    });
-                }
-                this.getScreenParams("screen1").idMultiInputCompradorCod1 = oScreenMulti;
-
-                // Fornecedor (Clear)
-                this.getScreenParams("screen1").idMultiInputFornecedorCod1 = [];
-                // Contrato (Clear)
-                this.getScreenParams("screen1").idMultiInputContrato1 = [];
-                // Departamento (Clear)
-                this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
-                // Hierarquia (Clear)
-                this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
-			}
-            
-            // Refresh screen model
-            this.refreshScreenModel();
-            
-            // Release fragment
-            this._oDialog = undefined;
-        },
-
-        /**
-         * 
-         * 
-         */
-        onContratoClose: function (oEvt) {
-/*
-            let oSelectedItem = oEvt.getParameter("selectedItem");
-            let sValue;
-
-            if (oSelectedItem) {
-                // Ebeln
-                sValue = oSelectedItem.getTitle().toUpperCase();
-                this.getScreenParams("screen1").idInputContrato1 = sValue;
-
-                // Refresh screen model
-                this.refreshScreenModel();
-            }
-            oEvt.getSource().getBinding("items").filter([]);
-            this._oDialog = undefined;
-*/
-            // Multi Selection with Model
-			let aSelectedItems = oEvt.getParameter("selectedItems");
-            let oScreenMulti = [];
-
-            if(aSelectedItems && aSelectedItems.length > 0){
-                for(var oIndex in aSelectedItems){
-                    oScreenMulti.push({
-                        "Ebeln" : aSelectedItems[oIndex].getTitle()
-                    });
-                }
-                this.getScreenParams("screen1").idMultiInputContrato1 = oScreenMulti;
-
-                // Departamento (Clear)
-                this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
-                // Hierarquia (Clear)
-                this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
-            }
-
-            // Refresh screen model
-            this.refreshScreenModel();
-
-            // Release fragment
-            this._oDialog = undefined;
-        },
-
-        /**
-         * 
-         * 
-         */
-        onFornecedorClose: function (oEvt) {
-/*
-            // Single Selection
-            let oSelectedItem   = oEvt.getParameter("selectedItem");
-            let sValue;
-
-            if (oSelectedItem) {
-                // Lifnr
-                sValue = oSelectedItem.getTitle().toUpperCase();
-                this.getScreenParams("screen1").idInputFornecedorCod1 = sValue;
-                // Mcod1
-                sValue = oSelectedItem.getDescription().toUpperCase();
-                this.getScreenParams("screen1").idInputFornecedorDescr1 = sValue;
-
-                // Contrato (Clear)
-                this.getScreenParams("screen1").idInputContrato1 = "";
-
-                // Refresh screen model
-                this.refreshScreenModel();
-            }
-            oEvt.getSource().getBinding("items").filter([]);
-
-            // Release fragment
-            this._oDialog = undefined;
-*/
-            // Multi Selection with Model
-			let aSelectedItems = oEvt.getParameter("selectedItems");
-            let oScreenMulti = [];
-
-            if(aSelectedItems && aSelectedItems.length > 0){
-                for(var oIndex in aSelectedItems){
-                    oScreenMulti.push({
-                        "Lifnr" : aSelectedItems[oIndex].getTitle()
-                    });
-                }
-                this.getScreenParams("screen1").idMultiInputFornecedorCod1 = oScreenMulti;
-
-                // Contrato (Clear)
-                this.getScreenParams("screen1").idMultiInputContrato1 = [];
-                // Departamento (Clear)
-                this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
-                // Hierarquia (Clear)
-                this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
-			}
-
-            // Refresh screen model
-            this.refreshScreenModel();
-
-            // Release fragment
-            this._oDialog = undefined;
-        },
-
-        /**
-         * 
-         * 
-         */
-        onDepartamentoClose: function (oEvt) {
-            // Multi Selection with Model
-			let aSelectedItems = oEvt.getParameter("selectedItems");
-            let oScreenMulti = [];
-
-            if(aSelectedItems && aSelectedItems.length > 0){
-                for(var oIndex in aSelectedItems){
-                    oScreenMulti.push({
-                        "Node3" : aSelectedItems[oIndex].getTitle()
-                    });
-                }
-                this.getScreenParams("screen1").idMultiInputDepartamento1 = oScreenMulti;
-
-                // Hierarquia (Clear)
-                this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
-			}
-
-            // Refresh screen model
-            this.refreshScreenModel();
-
-            // Release fragment
-            this._oDialog = undefined;
-        },
-
-        /**
-         * 
-         * 
-         */
-        onGrupoPrecosClose: function (oEvt) {
-/*
-            let oSelectedItem = oEvt.getParameter("selectedItem");
-            let sValue;
-
-            if (oSelectedItem) {
-                // Clint
-                sValue = oSelectedItem.getTitle().toUpperCase();
-                this.getScreenParams("screen1").idInputGrpPrecos1 = sValue;
-
-                // Refresh screen model
-                this.refreshScreenModel();
-            }
-            oEvt.getSource().getBinding("items").filter([]);
-
-            // Release fragment
-            this._oDialog = undefined;
-*/
-            // Multi Selection with Model
-			let aSelectedItems = oEvt.getParameter("selectedItems");
-            let oScreenMulti = [];
-
-            if(aSelectedItems && aSelectedItems.length > 0){
-                for(var oIndex in aSelectedItems){
-                    oScreenMulti.push({
-                        "Bandeira" : aSelectedItems[oIndex].getTitle()
-                    });
-                }
-                this.getScreenParams("screen1").idMultiInputGrpPrecos1 = oScreenMulti;
-			}
-
-            // Refresh screen model
-            this.refreshScreenModel();
-
-            // Release fragment
-            this._oDialog = undefined;
-        },
-
-        /**
-         * 
-         * 
-         */
-        onHierarquiaClose: function (oEvt) {
-/*
-            // Single Selection
-            let oSelectedItem = oEvt.getParameter("selectedItem");
-            let sValue;
-
-            if (oSelectedItem) {
-                // Node6
-                sValue = oSelectedItem.getTitle().toUpperCase();
-                this.getScreenParams("screen1").idInputSortim1 = sValue;
-
-                // Refresh screen model
-                this.refreshScreenModel();
-            }
-            oEvt.getSource().getBinding("items").filter([]);
-            this._oDialog = undefined;
-*/
-            // Multi Selection with Model
-			let aSelectedItems = oEvt.getParameter("selectedItems");
-            let oScreenMulti = [];
-
-            if(aSelectedItems && aSelectedItems.length > 0){
-                for(var oIndex in aSelectedItems){
-                    oScreenMulti.push({
-                        "Node6" : aSelectedItems[oIndex].getTitle()
-                    });
-                }
-                this.getScreenParams("screen1").idMultiInputNoHierarquia1 = oScreenMulti;
-			}
-
-            // Refresh screen model
-            this.refreshScreenModel();
-
-            // Release fragment
-            this._oDialog = undefined;
-        },
-
-        /**
-         * 
-         * 
-         */
-        onLojasClose: function (oEvt) {
-/*
-            let oSelectedItem = oEvt.getParameter("selectedItem");
-            let sValue;
-
-            if (oSelectedItem) {
-                // Werks
-                sValue = oSelectedItem.getTitle().toUpperCase();
-                this.getScreenParams("screen1").idInputLoja1 = sValue;
-
-                // Refresh screen model
-                this.refreshScreenModel();
-            }
-            oEvt.getSource().getBinding("items").filter([]);
-
-            // Release fragment
-            this._oDialog = undefined;
-*/
-            // Multi Selection with Model
-			let aSelectedItems = oEvt.getParameter("selectedItems");
-            let oScreenMulti = [];
-
-            if(aSelectedItems && aSelectedItems.length > 0){
-                for(var oIndex in aSelectedItems){
-                    oScreenMulti.push({
-                        "Werks" : aSelectedItems[oIndex].getTitle()
-                    });
-                }
-                this.getScreenParams("screen1").idMultiInputLoja1 = oScreenMulti;
-			}
-
-            // Refresh screen model
-            this.refreshScreenModel();
-
-            // Release fragment
-            this._oDialog = undefined;
-        },
-
-        /**
-         * 
-         * 
-         */
-        onUfClose: function (oEvt) {
-/*
-            // Single Selection
-            let oSelectedItem = oEvt.getParameter("selectedItem");
-            let sValue;
-
-            if (oSelectedItem) {
-                // Bland
-                sValue = oSelectedItem.getTitle().toUpperCase();
-                this.getScreenParams("screen1").idInputUf1 = sValue;
-
-                // Grupo de Preços (Clear)
-                this.getScreenParams("screen1").idInputGrpPrecos1 = "";
-                // Lojas (Clear)
-                this.getScreenParams("screen1").idInputLoja1 = "";
-
-                // Refresh screen model
-                this.refreshScreenModel();
-            }
-            oEvt.getSource().getBinding("items").filter([]);
-            this._oDialog = undefined;
-*/
-            // Multi Selection with Model
-			let aSelectedItems = oEvt.getParameter("selectedItems");
-            let oScreenMulti = [];
-
-            if(aSelectedItems && aSelectedItems.length > 0){
-                for(var oIndex in aSelectedItems){
-                    oScreenMulti.push({
-                        "Bland" : aSelectedItems[oIndex].getTitle()
-                    });
-                }
-                this.getScreenParams("screen1").idMultiInputUf1 = oScreenMulti;
-
-                // Grupo de Preços (Clear)
-                this.getScreenParams("screen1").idMultiInputGrpPrecos1 = [];
-                // Lojas (Clear)
-                this.getScreenParams("screen1").idMultiInputLoja1 = [];
-			}
-            
-            // Refresh screen model
-            this.refreshScreenModel();
-            
-            // Release fragment
-            this._oDialog = undefined;
-        },
-
-        /**
-         * 
-         * 
-         */
-        onCompradorSearch: function(oEvt){
+        onValueHelpCompradorSearch: function(oEvt){
             let aFilters    = [];
 			let oBinding    = oEvt.getSource().getBinding("items"),
                 oFilter     = {};
             let sValue      = oEvt.getParameter("value").toUpperCase();
-/*
+
             oFilter = new Filter("Nome", FilterOperator.Contains, sValue);
             aFilters.push(oFilter);
-            oFilter = new Filter("Uname", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
-			oBinding.filter(new Filter(aFilters, false)); // Use OR (false parameter)
-*/
-			// let oFilter = new Filter("Ekgrp", FilterOperator.Contains, sValue);
-            oFilter = new Filter("Nome", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
-			// oBinding.filter([oFilter]);
 			oBinding.filter(aFilters);
+        },
+
+
+//----------------------------------------------------------------------//
+// Contrato                                                             //
+//----------------------------------------------------------------------//
+        /**
+         * 
+         * 
+         */
+        onValueHelpContratoOpen: function(oEvt){
+            // Create value help dialog
+            if (!this._ShContratoDialog) {
+                this._ShContratoDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShContrato", this);
+                this.getView().addDependent(this._ShContratoDialog);
+            }
+
+            this.onValueHelpContratoPreFilter(oEvt);
+
+            this._ShContratoDialog.open();
         },
 
         /**
          * 
          * 
          */
-        onContratoSearch: function(oEvt){
-/*
-            let aFilters = [];
-            let oBinding = oEvt.getSource().getBinding("items"),
-                oFilter = {};
-            let sValue;
+        onValueHelpContratoPreFilter: function(oEvt){
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            //let oDialog = this._getDialog("ShContrato"),
+            let oFilter = {};
 
-            // Main value used on Search Help
-            sValue = oEvt.getParameter("value").toUpperCase();
-			oFilter = new Filter("Ebeln", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
-            
-            // set previous filter - if "Comprador" is filled
-            sValue = this.getScreenParam("screen1", "idInputCompradorCod1");
-            if (sValue) {
-                oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
-                aFilters.push(oFilter);
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            aValues = this.byId("idMultiInputCompradorCod1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
-            
-            // set previous filter - if "Fornecedor" is filled
-            sValue = this.getScreenParam("screen1", "idInputFornecedorCod1");
-            if (sValue) {
-                oFilter = new sap.ui.model.Filter("Lifnr", sap.ui.model.FilterOperator.EQ, sValue);
-                aFilters.push(oFilter);
+
+            // Set previous filter - if "Fornecedor" is filled (Multiple)
+            aValues = this.byId("idMultiInputFornecedorCod1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
             // Define filters
-            oBinding.filter(aFilters);
-*/
+            this._ShContratoDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpContratoClose: function (oEvt) {
+            let aSelectedItems = oEvt.getParameter("selectedItems"),
+                oMultiInput = this.byId("idMultiInputContrato1");
+
+            oMultiInput.removeAllTokens();
+
+            if (aSelectedItems && aSelectedItems.length > 0) {
+                aSelectedItems.forEach(function (oItem) {
+                    oMultiInput.addToken(new Token({
+                        key: oItem.getTitle(),
+                        //text: oItem.getDescription()
+                        text: oItem.getTitle()
+                    }));
+                });
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpContratoSearch: function(oEvt){
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -1166,21 +496,21 @@ sap.ui.define([
             oFilter = new Filter("Ebeln", FilterOperator.Contains, sValue);
             aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
 
-            // set previous filter - if "Comprador" is filled
-            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
+            // Set previous filter - if "Comprador" is filled
+            aValues = this.byId("idMultiInputCompradorCod1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
-                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
             }
 
-            // set previous filter - if "Fornecedor" is filled
-            aValues = this.getScreenParam("screen1", "idMultiInputFornecedorCod1");
+            // Set previous filter - if "Fornecedor" is filled
+            aValues = this.byId("idMultiInputFornecedorCod1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
-                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Lifnr);
+                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
@@ -1189,158 +519,100 @@ sap.ui.define([
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
+
+//----------------------------------------------------------------------//
+// Departamento                                                             //
+//----------------------------------------------------------------------//
         /**
          * 
          * 
          */
-        onFornecedorSearch: function(oEvt){
-/*
-            let aFilters    = [];
-            let oBinding    = oEvt.getSource().getBinding("items"),
-                oFilter     = {};
-            let sValue;
-
-            // Main value used on Search Help
-            sValue = oEvt.getParameter("value").toUpperCase();
-            oFilter = new Filter("Lifnr", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
-
-            // set previous filter - if "Comprador" is filled
-            sValue = this.getScreenParam("screen1", "idInputCompradorCod1");
-            if (sValue) {
-                oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
-                aFilters.push(oFilter);
+        onValueHelpDepartamentoOpen: function(oEvt){
+            // Create value help dialog
+            if (!this._ShDepartamentoDialog) {
+                this._ShDepartamentoDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShDepartamento", this);
+                this.getView().addDependent(this._ShDepartamentoDialog);
             }
 
-            oBinding.filter(aFilters);
-*/
+            this.onValueHelpDepartamentoPreFilter(oEvt);
+
+            this._ShDepartamentoDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpDepartamentoPreFilter: function(oEvt){
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
-            let oBinding    = oEvt.getSource().getBinding("items"),
-                oFilter     = {};
-            let sValue;
+            //let oDialog = this._getDialog("ShDepartamento"),
+            let oFilter = {};
 
-            sValue = oEvt.getParameter("value").toUpperCase();
-            oFilter = new Filter("Lifnr", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
-
-            // set previous filter - if "Comprador" is filled
-            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            aValues = this.byId("idMultiInputCompradorCod1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
-                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
-			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            // Set previous filter - if "Fornecedor" is filled (Multiple)
+            aValues = this.byId("idMultiInputFornecedorCod1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // Set previous filter - if "Contrato" is filled (Multiple)
+            aValues = this.byId("idMultiInputContrato1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ebeln", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // Define filters
+            this._ShDepartamentoDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
         /**
          * 
          * 
          */
-        onDepartamentoSearch: function(oEvt){
-            let aFilters    = [],
-                aOrFilters  = [],
-                aValues     = [];
-            let oBinding    = oEvt.getSource().getBinding("items"),
-                oFilter     = {};
-            let sValue;
+        onValueHelpDepartamentoClose: function (oEvt) {
+            let aSelectedItems = oEvt.getParameter("selectedItems"),
+                oMultiInput = this.byId("idMultiInputDepartamento1");
 
-            sValue = oEvt.getParameter("value").toUpperCase();
-            oFilter = new Filter("Node3", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
+            oMultiInput.removeAllTokens();
 
-            // set previous filter - if "Comprador" is filled
-            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            if (aSelectedItems && aSelectedItems.length > 0) {
+                aSelectedItems.forEach(function (oItem) {
+                    oMultiInput.addToken(new Token({
+                        key: oItem.getTitle(),
+                        text: oItem.getDescription()
+                        // text: oItem.getTitle()
+                    }));
+                });
             }
-
-            // set previous filter - if "Fornecedor" is filled
-            aValues = this.getScreenParam("screen1", "idMultiInputFornecedorCod1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Lifnr);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-            }
-
-            // set previous filter - if "Contrato" is filled
-            aValues = this.getScreenParam("screen1", "idMultiInputContrato1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Ebeln", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ebeln);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-            }
-
-			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
         /**
          * 
          * 
          */
-        onGrupoPrecosSearch: function (oEvt) {
-/*
-            let aFilters = [];
-            let oBinding = oEvt.getSource().getBinding("items"),
-                oFilter = {};
-            let sValue;
-
-            // Main value used on Search Help
-            sValue = oEvt.getParameter("value").toUpperCase();
-            oFilter = new Filter("Bandeira", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
-
-            // set previous filter - if "UF" is filled
-            sValue = this.getScreenParam("screen1", "idInputUf1");
-            if (sValue) {
-                oFilter = new sap.ui.model.Filter("UF", sap.ui.model.FilterOperator.EQ, sValue);
-                aFilters.push(oFilter);
-            }
-            
-            oBinding.filter(aFilters);
-*/
-            let aFilters    = [],
-                aOrFilters  = [],
-                aValues     = [];
-            let oBinding    = oEvt.getSource().getBinding("items"),
-                oFilter     = {};
-            let sValue;
-
-            sValue = oEvt.getParameter("value").toUpperCase();
-            oFilter = new Filter("Bandeira", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
-
-            // set previous filter - if "UF" is filled
-            aValues = this.getScreenParam("screen1", "idMultiInputUf1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("UF", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-            }
-
-			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
-        },
-
-        /**
-         * 
-         * 
-         */
-        onHierarquiaSearch: function (oEvt) {
+        onValueHelpDepartamentoSearch: function(oEvt){
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -1352,41 +624,31 @@ sap.ui.define([
             oFilter = new Filter("Node3", FilterOperator.Contains, sValue);
             aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
 
-            // set previous filter - if "Comprador" is filled
-            aValues = this.getScreenParam("screen1", "idMultiInputCompradorCod1");
+            // Set previous filter - if "Comprador" is filled
+            aValues = this.byId("idMultiInputCompradorCod1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
-                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
             }
 
-            // set previous filter - if "Fornecedor" is filled
-            aValues = this.getScreenParam("screen1", "idMultiInputFornecedorCod1");
+            // Set previous filter - if "Fornecedor" is filled
+            aValues = this.byId("idMultiInputFornecedorCod1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
-                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Lifnr);
+                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
             }
 
-            // set previous filter - if "Contrato" is filled
-            aValues = this.getScreenParam("screen1", "idMultiInputContrato1");
+            // Set previous filter - if "Contrato" is filled
+            aValues = this.byId("idMultiInputContrato1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
-                    oFilter = new Filter("Ebeln", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ebeln);
-                    aOrFilters.push(oFilter);
-                }
-                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
-            }
-
-            // set previous filter - if "Departamento" is filled
-            aValues = this.getScreenParam("screen1", "idMultiInputDepartamento1");
-            if (aValues.length) {
-                for(var iIndex in aValues){
-                    oFilter = new Filter("Node3", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Node3);
+                    oFilter = new Filter("Ebeln", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
@@ -1395,31 +657,396 @@ sap.ui.define([
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
+
+//----------------------------------------------------------------------//
+// Fornecedor                                                             //
+//----------------------------------------------------------------------//
         /**
          * 
          * 
          */
-        onLojasSearch: function (oEvt) {
-/*
-            let aFilters = [];
-            let oBinding = oEvt.getSource().getBinding("items"),
-                oFilter = {};
-            let sValue;
-            
-            // Main value used on Search Help
-            sValue = oEvt.getParameter("value").toUpperCase();
-            oFilter = new Filter("Werks", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
-
-            // set previous filter - if "UF" is filled
-            sValue = this.getScreenParam("screen1", "idInputUf1");
-            if (sValue) {
-                oFilter = new sap.ui.model.Filter("UF", sap.ui.model.FilterOperator.EQ, sValue);
-                aFilters.push(oFilter);
+        onValueHelpFornecedorOpen: function(oEvt){
+            // Create value help dialog
+            if (!this._ShFornecedorDialog) {
+                this._ShFornecedorDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShFornecedor", this);
+                this.getView().addDependent(this._ShFornecedorDialog);
             }
-            
-            oBinding.filter(aFilters);
-*/
+
+            this.onValueHelpFornecedorPreFilter(oEvt);
+
+            this._ShFornecedorDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpFornecedorPreFilter: function(oEvt){
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            //let oDialog = this._getDialog("ShFornecedor"),
+            let oFilter = {};
+
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            aValues = this.byId("idMultiInputCompradorCod1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // Define filters
+            this._ShFornecedorDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpFornecedorClose: function (oEvt) {
+            let aSelectedItems = oEvt.getParameter("selectedItems"),
+                oMultiInput = this.byId("idMultiInputFornecedorCod1");
+
+            oMultiInput.removeAllTokens();
+
+            if (aSelectedItems && aSelectedItems.length > 0) {
+                aSelectedItems.forEach(function (oItem) {
+                    oMultiInput.addToken(new Token({
+                        key: oItem.getTitle(),
+                        // text: oItem.getDescription()
+                        text: oItem.getTitle()
+                    }));
+                });
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpFornecedorSearch: function(oEvt){
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue;
+
+            sValue = oEvt.getParameter("value").toUpperCase();
+            oFilter = new Filter("Lifnr", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
+
+            // Set previous filter - if "Comprador" is filled
+            aValues = this.byId("idMultiInputCompradorCod1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+        },
+
+
+//----------------------------------------------------------------------//
+// Grupos de Precos                                                     //
+//----------------------------------------------------------------------//
+        /**
+         * 
+         * 
+         */
+        onValueHelpGrpPrecosOpen: function(oEvt){
+            // Create value help dialog
+            if (!this._ShGrpPrecosDialog) {
+                this._ShGrpPrecosDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShGrupoPrecos", this);
+                this.getView().addDependent(this._ShGrpPrecosDialog);
+            }
+
+            this.onValueHelpGrpPrecosPreFilter(oEvt);
+
+            this._ShGrpPrecosDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpGrpPrecosPreFilter: function(oEvt){
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            //let oDialog = this._getDialog("ShGrpPrecos"),
+            let oFilter = {};
+
+            // Set previous filter - if "UF" is filled (Multiple)
+            aValues = this.byId("idMultiInputUf1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("UF", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // Define filters
+            this._ShGrpPrecosDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpGrpPrecosClose: function (oEvt) {
+            let aSelectedItems = oEvt.getParameter("selectedItems"),
+                oMultiInput = this.byId("idMultiInputGrpPrecos1");
+
+            oMultiInput.removeAllTokens();
+
+            if (aSelectedItems && aSelectedItems.length > 0) {
+                aSelectedItems.forEach(function (oItem) {
+                    oMultiInput.addToken(new Token({
+                        key: oItem.getTitle(),
+                        // text: oItem.getDescription()
+                        text: oItem.getTitle()
+                    }));
+                });
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpGrpPrecosSearch: function(oEvt){
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue;
+
+            sValue = oEvt.getParameter("value").toUpperCase();
+            oFilter = new Filter("Bandeira", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
+
+            // Set previous filter - if "Comprador" is filled
+            aValues = this.byId("idMultiInputUf1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("UF", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+        },
+
+
+//----------------------------------------------------------------------//
+// Hierarquia                                                             //
+//----------------------------------------------------------------------//
+        /**
+         * 
+         * 
+         */
+        onValueHelpHierarquiaOpen: function(oEvt){
+            // Create value help dialog
+            if (!this._ShHierarquiaDialog) {
+                this._ShHierarquiaDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShHierarquia", this);
+                this.getView().addDependent(this._ShHierarquiaDialog);
+            }
+
+            this.onValueHelpHierarquiaPreFilter(oEvt);
+
+            this._ShHierarquiaDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpHierarquiaPreFilter: function(oEvt){
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            //let oDialog = this._getDialog("ShHierarquia"),
+            let oFilter = {};
+
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            aValues = this.byId("idMultiInputDepartamento1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Node3", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // Define filters
+            this._ShHierarquiaDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpHierarquiaClose: function (oEvt) {
+            let aSelectedItems = oEvt.getParameter("selectedItems"),
+                oMultiInput = this.byId("idMultiInputNoHierarquia1");
+
+            oMultiInput.removeAllTokens();
+
+            if (aSelectedItems && aSelectedItems.length > 0) {
+                aSelectedItems.forEach(function (oItem) {
+                    oMultiInput.addToken(new Token({
+                        key: oItem.getTitle(),
+                        // text: oItem.getDescription()
+                        text: oItem.getTitle()
+                    }));
+                });
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpHierarquiaSearch: function(oEvt){
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue;
+
+            sValue = oEvt.getParameter("value").toUpperCase();
+            oFilter = new Filter("Node6", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
+
+            // Set previous filter - if "Comprador" is filled
+            aValues = this.byId("idMultiInputCompradorCod1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+            // Set previous filter - if "Fornecedor" is filled
+            aValues = this.byId("idMultiInputFornecedorCod1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+            // Set previous filter - if "Comprador" is filled
+            aValues = this.byId("idMultiInputContrato1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ebeln", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+            // Set previous filter - if "Departamento" is filled
+            aValues = this.byId("idMultiInputDepartamento1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Node3", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            }
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+        },
+
+
+//----------------------------------------------------------------------//
+// Lojas                                                                //
+//----------------------------------------------------------------------//
+        /**
+         * 
+         * 
+         */
+        onValueHelpLojasOpen: function(oEvt){
+            // Create value help dialog
+            if (!this._ShLojasDialog) {
+                this._ShLojasDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShLojas", this);
+                this.getView().addDependent(this._ShLojasDialog);
+            }
+
+            this.onValueHelpLojasPreFilter(oEvt);
+
+            this._ShLojasDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpLojasPreFilter: function(oEvt){
+            let aFilters    = [],
+                aOrFilters  = [],
+                aValues     = [];
+            //let oDialog = this._getDialog("ShLojas"),
+            let oFilter = {};
+
+            // Set previous filter - if "UF" is filled (Multiple)
+            aValues = this.byId("idMultiInputUf1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("UF", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // Define filters
+            this._ShLojasDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpLojasClose: function (oEvt) {
+            let aSelectedItems = oEvt.getParameter("selectedItems"),
+                oMultiInput = this.byId("idMultiInputLojas1");
+
+            oMultiInput.removeAllTokens();
+
+            if (aSelectedItems && aSelectedItems.length > 0) {
+                aSelectedItems.forEach(function (oItem) {
+                    oMultiInput.addToken(new Token({
+                        key: oItem.getTitle(),
+                        text: oItem.getDescription()
+                        // text: oItem.getTitle()
+                    }));
+                });
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpLojasSearch: function(oEvt){
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -1431,11 +1058,11 @@ sap.ui.define([
             oFilter = new Filter("Werks", FilterOperator.Contains, sValue);
             aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
 
-            // set previous filter - if "UF" is filled
-            aValues = this.getScreenParam("screen1", "idMultiInputUf1");
+            // Set previous filter - if "Comprador" is filled
+            aValues = this.byId("idMultiInputUf1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
-                    oFilter = new Filter("UF", sap.ui.model.FilterOperator.EQ, aValues[iIndex].Ekgrp);
+                    oFilter = new Filter("UF", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
@@ -1444,17 +1071,61 @@ sap.ui.define([
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
+
+//----------------------------------------------------------------------//
+// Uf                                                                   //
+//----------------------------------------------------------------------//
         /**
          * 
          * 
          */
-        onUfSearch: function (oEvt) {
-/*
-            let sValue = oEvt.getParameter("value").toUpperCase();
-            let oFilter = new Filter("Bland", FilterOperator.Contains, sValue);
-            let oBinding = oEvt.getSource().getBinding("items");
-            oBinding.filter([oFilter]);
-*/
+        onValueHelpUfOpen: function(oEvt){
+            // this._getDialog("ShUf").open();
+
+            // Create value help dialog
+            if (!this._ShUfDialog) {
+                this._ShUfDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShUf", this);
+                this.getView().addDependent(this._ShUfDialog);
+            }
+
+            this.onValueHelpUfPreFilter(oEvt);
+
+            this._ShUfDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpUfPreFilter: function(oEvt){
+            
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpUfClose: function (oEvt) {
+            let aSelectedItems = oEvt.getParameter("selectedItems"),
+                oMultiInput = this.byId("idMultiInputUf1");
+
+            oMultiInput.removeAllTokens();
+
+            if (aSelectedItems && aSelectedItems.length > 0) {
+                aSelectedItems.forEach(function (oItem) {
+                    oMultiInput.addToken(new Token({
+                        key: oItem.getTitle(),
+                        text: oItem.getDescription()
+                    }));
+                });
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpUfSearch: function(oEvt){
             let aFilters    = [];
 			let oBinding    = oEvt.getSource().getBinding("items"),
                 oFilter     = {};
@@ -1462,8 +1133,9 @@ sap.ui.define([
 
             oFilter = new Filter("Bland", FilterOperator.Contains, sValue);
             aFilters.push(oFilter);
-			// oBinding.filter([oFilter]);
 			oBinding.filter(aFilters);
         },
+
+
     });
 });

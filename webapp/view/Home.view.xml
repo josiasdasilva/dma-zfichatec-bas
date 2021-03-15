@@ -45,107 +45,68 @@
                                     alignItems="Start"
                                     justifyContent="Start"
                                     width="50%">
+                                    
+                                    <!-- COMPRADOR -->
                                     <Label
                                         text="{i18n>comprador_lbl}:"
                                         width="76px"
                                         class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
-<!--
-                                    <Input
-                                        id="idInputCompradorCod1"
-                                        maxLength="3"
-                                        value="{modelScreenParams>/screen1/idInputCompradorCod1}"
-                                        valueLiveUpdate="true"
-                                        width="85px"
-                                        showValueHelp="true"
-                                        valueHelpRequest="onValueHelpComprador"
-                                        change="onChangeInputField" />
-                                    <Input
-                                        id="idInputCompradorDescr1"
-                                        value="{modelScreenParams>/screen1/idInputCompradorDescr1}"
-                                        enabled="false"
-                                        class="sapUiSmallMarginBegin" />
--->
                                     <MultiInput
                                         width="350px"
                                         id="idMultiInputCompradorCod1"
-                                        tokens="{
-                                            path: 'modelScreenParams>/screen1/idMultiInputCompradorCod1'
+                                        suggestionItems="{
+                                            path: '/CompradorSet'
                                         }"
                                         tokenChange="onTokenChangeMultiInput"
-                                        valueHelpRequest="onValueHelpComprador" >
-                                        <tokens>
-                                            <Token
-                                                key="{modelScreenParams>Ekgrp}"
-                                                text="{modelScreenParams>Ekgrp}" />
-                                        </tokens>
+                                        valueHelpRequest="onValueHelpCompradorOpen"
+                                        valueHelpOnly="true" >
+                                        <core:Item key="{Ekgrp}" text="{Nome}"/>
                                     </MultiInput>
+
                                 </HBox>
-                                    
+                                
                                 <HBox
                                     alignItems="Start"
                                     justifyContent="Start"
                                     width="50%">
+                                    
+                                    <!-- FORNECEDOR -->
                                     <Label
                                         text="{i18n>fornecedor_lbl}:"
                                         width="76px"
                                         class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
-<!-- 
-                                    <Input
-                                        id="idInputFornecedorCod1"
-                                        maxLength="10"
-                                        value="{modelScreenParams>/screen1/idInputFornecedorCod1}"
-                                        width="140px"
-                                        showValueHelp="true"
-                                        valueHelpRequest="onValueHelpFornecedor"
-                                        change="onChangeInputField" />
-                                    <Input
-                                        id="idInputFornecedorDescr1"
-                                        value="{modelScreenParams>/screen1/idInputFornecedorDescr1}"
-                                        enabled="false"
-                                        class="sapUiSmallMarginBegin" />
- -->
                                     <MultiInput
                                         width="350px"
                                         id="idMultiInputFornecedorCod1"
-                                        tokens="{
-                                            path: 'modelScreenParams>/screen1/idMultiInputFornecedorCod1'
+                                        suggestionItems="{
+                                            path: '/FornecedorSet'
                                         }"
                                         tokenChange="onTokenChangeMultiInput"
-                                        valueHelpRequest="onValueHelpFornecedor" >
-                                        <tokens>
-                                            <Token key="{modelScreenParams>Lifnr}" text="{modelScreenParams>Lifnr}" />
-                                        </tokens>
+                                        valueHelpRequest="onValueHelpFornecedorOpen" >
+                                        <core:Item key="{Lifnr}" text="{Lifnr}"/>
                                     </MultiInput>
                                 </HBox>
-                                    
+                                
                                 <HBox
                                     alignItems="Start"
                                     justifyContent="Start"
                                     width="50%">
+                                    
+                                    <!-- CONTRATO -->
                                     <Label
                                         text="{i18n>contrato_lbl}:"
                                         width="76px"
                                         class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
-<!-- 
-                                    <Input
-                                        id="idInputContrato1"
-                                        maxLength="10"
-                                        value="{modelScreenParams>/screen1/idInputContrato1}"
-                                        width="140px"
-                                        showValueHelp="true"
-                                        valueHelpRequest="onValueHelpContrato" />
- -->
                                     <MultiInput
                                         width="350px"
                                         id="idMultiInputContrato1"
-                                        tokens="{
-                                            path: 'modelScreenParams>/screen1/idMultiInputContrato1'
+                                        suggestionItems="{
+                                            path: '/ContratoSet'
                                         }"
                                         tokenChange="onTokenChangeMultiInput"
-                                        valueHelpRequest="onValueHelpContrato" >
-                                        <tokens>
-                                            <Token key="{modelScreenParams>Ebeln}" text="{modelScreenParams>Ebeln}" />
-                                        </tokens>
+                                        valueHelpRequest="onValueHelpContratoOpen"
+                                        valueHelpOnly="true" >
+                                        <core:Item key="{Ebeln}" text="{Ebeln}"/>
                                     </MultiInput>
                                 </HBox>
 
@@ -219,109 +180,81 @@
                                         
                                         <HBox
                                             class="sapUiSmallMarginTop" >
+
+                                            <!-- FONTE DE SUPRIMENTO -->
                                             <Label
                                                 text="{i18n>fonte_supr_lbl}:"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
-<!-- 
-                                            <Input
-                                                id="idInputFonteSuprimento1"
-                                                maxLength="10"
-                                                value="{modelScreenParams>/screen1/idInputFonteSuprimento1}"
-                                                width="140px"
-                                                showValueHelp="true" />
- -->
                                             <MultiInput
                                                 width="200px"
                                                 id="idMultiInputFonteSuprimento1"
-                                                tokens="{
-                                                    path: 'modelScreenParams>/screen1/idMultiInputFonteSuprimento1'
+                                                suggestionItems="{
+                                                    path: '/SuprimentosSet'
                                                 }"
                                                 tokenChange="onTokenChangeMultiInput"
-                                                valueHelpRequest="onValueHelpFonteSuprimento">
-                                                <tokens>
-                                                    <Token key="{modelScreenParams>}" text="{modelScreenParams>}" />
-                                                </tokens>
+                                                valueHelpRequest="onValueHelpFonteSuprimentoOpen"
+                                                valueHelpOnly="true" >
+                                                <core:Item key="{}" text="{}"/>
                                             </MultiInput>
                                         </HBox>
 
                                         <HBox
                                             class="sapUiTinyMarginTop" >
+                                            
+                                            <!-- STATUS DO MATERIAL -->
                                             <Label
                                                 text="{i18n>status_mat_lbl}: ="
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
-<!-- 
-                                            <Input
-                                                id="idInputStatusMat1"
-                                                maxLength="3"
-                                                value="{modelScreenParams>/screen1/idInputStatusMat1}"
-                                                width="85px"
-                                                showValueHelp="true" />
- -->
                                             <MultiInput
                                                 width="205px"
                                                 id="idMultiInputStatusMat1"
-                                                tokens="{
-                                                    path: 'modelScreenParams>/screen1/idMultiInputStatusMat1'
+                                                suggestionItems="{
+                                                    path: '/StatusMaterialSet'
                                                 }"
                                                 tokenChange="onTokenChangeMultiInput"
-                                                valueHelpRequest="onValueHelpStatusMat">
-                                                <tokens>
-                                                    <Token key="{modelScreenParams>}" text="{modelScreenParams>}" />
-                                                </tokens>
+                                                valueHelpRequest="onValueHelpStatusMaterialOpen"
+                                                valueHelpOnly="true" >
+                                                <core:Item key="{}" text="{}"/>
                                             </MultiInput>
                                         </HBox>
 
                                         <HBox
                                             class="sapUiTinyMarginTop" >
+                                            
+                                            <!-- DEPARTAMENTO -->
                                             <Label
                                                 text="{i18n>departamento_lbl}:"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
-<!-- 
-                                            <Input
-                                                id="idInputDepartamento1"
-                                                maxLength="5"
-                                                value="{modelScreenParams>/screen1/idInputDepartamento1}"
-                                                width="100px"
-                                                showValueHelp="true" />
- -->
                                             <MultiInput
                                                 width="242px"
                                                 id="idMultiInputDepartamento1"
-                                                tokens="{
-                                                    path: 'modelScreenParams>/screen1/idMultiInputDepartamento1'
+                                                suggestionItems="{
+                                                    path: '/DepartamentoSet'
                                                 }"
                                                 tokenChange="onTokenChangeMultiInput"
-                                                valueHelpRequest="onValueHelpDepartamento">
-                                                <tokens>
-                                                    <Token key="{modelScreenParams>Node3}" text="{modelScreenParams>Node3}" />
-                                                </tokens>
+                                                valueHelpRequest="onValueHelpDepartamentoOpen"
+                                                valueHelpOnly="true" >
+                                                <core:Item key="{Node3}" text="{Ltext}"/>
                                             </MultiInput>
                                         </HBox>
 
                                         <HBox
                                             class="sapUiTinyMarginTop" >
+                                            
+                                            <!-- HIERARQUIA -->
                                             <Label
                                                 text="{i18n>no_hierarquia_lbl}:"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
-<!-- 
-                                            <Input
-                                                id="idInputNoHierarquia1"
-                                                maxLength="12"
-                                                value="{modelScreenParams>/screen1/idInputNoHierarquia1}"
-                                                width="160px"
-                                                showValueHelp="true" />
- -->
                                             <MultiInput
                                                 width="225px"
                                                 id="idMultiInputNoHierarquia1"
-                                                tokens="{
-                                                    path: 'modelScreenParams>/screen1/idMultiInputNoHierarquia1'
+                                                suggestionItems="{
+                                                    path: '/HierarquiaSet'
                                                 }"
                                                 tokenChange="onTokenChangeMultiInput"
-                                                valueHelpRequest="onValueHelpHierarquia">
-                                                <tokens>
-                                                    <Token key="{modelScreenParams>Node6}" text="{modelScreenParams>Node6}" />
-                                                </tokens>
+                                                valueHelpRequest="onValueHelpHierarquiaOpen"
+                                                valueHelpOnly="true" >
+                                                <core:Item key="{Node6}" text="{Node6}"/>
                                             </MultiInput>
                                         </HBox>
 
@@ -348,112 +281,77 @@
                                             class="sapUiSmallMarginTop" />
                                         <HBox
                                             class="sapUiTinyMarginTop" >
+
+                                            <!-- UF -->
                                             <Label
                                                 text="{i18n>uf_lbl}:"
                                                 width="50px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
-<!-- 
-                                            <Input
-                                                id="idInputUf1"
-                                                maxLength="2"
-                                                value="{modelScreenParams>/screen1/idInputUf1}"
-                                                width="85px"
-                                                showValueHelp="true"
-                                                valueHelpRequest="onValueHelpUf" />
- -->
                                             <MultiInput
                                                 width="200px"
                                                 id="idMultiInputUf1"
-                                                tokens="{
-                                                    path: 'modelScreenParams>/screen1/idMultiInputUf1'
+                                                suggestionItems="{
+                                                    path: '/UFSet'
                                                 }"
                                                 tokenChange="onTokenChangeMultiInput"
-                                                valueHelpRequest="onValueHelpUf" >
-                                                <tokens>
-                                                    <Token key="{modelScreenParams>Bland}" text="{modelScreenParams>Bland}" />
-                                                </tokens>
+                                                valueHelpRequest="onValueHelpUfOpen"
+                                                valueHelpOnly="true" >
+                                                <core:Item key="{Bland}" text="{Bland}"/>
                                             </MultiInput>
 
+                                            <!-- GRUPO DE PREÇOS -->
                                             <Label
                                                 text="{i18n>grp_precos_lbl}:"
                                                 width="110px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginBegin" />
-<!-- 
-                                            <Input
-                                                id="idInputGrpPrecos1"
-                                                maxLength="3"
-                                                value="{modelScreenParams>/screen1/idInputGrpPrecos1}"
-                                                width="85px"
-                                                showValueHelp="true"
-                                                valueHelpRequest="onValueHelpGrpPrecos"
-                                                class="sapUiTinyMarginBegin" />
- -->
                                             <MultiInput
                                                 width="200px"
                                                 id="idMultiInputGrpPrecos1"
-                                                tokens="{
-                                                    path: 'modelScreenParams>/screen1/idMultiInputGrpPrecos1'
+                                                suggestionItems="{
+                                                    path: '/GrupoPrecosSet'
                                                 }"
                                                 tokenChange="onTokenChangeMultiInput"
-                                                valueHelpRequest="onValueHelpGrpPrecos" >
-                                                <tokens>
-                                                    <Token key="{modelScreenParams>Bandeira}" text="{modelScreenParams>Bandeira}" />
-                                                </tokens>
+                                                valueHelpRequest="onValueHelpGrpPrecosOpen"
+                                                valueHelpOnly="true" >
+                                                <core:Item key="{Bandeira}" text="{Descricao}"/>
                                             </MultiInput>
                                         </HBox>
 
                                         <HBox
                                             class="sapUiTinyMarginTop" >
+                                            
+                                            <!-- LOJAS -->
                                             <Label
                                                 text="{i18n>loja_lbl}:"
                                                 width="50px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
-<!-- 
-                                            <Input
-                                                id="idInputLoja1"
-                                                maxLength="4"
-                                                value="{modelScreenParams>/screen1/idInputLoja1}"
-                                                width="85px"
-                                                showValueHelp="true"
-                                                valueHelpRequest="onValueHelpLoja" />
- -->
                                             <MultiInput
                                                 width="200px"
-                                                id="idMultiInputLoja1"
-                                                tokens="{
-                                                    path: 'modelScreenParams>/screen1/idMultiInputLoja1'
+                                                id="idMultiInputLojas1"
+                                                suggestionItems="{
+                                                    path: '/LojasSet'
                                                 }"
                                                 tokenChange="onTokenChangeMultiInput"
-                                                valueHelpRequest="onValueHelpLoja" >
-                                                <tokens>
-                                                    <Token key="{modelScreenParams>Werks}" text="{modelScreenParams>Werks}" />
-                                                </tokens>
+                                                valueHelpRequest="onValueHelpLojasOpen"
+                                                valueHelpOnly="true" >
+                                                <core:Item key="{Werks}" text="{Werks}"/>
                                             </MultiInput>
 
+                                            <!-- SORTIMENTOS -->
                                             <Label
                                                 text="{i18n>sortim_lbl}:"
                                                 width="110px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginBegin" />
-<!-- 
-                                            <Input
-                                                id="idInputSortim1"
-                                                maxLength="8"
-                                                value="{modelScreenParams>/screen1/idInputSortim1}"
-                                                width="140px"
-                                                showValueHelp="true"
-                                                class="sapUiTinyMarginBegin" />
- -->
                                             <MultiInput
                                                 width="200px"
                                                 id="idMultiInputSortim1"
-                                                tokens="{
-                                                    path: 'modelScreenParams>/screen1/idMultiInputSortim1'
+                                                suggestionItems="{
+                                                    path: '/SortimentosSet'
                                                 }"
                                                 tokenChange="onTokenChangeMultiInput"
-                                                valueHelpRequest="onValueHelpSortim">
-                                                <tokens>
-                                                    <Token key="{modelScreenParams>}" text="{modelScreenParams>}" />
-                                                </tokens>
+                                                valueHelpRequest="onValueHelpSortim"
+                                                valueHelpOnly="true" >
+                                                <core:Item key="{}" text="{}"/>
                                             </MultiInput>
                                         </HBox>
 

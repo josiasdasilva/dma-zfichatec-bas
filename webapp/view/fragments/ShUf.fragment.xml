@@ -7,9 +7,10 @@
 		class="sapUiPopupWithPadding"
 		items="{/UFSet}"
         multiSelect="true"
-		search="onUfSearch"
-		confirm="onUfClose"
-		cancel="onUfClose">
+        rememberSelections="true"
+		search="onValueHelpUfSearch"
+		confirm="onValueHelpUfClose"
+		cancel="onValueHelpUfClose" >
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"
