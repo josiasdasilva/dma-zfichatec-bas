@@ -103,16 +103,25 @@
                 "clearControlAggregation": false,
                 "transition": "slide"
             },
-            "routes": [{
+            "routes": [
+                {
                     "pattern": "",
-                    "name": "home",
-                    "target": "home"
+                    "name": "routeHome",
+                    "target": "targetHome"
+                },{
+                    "pattern": "imprimirDetalhe",
+                    "name": "routeImprimirDetalhe",
+                    "target": "targetImprimirDetalhe"
                 }
             ],
             "targets": {
-                "home": {
+                "targetHome": {
                     "viewName": "Home",
                     "viewLevel": 1
+                },
+                "targetImprimirDetalhe": {
+                    "viewName": "imprimirDetalhe",
+                    "viewLevel": 2
                 }
             }
         }

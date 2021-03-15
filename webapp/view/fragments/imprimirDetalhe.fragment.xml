@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
+   <Dialog
+        title=""
+        contentWidth="70%"
+        contentHeight="70%">
+        <core:HTML id="idFrame01" />
+        <Button
+            text="Enviar por e-mail"
+            press="onEnviarEmailDetalhe"
+            class="sapUiTinyMarginBegin" />
+        <Button
+            text="Fechar"
+            press="onImprimirDetalheClose"
+            class="sapUiTinyMarginBegin" />
+   </Dialog>
+</core:FragmentDefinition>

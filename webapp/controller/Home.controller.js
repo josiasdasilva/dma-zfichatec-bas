@@ -60,11 +60,17 @@ sap.ui.define([
 
             if(sValueState === sap.ui.core.ValueState.Error){
                 this.getView().byId("idMultiInputCompradorCod1").focus();
-                sap.m.MessageToast.show(this.getResourceBundle().getText("campos_obrig_txt"));
+                MessageToast.show(this.getResourceBundle().getText("campos_obrig_txt"));
                 return 1;
             }
 
-            sap.m.MessageToast.show(this.getResourceBundle().getText("em_desenv_msg"));
+            MessageToast.show(this.getResourceBundle().getText("em_desenv_msg"));
+            // window.open(this.getModel().sServiceUrl + "/$metadata", "_blank");
+            // sap.m.URLHelper.redirect(this.getModel().sServiceUrl + "/$metadata", true /*new window*/);
+            // sap.m.URLHelper.redirect("/dmazfichatec/imprimirDetalhe", true /*new window*/);
+            
+            // this.getOwnerComponent().getRouter().navTo("routeImprimirDetalhe");
+            this.onImprimirDetalheOpen();
         },
 
         /**
@@ -361,6 +367,40 @@ sap.ui.define([
         onValueHelpComprador: function(){
             this._getDialog("ShComprador").open();
             // this.onOpenDialog("idFragmentShComprador", "ShComprador");
+        },
+
+        /**
+         * 
+         * 
+         */
+        onEnviarEmailDetalhe: function(oEvt){
+            MessageToast.show(this.getResourceBundle().getText("em_desenv_msg"));
+        },
+
+        /**
+         * 
+         * 
+         */
+        onImprimirDetalheOpen: function(oEvt){
+            let oDialog = this._getDialog("imprimirDetalhe");
+            // let oIframe = oDialog.byId("idFrame01");
+            let oIframe = oDialog.getAggregation("content")[0];
+            oIframe.setContent(
+                "<iframe src='https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf' " +
+                "height='100%' width='100%' style='border: none;'></iframe>");
+            
+            oDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onImprimirDetalheClose: function(oEvt){
+            let oDialog = this._getDialog("imprimirDetalhe");
+            // Release fragment
+            // oDialog.close();
+            oDialog = undefined;
         },
 
         /**
