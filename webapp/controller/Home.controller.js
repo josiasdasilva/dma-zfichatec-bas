@@ -8,8 +8,9 @@ sap.ui.define([
 	"sap/ui/core/format/DateFormat",
 	"sap/ui/core/Fragment",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
-], function (BaseController, Filter, FilterOperator, Label, Popover, Token, DateFormat, Fragment, JSONModel, MessageToast) {
+    "sap/m/MessageToast",
+    "sap/m/MessageBox"
+], function (BaseController, Filter, FilterOperator, Label, Popover, Token, DateFormat, Fragment, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 	//var sResponsivePaddingClasses = "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer";
 	return BaseController.extend("dma.zfichatec.controller.Home", {
@@ -46,24 +47,24 @@ sap.ui.define([
         handleWizardCompleted: function(oEvt){
             let sValueState;
 
-            if(!this.getView().byId("idInputCompradorCod1").getValue() &&
-               !this.getView().byId("idInputFornecedorCod1").getValue() &&
-               !this.getView().byId("idInputContrato1").getValue()){
+            if(!this.getView().byId("idMultiInputCompradorCod1").getTokens().length &&
+               !this.getView().byId("idMultiInputFornecedorCod1").getTokens().length &&
+               !this.getView().byId("idMultiInputContrato1").getTokens().length){
                 sValueState = sap.ui.core.ValueState.Error;
             }else{
                 sValueState = sap.ui.core.ValueState.None;
             }
-            this.getView().byId("idInputCompradorCod1").setValueState(sValueState);
-            this.getView().byId("idInputFornecedorCod1").setValueState(sValueState);
-            this.getView().byId("idInputContrato1").setValueState(sValueState);
+            this.getView().byId("idMultiInputCompradorCod1").setValueState(sValueState);
+            this.getView().byId("idMultiInputFornecedorCod1").setValueState(sValueState);
+            this.getView().byId("idMultiInputContrato1").setValueState(sValueState);
 
             if(sValueState === sap.ui.core.ValueState.Error){
-                this.getView().byId("idInputCompradorCod1").focus();
-                sap.m.MessageToast.show("É necessário preencher pelo menos um dos campos.");
+                this.getView().byId("idMultiInputCompradorCod1").focus();
+                sap.m.MessageToast.show(this.getResourceBundle().getText("campos_obrig_txt"));
                 return 1;
             }
 
-            sap.m.MessageToast.show("Em desenvolvimento (Placeholder)");
+            sap.m.MessageToast.show(this.getResourceBundle().getText("em_desenv_msg"));
         },
 
         /**
@@ -71,13 +72,32 @@ sap.ui.define([
          * 
          */
         handleWizardResetFilters: function(oEvt){
-            // Reset model attached to screen fields
-            this.initScreenParams();
+			let bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			MessageBox.show(
+					this.getResourceBundle().getText("confirma_reset_filtros_txt"),
+					{
+						icon: MessageBox.Icon.WARNING,
+						title: this.getResourceBundle().getText("confirma_reset_filtros_tit"),
+						actions: [MessageBox.Action.YES, MessageBox.Action.NO], // , "Custom Button"],
+						styleClass: bCompact ? "sapUiSizeCompact" : "",
+                        initialFocus:  MessageBox.Action.NO, //"Custom Button",
+                        onClose: function(sButton){
+                            this.resetFilters(sButton);
+                        }.bind(this)
+					}
+			);
+        },
 
-            // Refresh screen model
-            this.refreshScreenModel();
+        resetFilters: function(sButton){
+            if(sButton === MessageBox.Action.YES){
+                // Reset model attached to screen fields
+                this.initScreenParams();
 
-            this.getView().byId("idInputCompradorCod1").focus();
+                // Refresh screen model
+                this.refreshScreenModel();
+
+                this.getView().byId("idMultiInputCompradorCod1").focus();
+            }
         },
 
 /*
@@ -130,6 +150,8 @@ sap.ui.define([
 
             if(typeof oEvt.getParameter("removedTokens") !== "undefined" && oEvt.getParameter("removedTokens").length > 0){
                 aRemovedTokens = oEvt.getParameter("removedTokens");
+                
+                // Comprador
                 if(sId.search("idMultiInputCompradorCod1") >= 0){
                     aValues = this.getScreenParams("screen1").idMultiInputCompradorCod1;
                     for(var iIndexOut in aRemovedTokens){
@@ -147,6 +169,8 @@ sap.ui.define([
                     this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
                     // Hierarquia (Clear)
                     this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
+                
+                // Contrato
                 }else if(sId.search("idMultiInputContrato1") >= 0){
                     aValues = this.getScreenParams("screen1").idMultiInputContrato1;
                     for(var iIndexOut in aRemovedTokens){
@@ -160,6 +184,22 @@ sap.ui.define([
                     this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
                     // Hierarquia (Clear)
                     this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
+                
+                // Departamento
+                }else if(sId.search("idMultiInputDepartamento1") >= 0){
+                    aValues = this.getScreenParams("screen1").idMultiInputDepartamento1;
+                    for(var iIndexOut in aRemovedTokens){
+                        for(var iIndexIn in aValues){
+                            if(aValues[iIndexIn].Node3 === aRemovedTokens[iIndexOut].getProperty("key")){
+                                aValues.splice(iIndexIn, 1);
+                            }
+                        }
+                    }
+                    // Hierarquia (Clear)
+                    this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
+
+
+                // Fornecedor
                 }else if(sId.search("idMultiInputFornecedorCod1") >= 0){
                     aValues = this.getScreenParams("screen1").idMultiInputFornecedorCod1;
                     for(var iIndexOut in aRemovedTokens){
@@ -175,6 +215,55 @@ sap.ui.define([
                     this.getScreenParams("screen1").idMultiInputDepartamento1 = [];
                     // Hierarquia (Clear)
                     this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
+
+                // Grupo de Preços
+                }else if(sId.search("idMultiInputGrpPrecos1") >= 0){
+                    aValues = this.getScreenParams("screen1").idMultiInputGrpPrecos1;
+                    for(var iIndexOut in aRemovedTokens){
+                        for(var iIndexIn in aValues){
+                            if(aValues[iIndexIn].Bandeira === aRemovedTokens[iIndexOut].getProperty("key")){
+                                aValues.splice(iIndexIn, 1);
+                            }
+                        }
+                    }
+
+                // Hierarquia
+                }else if(sId.search("idMultiInputNoHierarquia1") >= 0){
+                    aValues = this.getScreenParams("screen1").idMultiInputNoHierarquia1;
+                    for(var iIndexOut in aRemovedTokens){
+                        for(var iIndexIn in aValues){
+                            if(aValues[iIndexIn].Node6 === aRemovedTokens[iIndexOut].getProperty("key")){
+                                aValues.splice(iIndexIn, 1);
+                            }
+                        }
+                    }
+
+                // Lojas
+                }else if(sId.search("idMultiInputLoja1") >= 0){
+                    aValues = this.getScreenParams("screen1").idMultiInputLoja1;
+                    for(var iIndexOut in aRemovedTokens){
+                        for(var iIndexIn in aValues){
+                            if(aValues[iIndexIn].Werks === aRemovedTokens[iIndexOut].getProperty("key")){
+                                aValues.splice(iIndexIn, 1);
+                            }
+                        }
+                    }
+
+                // UF
+                }else if(sId.search("idMultiInputUf1") >= 0){
+                    aValues = this.getScreenParams("screen1").idMultiInputUf1;
+                    for(var iIndexOut in aRemovedTokens){
+                        for(var iIndexIn in aValues){
+                            if(aValues[iIndexIn].Bland === aRemovedTokens[iIndexOut].getProperty("key")){
+                                aValues.splice(iIndexIn, 1);
+                            }
+                        }
+                    }
+                     // Grupo de Preços (Clear)
+                    this.getScreenParams("screen1").idMultiInputGrpPrecos1 = [];
+                     // Lojas (Clear)
+                    this.getScreenParams("screen1").idMultiInputLoja1 = [];
+
                 }
 
                 // Refresh screen model
@@ -782,6 +871,9 @@ sap.ui.define([
                     });
                 }
                 this.getScreenParams("screen1").idMultiInputDepartamento1 = oScreenMulti;
+
+                // Hierarquia (Clear)
+                this.getScreenParams("screen1").idMultiInputNoHierarquia1 = [];
 			}
 
             // Refresh screen model

@@ -236,6 +236,7 @@
                                                 tokens="{
                                                     path: 'modelScreenParams>/screen1/idMultiInputFonteSuprimento1'
                                                 }"
+                                                tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpFonteSuprimento">
                                                 <tokens>
                                                     <Token key="{modelScreenParams>}" text="{modelScreenParams>}" />
@@ -262,6 +263,7 @@
                                                 tokens="{
                                                     path: 'modelScreenParams>/screen1/idMultiInputStatusMat1'
                                                 }"
+                                                tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpStatusMat">
                                                 <tokens>
                                                     <Token key="{modelScreenParams>}" text="{modelScreenParams>}" />
@@ -288,6 +290,7 @@
                                                 tokens="{
                                                     path: 'modelScreenParams>/screen1/idMultiInputDepartamento1'
                                                 }"
+                                                tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpDepartamento">
                                                 <tokens>
                                                     <Token key="{modelScreenParams>Node3}" text="{modelScreenParams>Node3}" />
@@ -314,6 +317,7 @@
                                                 tokens="{
                                                     path: 'modelScreenParams>/screen1/idMultiInputNoHierarquia1'
                                                 }"
+                                                tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpHierarquia">
                                                 <tokens>
                                                     <Token key="{modelScreenParams>Node6}" text="{modelScreenParams>Node6}" />
@@ -445,6 +449,7 @@
                                                 tokens="{
                                                     path: 'modelScreenParams>/screen1/idMultiInputSortim1'
                                                 }"
+                                                tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpSortim">
                                                 <tokens>
                                                     <Token key="{modelScreenParams>}" text="{modelScreenParams>}" />
