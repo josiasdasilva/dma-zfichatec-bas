@@ -331,6 +331,18 @@ sap.ui.define([
                 this.getView().addDependent(this._imprimirDetalheDialog);
             }
 
+            let oModel = this.getView().getModel();
+            let sObjectPath = oModel.createKey("/PrnFichaSet", {
+                Ekgrp: 'F04' // Placeholder
+            });
+            let sUrl = oModel.sServiceUrl + sObjectPath.replaceAll("'", "%27") + '/$value';
+
+            let oIframe = this._imprimirDetalheDialog.getAggregation("content")[0];
+            oIframe.setContent(
+                "<iframe src='" + sUrl + "' " +
+                // "<iframe src='/sap/opu/odata/sap/ZCOCKPIT_FICHATEC_SRV/PrnFichaSet(%27F04%27)/$value' " +
+                "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
+            this._imprimirDetalheDialog.open();
 /*
             let oModel = this.getView().getModel();
             let sObjectPath = oModel.createKey("/PrnFichaSet", {
@@ -342,6 +354,7 @@ sap.ui.define([
             oIframe.setContent(
                 "<iframe src='" + sUrl + "' " +
                 "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
+            this._imprimirDetalheDialog.open();
 */
 /*
             let oModel = this.getView().getModel();
@@ -370,14 +383,14 @@ sap.ui.define([
                 }
             );
 */
-
+/*
             let oIframe = this._imprimirDetalheDialog.getAggregation("content")[0];
             oIframe.setContent(
                 "<iframe src='https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf' " +
                 "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
 
             this._imprimirDetalheDialog.open();
-
+*/
         },
 
         /**
