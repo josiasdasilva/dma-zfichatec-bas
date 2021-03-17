@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
+	<SelectDialog
+		title="Fonte de Suprimento"
+		class="sapUiPopupWithPadding"
+		items="{/FSupSet}"
+        multiSelect="true"
+        rememberSelections="true"
+		search="onValueHelpFonteSuprimentoSearch"
+		confirm="onValueHelpFonteSuprimentoClose"
+		cancel="onValueHelpFonteSuprimentoClose"
+        showClearButton="true" >
+		<StandardListItem
+			icon=""
+			iconDensityAware="false"
+			iconInset="false"
+			title="{Sobsl}"
+			description="{Ltext}"
+			info="" />
+	</SelectDialog>
+</core:FragmentDefinition>

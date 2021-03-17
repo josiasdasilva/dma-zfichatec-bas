@@ -130,7 +130,7 @@ sap.ui.define([
                 // Lojas (Clear)
                 this.byId("idMultiInputLojas1").removeAllTokens();
                 // Sortimentos (Clear)
-                this.byId("idMultiInputSortim1").removeAllTokens();
+                this.byId("idMultiInputSortimento1").removeAllTokens();
                 // Status do Material (Clear)
                 this.byId("idMultiInputStatusMaterial1").removeAllTokens();
                 // UF (Clear)
@@ -331,12 +331,53 @@ sap.ui.define([
                 this.getView().addDependent(this._imprimirDetalheDialog);
             }
 
+/*
+            let oModel = this.getView().getModel();
+            let sObjectPath = oModel.createKey("/PrnFichaSet", {
+                Ekgrp: 'F04' // Placeholder
+            })
+            let sUrl = sObjectPath + "/$value";
+
+            let oIframe = this._imprimirDetalheDialog.getAggregation("content")[0];
+            oIframe.setContent(
+                "<iframe src='" + sUrl + "' " +
+                "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
+*/
+/*
+            let oModel = this.getView().getModel();
+            // oModel.read("/PrnFichaSet('F04')", {
+            oModel.read("/CompradorSet('F04')", {
+                    success: function(oRetrievedResult, oResult){
+                        debugger;
+                        let oJsonResult = JSON.parse(oResult.body);
+                        let sUrl = oJsonResult.d.__metadata.uri.slice(0, (oJsonResult.d.__metadata.uri.search("Comprador") - 1));
+
+                        // let oIframe = this._imprimirDetalheDialog.getAggregation("content")[0];
+                        // oIframe.setContent(
+                        //     "<iframe src='https://devsapecc02.grupodma.intra:8000/sap/opu/odata/sap/ZCOCKPIT_FICHATEC_SRV/PrnFichaSet(%27F04%27)/$value' " +
+                        //     "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
+
+                        // oIframe.setContent(
+                        //     "<iframe src='" + sUrl + "/PrnFichaSet('F04')/$value' " +
+                        //     "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
+
+                        this._imprimirDetalheDialog.open();
+
+                    }.bind(this),
+                    error: function(oError, oResult){
+                        debugger;
+                    }.bind(this)
+                }
+            );
+*/
+
             let oIframe = this._imprimirDetalheDialog.getAggregation("content")[0];
             oIframe.setContent(
                 "<iframe src='https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf' " +
-                "height='100%' width='100%' style='border: none;'></iframe>");
+                "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
 
             this._imprimirDetalheDialog.open();
+
         },
 
         /**
@@ -666,6 +707,69 @@ sap.ui.define([
             }
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+        },
+
+
+//----------------------------------------------------------------------//
+// Fonte de Suprimento                                                  //
+//----------------------------------------------------------------------//
+        /**
+         * 
+         * 
+         */
+        onValueHelpFonteSuprimentoOpen: function(oEvt){
+            // Create value help dialog
+            if (!this._ShFonteSuprimentoDialog) {
+                this._ShFonteSuprimentoDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShFonteSuprimento", this);
+                this.getView().addDependent(this._ShFonteSuprimentoDialog);
+            }
+
+            this.onValueHelpFonteSuprimentoPreFilter(oEvt);
+
+            this._ShFonteSuprimentoDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpFonteSuprimentoPreFilter: function(oEvt){
+            
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpFonteSuprimentoClose: function (oEvt) {
+            let aSelectedItems = oEvt.getParameter("selectedItems"),
+                oMultiInput = this.byId("idMultiInputFonteSuprimento1");
+
+            oMultiInput.removeAllTokens();
+
+            if (aSelectedItems && aSelectedItems.length > 0) {
+                aSelectedItems.forEach(function (oItem) {
+                    oMultiInput.addToken(new Token({
+                        key: oItem.getTitle(),
+                        text: oItem.getDescription()
+                    }));
+                });
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpFonteSuprimentoSearch: function(oEvt){
+            let aFilters    = [];
+			let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue      = oEvt.getParameter("value").toUpperCase();
+
+            oFilter = new Filter("Sobsl", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter);
+			oBinding.filter(aFilters);
         },
 
 
@@ -1118,6 +1222,69 @@ sap.ui.define([
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
+
+//----------------------------------------------------------------------//
+// Sortimento                                                           //
+//----------------------------------------------------------------------//
+        /**
+         * 
+         * 
+         */
+        onValueHelpSortimentoOpen: function(oEvt){
+            // Create value help dialog
+            if (!this._ShSortimentoDialog) {
+                this._ShSortimentoDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShSortimento", this);
+                this.getView().addDependent(this._ShSortimentoDialog);
+            }
+
+            this.onValueHelpSortimentoPreFilter(oEvt);
+
+            this._ShSortimentoDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpSortimentoPreFilter: function(oEvt){
+            
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpSortimentoClose: function (oEvt) {
+            let aSelectedItems = oEvt.getParameter("selectedItems"),
+                oMultiInput = this.byId("idMultiInputSortimento1");
+
+            oMultiInput.removeAllTokens();
+
+            if (aSelectedItems && aSelectedItems.length > 0) {
+                aSelectedItems.forEach(function (oItem) {
+                    oMultiInput.addToken(new Token({
+                        key: oItem.getTitle(),
+                        text: oItem.getDescription()
+                    }));
+                });
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpSortimentoSearch: function(oEvt){
+            let aFilters    = [];
+			let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue      = oEvt.getParameter("value").toUpperCase();
+
+            oFilter = new Filter("Asort", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter);
+			oBinding.filter(aFilters);
+        },
+        
 
 //----------------------------------------------------------------------//
 // Status do Material                                                   //

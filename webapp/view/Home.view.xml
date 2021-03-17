@@ -224,12 +224,12 @@
                                                 width="200px"
                                                 id="idMultiInputFonteSuprimento1"
                                                 suggestionItems="{
-                                                    path: '/SuprimentosSet'
+                                                    path: '/FSupSet'
                                                 }"
                                                 tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpFonteSuprimentoOpen"
                                                 valueHelpOnly="true" >
-                                                <core:Item key="{}" text="{}"/>
+                                                <core:Item key="{Sobsl}" text="{Ltext}"/>
                                             </MultiInput>
                                         </HBox>
 
@@ -244,7 +244,7 @@
                                                 width="205px"
                                                 id="idMultiInputStatusMaterial1"
                                                 suggestionItems="{
-                                                    path: '/StatusMaterialSet'
+                                                    path: '/StatusMatSet'
                                                 }"
                                                 tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpStatusMaterialOpen"
@@ -389,14 +389,14 @@
                                                 class="sapUiSmallMarginTop sapUiSmallMarginBegin" />
                                             <MultiInput
                                                 width="200px"
-                                                id="idMultiInputSortim1"
+                                                id="idMultiInputSortimento1"
                                                 suggestionItems="{
-                                                    path: '/SortimentosSet'
+                                                    path: '/SortimSet'
                                                 }"
                                                 tokenChange="onTokenChangeMultiInput"
-                                                valueHelpRequest="onValueHelpSortim"
+                                                valueHelpRequest="onValueHelpSortimentoOpen"
                                                 valueHelpOnly="true" >
-                                                <core:Item key="{}" text="{}"/>
+                                                <core:Item key="{Asort}" text="{Name1}"/>
                                             </MultiInput>
                                         </HBox>
 

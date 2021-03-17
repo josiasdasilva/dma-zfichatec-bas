@@ -7,7 +7,7 @@ sap.ui.define([
 
 	return Controller.extend("dma.zfichatec.controller.BaseController", {
         /**
-         * 
+         * (DESCONTINUADO)
          * 
          */
         initScreenParams: function(){
@@ -32,7 +32,7 @@ sap.ui.define([
                     "idInputUf1"                    : "",
                     "idInputGrpPrecos1"             : "",
                     "idInputLoja1"                  : "",
-                    "idInputSortim1"                : "",
+                    "idInputSortimento1"            : "",
                     "idCheckBoxTotUf1"              : false,
                     "idCheckBoxTotGrp1"             : false
                 }
@@ -55,7 +55,7 @@ sap.ui.define([
                     "idMultiInputUf1"               : [],
                     "idMultiInputGrpPrecos1"        : [],
                     "idMultiInputLojas1"            : [],
-                    "idMultiInputSortim1"           : [],
+                    "idMultiInputSortimento1"       : [],
                     "idCheckBoxTotUf1"              : false,
                     "idCheckBoxTotGrp1"             : false
                 }
@@ -65,7 +65,7 @@ sap.ui.define([
         },
 
         /**
-         * 
+         * (DESCONTINUADO)
          * 
          */
         getScreenParam: function(sScreenName, sProperty){
@@ -73,7 +73,7 @@ sap.ui.define([
         },
 
         /**
-         * 
+         * (DESCONTINUADO)
          * 
          */
         getScreenParams: function(sScreenName){
@@ -81,7 +81,7 @@ sap.ui.define([
         },
 
         /**
-         * 
+         * (DESCONTINUADO)
          * 
          */
         refreshScreenModel: function(){
@@ -89,7 +89,7 @@ sap.ui.define([
         },
 
         /**
-         * 
+         * (DESCONTINUADO)
          * 
          */
         getRadioButtonVisRelatOptions: function(){
