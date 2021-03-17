@@ -3,21 +3,21 @@
 	xmlns:core="sap.ui.core"
     xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
 	<SelectDialog
-		title="Comprador"
+		title="{i18n>status_mat_lbl}"
 		class="sapUiPopupWithPadding"
-		items="{/CompradorSet}"
+		items="{/StatusMatSet}"
         multiSelect="true"
         rememberSelections="true"
-		search="onValueHelpCompradorSearch"
-		confirm="onValueHelpCompradorClose"
-		cancel="onValueHelpCompradorClose"
+		search="onValueHelpStatusMaterialSearch"
+		confirm="onValueHelpStatusMaterialClose"
+		cancel="onValueHelpStatusMaterialClose"
         showClearButton="true" >
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"
 			iconInset="false"
-			title="{Ekgrp}"
-			description="{Nome}"
-			info="{Uname}" />
+			title="{MMSTA}"
+			description="{MTSTB}"
+			info="" />
 	</SelectDialog>
 </core:FragmentDefinition>

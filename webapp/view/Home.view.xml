@@ -119,6 +119,7 @@
                                     alignItems="Start"
                                     justifyContent="Start"
                                     width="50%">
+<!--
                                     <RadioButton
                                         id="idRadioButtonVisRelatLoja"
                                         groupName="GroupVisRelat"
@@ -140,12 +141,30 @@
                                         class="sapUiMediumMarginEnd"
                                         selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '3' }"
                                         select="onRadioButtonSelect" />
+-->
+                                    <RadioButton
+                                        id="idRadioButtonVisRelatLoja"
+                                        groupName="GroupVisRelat"
+                                        text="{i18n>loja_lbl}"
+                                        class="sapUiMediumMarginEnd"
+                                        selected="true" />
+                                    <RadioButton
+                                        id="idRadioButtonVisRelatGrpPrecos"
+                                        groupName="GroupVisRelat"
+                                        text="{i18n>grp_precos_lbl}"
+                                        class="sapUiMediumMarginEnd" />
+                                    <RadioButton
+                                        id="idRadioButtonVisRelatFonteSupr"
+                                        groupName="GroupVisRelat"
+                                        text="{i18n>fonte_supr_lbl}"
+                                        class="sapUiMediumMarginEnd" />
                                 </HBox>
 
                                 <HBox
                                     alignItems="Start"
                                     justifyContent="Start"
                                     width="50%">
+<!-- 
                                     <RadioButton
                                         id="idRadioButtonVisRelatUf"
                                         groupName="GroupVisRelat"
@@ -159,6 +178,16 @@
                                         text="{i18n>sortim_lbl}"
                                         selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '5' }"
                                         select="onRadioButtonSelect" />
+-->
+                                    <RadioButton
+                                        id="idRadioButtonVisRelatUf"
+                                        groupName="GroupVisRelat"
+                                        text="{i18n>uf_lbl}"
+                                        class="sapUiMediumMarginEnd" />
+                                    <RadioButton
+                                        id="idRadioButtonVisRelatSortim"
+                                        groupName="GroupVisRelat"
+                                        text="{i18n>sortim_lbl}" />
                                 </HBox>
                             </WizardStep>
 
@@ -172,11 +201,17 @@
                                     class="sapUiLargeMarginEnd" >
                                     
                                     <VBox>
+<!-- 
                                         <CheckBox
                                             id="idCheckBoxSomenteMatXdock1"
                                             text="{i18n>somente_mat_xdock_lbl}"
                                             selected="{= ${modelScreenParams>/screen1/idCheckBoxSomenteMatXdock1} === true }"
                                             select="onCheckBoxSelect" />
+-->
+                                        <CheckBox
+                                            id="idCheckBoxSomenteMatXdock1"
+                                            text="{i18n>somente_mat_xdock_lbl}"
+                                            selected="false" />
                                         
                                         <HBox
                                             class="sapUiSmallMarginTop" >
@@ -207,14 +242,14 @@
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
                                             <MultiInput
                                                 width="205px"
-                                                id="idMultiInputStatusMat1"
+                                                id="idMultiInputStatusMaterial1"
                                                 suggestionItems="{
                                                     path: '/StatusMaterialSet'
                                                 }"
                                                 tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpStatusMaterialOpen"
                                                 valueHelpOnly="true" >
-                                                <core:Item key="{}" text="{}"/>
+                                                <core:Item key="{MMSTA}" text="{MTSTB}"/>
                                             </MultiInput>
                                         </HBox>
 
@@ -264,6 +299,7 @@
                                         class="sapUiLargeMarginBegin" >
                                         <Label text="{i18n>bandeira_lbl}:" />
                                         <HBox>
+<!-- 
                                             <CheckBox
                                                 id="idCheckBoxAtacado1"
                                                 text="{i18n>atacado_lbl}"
@@ -274,6 +310,15 @@
                                                 text="{i18n>varejo_lbl}"
                                                 selected="{= ${modelScreenParams>/screen1/idCheckBoxVarejo1} === true }"
                                                 select="onCheckBoxSelect" />
+-->
+                                            <CheckBox
+                                                id="idCheckBoxAtacado1"
+                                                text="{i18n>atacado_lbl}"
+                                                selected="true" />
+                                            <CheckBox
+                                                id="idCheckBoxVarejo1"
+                                                text="{i18n>varejo_lbl}"
+                                                selected="true" />
                                         </HBox>
 
                                         <Label
@@ -356,6 +401,7 @@
                                         </HBox>
 
                                         <HBox>
+<!-- 
                                             <CheckBox
                                                 id="idCheckBoxTotUf1"
                                                 text="{i18n>tot_uf_lbl}"
@@ -366,6 +412,15 @@
                                                 text="{i18n>tot_grp_lbl}"
                                                 selected="{= ${modelScreenParams>/screen1/idCheckBoxTotGrp1} === true }"
                                                 select="onCheckBoxSelect" />
+-->
+                                            <CheckBox
+                                                id="idCheckBoxTotUf1"
+                                                text="{i18n>tot_uf_lbl}"
+                                                selected="false" />
+                                            <CheckBox
+                                                id="idCheckBoxTotGrp1"
+                                                text="{i18n>tot_grp_lbl}"
+                                                selected="false" />
                                         </HBox>
                                     </VBox>
 

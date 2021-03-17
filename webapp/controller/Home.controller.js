@@ -37,8 +37,8 @@ sap.ui.define([
 		 * @memberOf dma.zfichatec.view.Home
 		 */
 		onBeforeRendering: function() {
-			this.initScreenParams();
-		},
+            this.initScreenParams();
+        },
 
         /**
          * 
@@ -100,38 +100,54 @@ sap.ui.define([
          */
         resetFilters: function(sButton){
             if(sButton === MessageBox.Action.YES){
-                // Reset model attached to screen fields
-                this.initScreenParams();
-
-                // Refresh screen model
-                this.refreshScreenModel();
+                // Visão Relatório
+                this.getView().byId("idRadioButtonVisRelatLoja").setSelected(true);
+                // Somente Materiais CrossDocking
+                this.getView().byId("idCheckBoxSomenteMatXdock1").setSelected(false);
+                // Atacado
+                this.getView().byId("idCheckBoxAtacado1").setSelected(true);
+                // Varejo
+                this.getView().byId("idCheckBoxVarejo1").setSelected(true);
+                // Totalizador por UF
+                this.getView().byId("idCheckBoxTotUf1").setSelected(false);
+                // Totalizador por Grupo
+                this.getView().byId("idCheckBoxTotGrp1").setSelected(false);
 
                 // Comprador (Clear)
                 this.byId("idMultiInputCompradorCod1").removeAllTokens();
-                // Fornecedor (Clear)
-                this.byId("idMultiInputFornecedorCod1").removeAllTokens();
                 // Contrato (Clear)
                 this.byId("idMultiInputContrato1").removeAllTokens();
                 // Departamento (Clear)
                 this.byId("idMultiInputDepartamento1").removeAllTokens();
-                // Hierarquia (Clear)
-                this.byId("idMultiInputNoHierarquia1").removeAllTokens();
-                // UF (Clear)
-                this.byId("idMultiInputUf1").removeAllTokens();
+                // Fonte de Suprimento (Clear)
+                this.byId("idMultiInputFonteSuprimento1").removeAllTokens();
+                // Fornecedor (Clear)
+                this.byId("idMultiInputFornecedorCod1").removeAllTokens();
                 // Grupo de Preços (Clear)
                 this.byId("idMultiInputGrpPrecos1").removeAllTokens();
+                // Hierarquia (Clear)
+                this.byId("idMultiInputNoHierarquia1").removeAllTokens();
                 // Lojas (Clear)
                 this.byId("idMultiInputLojas1").removeAllTokens();
+                // Sortimentos (Clear)
+                this.byId("idMultiInputSortim1").removeAllTokens();
+                // Status do Material (Clear)
+                this.byId("idMultiInputStatusMaterial1").removeAllTokens();
+                // UF (Clear)
+                this.byId("idMultiInputUf1").removeAllTokens();
 
+                // Muda o foco para o primeiro campo da tela
                 this.getView().byId("idMultiInputCompradorCod1").focus();
             }
         },
 
 /*
+        // (DESCONTINUADO) Só foi implementado em versões posteriores
         onCancelDialog: function(sDialogId){
             this.byId(sDialogId).close();
         },
 
+        // (DESCONTINUADO) Só foi implementado em versões posteriores
         onOpenDialog : function (sDialogId, sDialogViewName) {
             let oView = this.getView();
 
@@ -154,7 +170,7 @@ sap.ui.define([
 */
 
         /**
-         * 
+         * (DESCONTINUADO)
          * 
          */
         onChangeInputField: function(oEvt){
@@ -225,7 +241,7 @@ sap.ui.define([
         },
 
         /**
-         * 
+         * (DESCONTINUADO)
          * 
          */
         onCheckBoxSelect: function(oEvt){
@@ -248,7 +264,7 @@ sap.ui.define([
         },
 
         /**
-         * 
+         * (DESCONTINUADO)
          * 
          */
         onRadioButtonSelect: function(oEvt){
@@ -276,7 +292,7 @@ sap.ui.define([
         },
 
         /**
-         * 
+         * (DESCONTINUADO)
          * 
          */
         onCancelDialog: function(oEvt){
@@ -285,7 +301,7 @@ sap.ui.define([
         },
 
         /**
-         * 
+         * (DESCONTINUADO)
          * 
          */
         _getDialog: function (sDialogViewName) {
@@ -328,12 +344,6 @@ sap.ui.define([
          * 
          */
         onImprimirDetalheClose: function(oEvt){
-/*
-            let oDialog = this._getDialog("imprimirDetalhe");
-            // Release fragment
-            // oDialog.close();
-            oDialog = undefined;
-*/
             this._imprimirDetalheDialog.close();
         },
 
@@ -346,8 +356,6 @@ sap.ui.define([
          * 
          */
         onValueHelpCompradorOpen: function(oEvt){
-            // this._getDialog("ShComprador").open();
-
             // Create value help dialog
             if (!this._ShCompradorDialog) {
                 this._ShCompradorDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShComprador", this);
@@ -430,7 +438,6 @@ sap.ui.define([
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
-            //let oDialog = this._getDialog("ShContrato"),
             let oFilter = {};
 
             // Set previous filter - if "Comprador" is filled (Multiple)
@@ -504,6 +511,7 @@ sap.ui.define([
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
             // Set previous filter - if "Fornecedor" is filled
@@ -514,6 +522,7 @@ sap.ui.define([
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -547,7 +556,6 @@ sap.ui.define([
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
-            //let oDialog = this._getDialog("ShDepartamento"),
             let oFilter = {};
 
             // Set previous filter - if "Comprador" is filled (Multiple)
@@ -632,6 +640,7 @@ sap.ui.define([
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
             // Set previous filter - if "Fornecedor" is filled
@@ -642,6 +651,7 @@ sap.ui.define([
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
             // Set previous filter - if "Contrato" is filled
@@ -652,6 +662,7 @@ sap.ui.define([
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -685,7 +696,6 @@ sap.ui.define([
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
-            //let oDialog = this._getDialog("ShFornecedor"),
             let oFilter = {};
 
             // Set previous filter - if "Comprador" is filled (Multiple)
@@ -748,6 +758,7 @@ sap.ui.define([
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -755,7 +766,7 @@ sap.ui.define([
 
 
 //----------------------------------------------------------------------//
-// Grupos de Precos                                                     //
+// Grupos de Preços                                                     //
 //----------------------------------------------------------------------//
         /**
          * 
@@ -781,7 +792,6 @@ sap.ui.define([
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
-            //let oDialog = this._getDialog("ShGrpPrecos"),
             let oFilter = {};
 
             // Set previous filter - if "UF" is filled (Multiple)
@@ -844,6 +854,7 @@ sap.ui.define([
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -877,10 +888,42 @@ sap.ui.define([
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
-            //let oDialog = this._getDialog("ShHierarquia"),
             let oFilter = {};
 
-            // Set previous filter - if "Comprador" is filled (Multiple)
+            // Set previous filter - if "Comprador" is filled
+            aValues = this.byId("idMultiInputCompradorCod1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // Set previous filter - if "Fornecedor" is filled
+            aValues = this.byId("idMultiInputFornecedorCod1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // Set previous filter - if "Contrato" is filled
+            aValues = this.byId("idMultiInputContrato1").getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new Filter("Ebeln", sap.ui.model.FilterOperator.EQ, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
+            }
+
+            // Set previous filter - if "Departamento" is filled (Multiple)
             aValues = this.byId("idMultiInputDepartamento1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
@@ -940,6 +983,7 @@ sap.ui.define([
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
             // Set previous filter - if "Fornecedor" is filled
@@ -950,9 +994,10 @@ sap.ui.define([
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
-            // Set previous filter - if "Comprador" is filled
+            // Set previous filter - if "Contrato" is filled
             aValues = this.byId("idMultiInputContrato1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
@@ -960,6 +1005,7 @@ sap.ui.define([
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
             // Set previous filter - if "Departamento" is filled
@@ -970,6 +1016,7 @@ sap.ui.define([
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -1003,7 +1050,6 @@ sap.ui.define([
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
-            //let oDialog = this._getDialog("ShLojas"),
             let oFilter = {};
 
             // Set previous filter - if "UF" is filled (Multiple)
@@ -1058,7 +1104,7 @@ sap.ui.define([
             oFilter = new Filter("Werks", FilterOperator.Contains, sValue);
             aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
 
-            // Set previous filter - if "Comprador" is filled
+            // Set previous filter - if "UF" is filled
             aValues = this.byId("idMultiInputUf1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
@@ -1066,12 +1112,76 @@ sap.ui.define([
                     aOrFilters.push(oFilter);
                 }
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+                aOrFilters = [];
             }
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
 
+//----------------------------------------------------------------------//
+// Status do Material                                                   //
+//----------------------------------------------------------------------//
+        /**
+         * 
+         * 
+         */
+        onValueHelpStatusMaterialOpen: function(oEvt){
+            // Create value help dialog
+            if (!this._ShStatusMaterialDialog) {
+                this._ShStatusMaterialDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShStatusMaterial", this);
+                this.getView().addDependent(this._ShStatusMaterialDialog);
+            }
+
+            this.onValueHelpStatusMaterialPreFilter(oEvt);
+
+            this._ShStatusMaterialDialog.open();
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpStatusMaterialPreFilter: function(oEvt){
+            
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpStatusMaterialClose: function (oEvt) {
+            let aSelectedItems = oEvt.getParameter("selectedItems"),
+                oMultiInput = this.byId("idMultiInputStatusMaterial1");
+
+            oMultiInput.removeAllTokens();
+
+            if (aSelectedItems && aSelectedItems.length > 0) {
+                aSelectedItems.forEach(function (oItem) {
+                    oMultiInput.addToken(new Token({
+                        key: oItem.getTitle(),
+                        text: oItem.getDescription()
+                    }));
+                });
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpStatusMaterialSearch: function(oEvt){
+            let aFilters    = [];
+			let oBinding    = oEvt.getSource().getBinding("items"),
+                oFilter     = {};
+            let sValue      = oEvt.getParameter("value").toUpperCase();
+
+            oFilter = new Filter("MMSTA", FilterOperator.Contains, sValue);
+            aFilters.push(oFilter);
+			oBinding.filter(aFilters);
+        },
+
+        
 //----------------------------------------------------------------------//
 // Uf                                                                   //
 //----------------------------------------------------------------------//
@@ -1080,8 +1190,6 @@ sap.ui.define([
          * 
          */
         onValueHelpUfOpen: function(oEvt){
-            // this._getDialog("ShUf").open();
-
             // Create value help dialog
             if (!this._ShUfDialog) {
                 this._ShUfDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShUf", this);
