@@ -1,8 +1,9 @@
 /*global history */
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/core/routing/History"
-], function (Controller, History) {
+    "sap/ui/core/routing/History",
+    "sap/m/Token",
+], function (Controller, History, Token) {
 	"use strict";
 
 	return Controller.extend("dma.zfichatec.controller.BaseController", {
@@ -99,6 +100,71 @@ sap.ui.define([
                 "FONTE_SUPR"    : "3",
                 "UF"            : "4",
                 "SORTIM"        : "5"
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        getFromType: function(){
+            return {
+                "TITLE"         : "0",
+                "DESCRIPTION"   : "1"
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpClose: function(oEvt, sId, sTextGetFrom = this.getFromType().DESCRIPTION){
+            let aSelectedItems = oEvt.getParameter("selectedItems");
+            let enumFromType = this.getFromType();
+            let oMultiInput = this.byId(sId);
+            let sTextGetFromValue;
+
+            oMultiInput.removeAllTokens();
+
+            if (aSelectedItems && aSelectedItems.length > 0) {
+                aSelectedItems.forEach(function (oItem) {
+                    switch(sTextGetFrom){
+                        case enumFromType.TITLE:
+                            sTextGetFromValue = oItem.getTitle();
+                            break;
+                        case enumFromType.DESCRIPTION:
+                            sTextGetFromValue = oItem.getDescription();
+                            break;
+                        default:
+                            break;
+                    }
+
+                    oMultiInput.addToken(
+                        new Token(
+                            {
+                                key: oItem.getTitle(),
+                                text: sTextGetFromValue
+                            }
+                        )
+                    );
+                });
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        onValueHelpRememberSelections: function(sId, oDialog){
+            let aInput = this.getView().byId(sId).getTokens();
+            let aValues = oDialog._oList.getItems();
+            
+            for(let iIndexInput in aInput){
+                for(let iIndexValues in aValues){
+                    if(aInput[iIndexInput].getKey() === aValues[iIndexValues].getTitle()){
+                        aValues[iIndexValues].setSelected(true);
+                    }
+                }
             }
         },
 

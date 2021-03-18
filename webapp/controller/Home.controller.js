@@ -2,15 +2,11 @@ sap.ui.define([
     "dma/zfichatec/controller/BaseController",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-	"sap/m/Label",
-    "sap/m/Popover",
     "sap/m/Token",
-	"sap/ui/core/format/DateFormat",
 	"sap/ui/core/Fragment",
-	"sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
     "sap/m/MessageBox"
-], function (BaseController, Filter, FilterOperator, Label, Popover, Token, DateFormat, Fragment, JSONModel, MessageToast, MessageBox) {
+], function (BaseController, Filter, FilterOperator, Token, Fragment, MessageToast, MessageBox) {
 	"use strict";
 	//var sResponsivePaddingClasses = "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer";
 	return BaseController.extend("dma.zfichatec.controller.Home", {
@@ -336,7 +332,7 @@ sap.ui.define([
                 Ekgrp: 'F04' // Placeholder
             });
             let sUrl = oModel.sServiceUrl + sObjectPath.replaceAll("'", "%27") + '/$value';
-
+            
             let oIframe = this._imprimirDetalheDialog.getAggregation("content")[0];
             oIframe.setContent(
                 "<iframe src='" + sUrl + "' " +
@@ -416,6 +412,8 @@ sap.ui.define([
                 this.getView().addDependent(this._ShCompradorDialog);
             }
 
+            this.onValueHelpRememberSelections("idMultiInputCompradorCod1", this._ShCompradorDialog);
+            
             this.onValueHelpCompradorPreFilter(oEvt);
 
             this._ShCompradorDialog.open();
@@ -434,19 +432,15 @@ sap.ui.define([
          * 
          */
         onValueHelpCompradorClose: function (oEvt) {
-            let aSelectedItems = oEvt.getParameter("selectedItems"),
-                oMultiInput = this.byId("idMultiInputCompradorCod1");
+            this.onValueHelpClose(oEvt, "idMultiInputCompradorCod1", this.getFromType().TITLE);
+        },
 
-            oMultiInput.removeAllTokens();
+        /**
+         * 
+         * 
+         */
+        onValueHelpCompradorCancel: function(oEvt){
 
-            if (aSelectedItems && aSelectedItems.length > 0) {
-                aSelectedItems.forEach(function (oItem) {
-                    oMultiInput.addToken(new Token({
-                        key: oItem.getTitle(),
-                        text: oItem.getDescription()
-                    }));
-                });
-            }
         },
 
         /**
@@ -478,6 +472,8 @@ sap.ui.define([
                 this._ShContratoDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShContrato", this);
                 this.getView().addDependent(this._ShContratoDialog);
             }
+
+            this.onValueHelpRememberSelections("idMultiInputContrato1", this._ShContratoDialog);
 
             this.onValueHelpContratoPreFilter(oEvt);
 
@@ -525,20 +521,15 @@ sap.ui.define([
          * 
          */
         onValueHelpContratoClose: function (oEvt) {
-            let aSelectedItems = oEvt.getParameter("selectedItems"),
-                oMultiInput = this.byId("idMultiInputContrato1");
+            this.onValueHelpClose(oEvt, "idMultiInputContrato1", this.getFromType().TITLE);
+        },
 
-            oMultiInput.removeAllTokens();
+        /**
+         * 
+         * 
+         */
+        onValueHelpContratoCancel: function(oEvt){
 
-            if (aSelectedItems && aSelectedItems.length > 0) {
-                aSelectedItems.forEach(function (oItem) {
-                    oMultiInput.addToken(new Token({
-                        key: oItem.getTitle(),
-                        //text: oItem.getDescription()
-                        text: oItem.getTitle()
-                    }));
-                });
-            }
         },
 
         /**
@@ -597,6 +588,8 @@ sap.ui.define([
                 this.getView().addDependent(this._ShDepartamentoDialog);
             }
 
+            this.onValueHelpRememberSelections("idMultiInputDepartamento1", this._ShDepartamentoDialog);
+
             this.onValueHelpDepartamentoPreFilter(oEvt);
 
             this._ShDepartamentoDialog.open();
@@ -654,20 +647,15 @@ sap.ui.define([
          * 
          */
         onValueHelpDepartamentoClose: function (oEvt) {
-            let aSelectedItems = oEvt.getParameter("selectedItems"),
-                oMultiInput = this.byId("idMultiInputDepartamento1");
+            this.onValueHelpClose(oEvt, "idMultiInputDepartamento1", this.getFromType().DESCRIPTION);
+        },
 
-            oMultiInput.removeAllTokens();
+        /**
+         * 
+         * 
+         */
+        onValueHelpDepartamentoCancel: function (oEvt) {
 
-            if (aSelectedItems && aSelectedItems.length > 0) {
-                aSelectedItems.forEach(function (oItem) {
-                    oMultiInput.addToken(new Token({
-                        key: oItem.getTitle(),
-                        text: oItem.getDescription()
-                        // text: oItem.getTitle()
-                    }));
-                });
-            }
         },
 
         /**
@@ -737,6 +725,8 @@ sap.ui.define([
                 this.getView().addDependent(this._ShFonteSuprimentoDialog);
             }
 
+            this.onValueHelpRememberSelections("idMultiInputFonteSuprimento1", this._ShFonteSuprimentoDialog);
+
             this.onValueHelpFonteSuprimentoPreFilter(oEvt);
 
             this._ShFonteSuprimentoDialog.open();
@@ -755,19 +745,15 @@ sap.ui.define([
          * 
          */
         onValueHelpFonteSuprimentoClose: function (oEvt) {
-            let aSelectedItems = oEvt.getParameter("selectedItems"),
-                oMultiInput = this.byId("idMultiInputFonteSuprimento1");
+            this.onValueHelpClose(oEvt, "idMultiInputFonteSuprimento1", this.getFromType().TITLE);
+        },
 
-            oMultiInput.removeAllTokens();
+        /**
+         * 
+         * 
+         */
+        onValueHelpFonteSuprimentoCancel: function (oEvt) {
 
-            if (aSelectedItems && aSelectedItems.length > 0) {
-                aSelectedItems.forEach(function (oItem) {
-                    oMultiInput.addToken(new Token({
-                        key: oItem.getTitle(),
-                        text: oItem.getDescription()
-                    }));
-                });
-            }
         },
 
         /**
@@ -799,6 +785,8 @@ sap.ui.define([
                 this._ShFornecedorDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShFornecedor", this);
                 this.getView().addDependent(this._ShFornecedorDialog);
             }
+
+            this.onValueHelpRememberSelections("idMultiInputFornecedorCod1", this._ShFornecedorDialog);
 
             this.onValueHelpFornecedorPreFilter(oEvt);
 
@@ -835,20 +823,15 @@ sap.ui.define([
          * 
          */
         onValueHelpFornecedorClose: function (oEvt) {
-            let aSelectedItems = oEvt.getParameter("selectedItems"),
-                oMultiInput = this.byId("idMultiInputFornecedorCod1");
+            this.onValueHelpClose(oEvt, "idMultiInputFornecedorCod1", this.getFromType().TITLE);
+        },
 
-            oMultiInput.removeAllTokens();
+        /**
+         * 
+         * 
+         */
+        onValueHelpFornecedorCancel: function (oEvt) {
 
-            if (aSelectedItems && aSelectedItems.length > 0) {
-                aSelectedItems.forEach(function (oItem) {
-                    oMultiInput.addToken(new Token({
-                        key: oItem.getTitle(),
-                        // text: oItem.getDescription()
-                        text: oItem.getTitle()
-                    }));
-                });
-            }
         },
 
         /**
@@ -896,6 +879,8 @@ sap.ui.define([
                 this.getView().addDependent(this._ShGrpPrecosDialog);
             }
 
+            this.onValueHelpRememberSelections("idMultiInputGrpPrecos1", this._ShGrpPrecosDialog);
+
             this.onValueHelpGrpPrecosPreFilter(oEvt);
 
             this._ShGrpPrecosDialog.open();
@@ -931,20 +916,15 @@ sap.ui.define([
          * 
          */
         onValueHelpGrpPrecosClose: function (oEvt) {
-            let aSelectedItems = oEvt.getParameter("selectedItems"),
-                oMultiInput = this.byId("idMultiInputGrpPrecos1");
+            this.onValueHelpClose(oEvt, "idMultiInputGrpPrecos1", this.getFromType().TITLE);
+        },
 
-            oMultiInput.removeAllTokens();
+        /**
+         * 
+         * 
+         */
+        onValueHelpGrpPrecosCancel: function (oEvt) {
 
-            if (aSelectedItems && aSelectedItems.length > 0) {
-                aSelectedItems.forEach(function (oItem) {
-                    oMultiInput.addToken(new Token({
-                        key: oItem.getTitle(),
-                        // text: oItem.getDescription()
-                        text: oItem.getTitle()
-                    }));
-                });
-            }
         },
 
         /**
@@ -991,6 +971,8 @@ sap.ui.define([
                 this._ShHierarquiaDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShHierarquia", this);
                 this.getView().addDependent(this._ShHierarquiaDialog);
             }
+
+            this.onValueHelpRememberSelections("idMultiInputNoHierarquia1", this._ShHierarquiaDialog);
 
             this.onValueHelpHierarquiaPreFilter(oEvt);
 
@@ -1060,20 +1042,15 @@ sap.ui.define([
          * 
          */
         onValueHelpHierarquiaClose: function (oEvt) {
-            let aSelectedItems = oEvt.getParameter("selectedItems"),
-                oMultiInput = this.byId("idMultiInputNoHierarquia1");
+            this.onValueHelpClose(oEvt, "idMultiInputNoHierarquia1", this.getFromType().TITLE);
+        },
 
-            oMultiInput.removeAllTokens();
+        /**
+         * 
+         * 
+         */
+        onValueHelpHierarquiaCancel: function (oEvt) {
 
-            if (aSelectedItems && aSelectedItems.length > 0) {
-                aSelectedItems.forEach(function (oItem) {
-                    oMultiInput.addToken(new Token({
-                        key: oItem.getTitle(),
-                        // text: oItem.getDescription()
-                        text: oItem.getTitle()
-                    }));
-                });
-            }
         },
 
         /**
@@ -1154,6 +1131,8 @@ sap.ui.define([
                 this.getView().addDependent(this._ShLojasDialog);
             }
 
+            this.onValueHelpRememberSelections("idMultiInputLojas1", this._ShLojasDialog);
+
             this.onValueHelpLojasPreFilter(oEvt);
 
             this._ShLojasDialog.open();
@@ -1189,20 +1168,15 @@ sap.ui.define([
          * 
          */
         onValueHelpLojasClose: function (oEvt) {
-            let aSelectedItems = oEvt.getParameter("selectedItems"),
-                oMultiInput = this.byId("idMultiInputLojas1");
+            this.onValueHelpClose(oEvt, "idMultiInputLojas1", this.getFromType().TITLE);
+        },
 
-            oMultiInput.removeAllTokens();
+        /**
+         * 
+         * 
+         */
+        onValueHelpLojasCancel: function (oEvt) {
 
-            if (aSelectedItems && aSelectedItems.length > 0) {
-                aSelectedItems.forEach(function (oItem) {
-                    oMultiInput.addToken(new Token({
-                        key: oItem.getTitle(),
-                        text: oItem.getDescription()
-                        // text: oItem.getTitle()
-                    }));
-                });
-            }
         },
 
         /**
@@ -1250,6 +1224,8 @@ sap.ui.define([
                 this.getView().addDependent(this._ShSortimentoDialog);
             }
 
+            this.onValueHelpRememberSelections("idMultiInputSortimento1", this._ShSortimentoDialog);
+
             this.onValueHelpSortimentoPreFilter(oEvt);
 
             this._ShSortimentoDialog.open();
@@ -1268,19 +1244,15 @@ sap.ui.define([
          * 
          */
         onValueHelpSortimentoClose: function (oEvt) {
-            let aSelectedItems = oEvt.getParameter("selectedItems"),
-                oMultiInput = this.byId("idMultiInputSortimento1");
+            this.onValueHelpClose(oEvt, "idMultiInputSortimento1", this.getFromType().DESCRIPTION);
+        },
 
-            oMultiInput.removeAllTokens();
+        /**
+         * 
+         * 
+         */
+        onValueHelpSortimentoCancel: function (oEvt) {
 
-            if (aSelectedItems && aSelectedItems.length > 0) {
-                aSelectedItems.forEach(function (oItem) {
-                    oMultiInput.addToken(new Token({
-                        key: oItem.getTitle(),
-                        text: oItem.getDescription()
-                    }));
-                });
-            }
         },
 
         /**
@@ -1313,6 +1285,8 @@ sap.ui.define([
                 this.getView().addDependent(this._ShStatusMaterialDialog);
             }
 
+            this.onValueHelpRememberSelections("idMultiInputStatusMaterial1", this._ShStatusMaterialDialog);
+
             this.onValueHelpStatusMaterialPreFilter(oEvt);
 
             this._ShStatusMaterialDialog.open();
@@ -1331,19 +1305,15 @@ sap.ui.define([
          * 
          */
         onValueHelpStatusMaterialClose: function (oEvt) {
-            let aSelectedItems = oEvt.getParameter("selectedItems"),
-                oMultiInput = this.byId("idMultiInputStatusMaterial1");
+            this.onValueHelpClose(oEvt, "idMultiInputStatusMaterial1", this.getFromType().TITLE);
+        },
 
-            oMultiInput.removeAllTokens();
+        /**
+         * 
+         * 
+         */
+        onValueHelpStatusMaterialCancel: function (oEvt) {
 
-            if (aSelectedItems && aSelectedItems.length > 0) {
-                aSelectedItems.forEach(function (oItem) {
-                    oMultiInput.addToken(new Token({
-                        key: oItem.getTitle(),
-                        text: oItem.getDescription()
-                    }));
-                });
-            }
         },
 
         /**
@@ -1376,6 +1346,8 @@ sap.ui.define([
                 this.getView().addDependent(this._ShUfDialog);
             }
 
+            this.onValueHelpRememberSelections("idMultiInputUf1", this._ShUfDialog);
+
             this.onValueHelpUfPreFilter(oEvt);
 
             this._ShUfDialog.open();
@@ -1394,19 +1366,15 @@ sap.ui.define([
          * 
          */
         onValueHelpUfClose: function (oEvt) {
-            let aSelectedItems = oEvt.getParameter("selectedItems"),
-                oMultiInput = this.byId("idMultiInputUf1");
+            this.onValueHelpClose(oEvt, "idMultiInputUf1", this.getFromType().TITLE);
+        },
 
-            oMultiInput.removeAllTokens();
+        /**
+         * 
+         * 
+         */
+        onValueHelpUfCancel: function (oEvt) {
 
-            if (aSelectedItems && aSelectedItems.length > 0) {
-                aSelectedItems.forEach(function (oItem) {
-                    oMultiInput.addToken(new Token({
-                        key: oItem.getTitle(),
-                        text: oItem.getDescription()
-                    }));
-                });
-            }
         },
 
         /**

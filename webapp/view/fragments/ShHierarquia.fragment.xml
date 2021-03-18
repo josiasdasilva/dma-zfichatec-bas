@@ -7,10 +7,9 @@
 		class="sapUiPopupWithPadding"
 		items="{/HierarquiaSet}"
         multiSelect="true"
-        rememberSelections="true"
 		search="onValueHelpHierarquiaSearch"
 		confirm="onValueHelpHierarquiaClose"
-		cancel="onValueHelpHierarquiaClose">
+		cancel="onValueHelpHierarquiaCancel">
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"

@@ -7,10 +7,9 @@
 		class="sapUiPopupWithPadding"
 		items="{/FornecedorSet}"
         multiSelect="true"
-        rememberSelections="true"
 		search="onValueHelpFornecedorSearch"
 		confirm="onValueHelpFornecedorClose"
-		cancel="onValueHelpFornecedorClose">
+		cancel="onValueHelpFornecedorCancel">
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"

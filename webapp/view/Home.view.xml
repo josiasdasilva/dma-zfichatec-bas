@@ -49,10 +49,10 @@
                                     <!-- COMPRADOR -->
                                     <Label
                                         text="{i18n>comprador_lbl}:"
-                                        width="76px"
-                                        class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                        width="120px"
+                                        class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                     <MultiInput
-                                        width="350px"
+                                        width="550px"
                                         id="idMultiInputCompradorCod1"
                                         suggestionItems="{
                                             path: '/CompradorSet'
@@ -60,7 +60,7 @@
                                         tokenChange="onTokenChangeMultiInput"
                                         valueHelpRequest="onValueHelpCompradorOpen"
                                         valueHelpOnly="true" >
-                                        <core:Item key="{Ekgrp}" text="{Nome}"/>
+                                        <core:Item key="{Ekgrp}" text="{Ekgrp}"/>
                                     </MultiInput>
 
                                 </HBox>
@@ -73,10 +73,10 @@
                                     <!-- FORNECEDOR -->
                                     <Label
                                         text="{i18n>fornecedor_lbl}:"
-                                        width="76px"
-                                        class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                        width="120px"
+                                        class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                     <MultiInput
-                                        width="350px"
+                                        width="550px"
                                         id="idMultiInputFornecedorCod1"
                                         suggestionItems="{
                                             path: '/FornecedorSet'
@@ -95,10 +95,10 @@
                                     <!-- CONTRATO -->
                                     <Label
                                         text="{i18n>contrato_lbl}:"
-                                        width="76px"
-                                        class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                        width="120px"
+                                        class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                     <MultiInput
-                                        width="350px"
+                                        width="550px"
                                         id="idMultiInputContrato1"
                                         suggestionItems="{
                                             path: '/ContratoSet'
@@ -219,7 +219,7 @@
                                             <!-- FONTE DE SUPRIMENTO -->
                                             <Label
                                                 text="{i18n>fonte_supr_lbl}:"
-                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
                                                 width="200px"
                                                 id="idMultiInputFonteSuprimento1"
@@ -239,9 +239,9 @@
                                             <!-- STATUS DO MATERIAL -->
                                             <Label
                                                 text="{i18n>status_mat_lbl}: ="
-                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
-                                                width="205px"
+                                                width="207px"
                                                 id="idMultiInputStatusMaterial1"
                                                 suggestionItems="{
                                                     path: '/StatusMatSet'
@@ -259,9 +259,9 @@
                                             <!-- DEPARTAMENTO -->
                                             <Label
                                                 text="{i18n>departamento_lbl}:"
-                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
-                                                width="242px"
+                                                width="260px"
                                                 id="idMultiInputDepartamento1"
                                                 suggestionItems="{
                                                     path: '/DepartamentoSet'
@@ -279,9 +279,9 @@
                                             <!-- HIERARQUIA -->
                                             <Label
                                                 text="{i18n>no_hierarquia_lbl}:"
-                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
-                                                width="225px"
+                                                width="235px"
                                                 id="idMultiInputNoHierarquia1"
                                                 suggestionItems="{
                                                     path: '/HierarquiaSet'
@@ -331,7 +331,7 @@
                                             <Label
                                                 text="{i18n>uf_lbl}:"
                                                 width="50px"
-                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
                                                 width="200px"
                                                 id="idMultiInputUf1"
@@ -347,8 +347,8 @@
                                             <!-- GRUPO DE PREÇOS -->
                                             <Label
                                                 text="{i18n>grp_precos_lbl}:"
-                                                width="110px"
-                                                class="sapUiSmallMarginTop sapUiSmallMarginBegin" />
+                                                width="170px"
+                                                class="sapUiSmallMarginTop sapUiSmallMarginBegin label_h3" />
                                             <MultiInput
                                                 width="200px"
                                                 id="idMultiInputGrpPrecos1"
@@ -369,7 +369,7 @@
                                             <Label
                                                 text="{i18n>loja_lbl}:"
                                                 width="50px"
-                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd" />
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
                                                 width="200px"
                                                 id="idMultiInputLojas1"
@@ -385,8 +385,8 @@
                                             <!-- SORTIMENTOS -->
                                             <Label
                                                 text="{i18n>sortim_lbl}:"
-                                                width="110px"
-                                                class="sapUiSmallMarginTop sapUiSmallMarginBegin" />
+                                                width="170px"
+                                                class="sapUiSmallMarginTop sapUiSmallMarginBegin label_h3" />
                                             <MultiInput
                                                 width="200px"
                                                 id="idMultiInputSortimento1"

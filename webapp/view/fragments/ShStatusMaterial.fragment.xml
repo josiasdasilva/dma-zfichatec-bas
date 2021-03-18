@@ -7,11 +7,9 @@
 		class="sapUiPopupWithPadding"
 		items="{/StatusMatSet}"
         multiSelect="true"
-        rememberSelections="true"
 		search="onValueHelpStatusMaterialSearch"
 		confirm="onValueHelpStatusMaterialClose"
-		cancel="onValueHelpStatusMaterialClose"
-        showClearButton="true" >
+		cancel="onValueHelpStatusMaterialCancel" >
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"

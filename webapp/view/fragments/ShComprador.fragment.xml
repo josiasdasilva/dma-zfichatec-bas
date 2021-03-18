@@ -7,11 +7,9 @@
 		class="sapUiPopupWithPadding"
 		items="{/CompradorSet}"
         multiSelect="true"
-        rememberSelections="true"
 		search="onValueHelpCompradorSearch"
 		confirm="onValueHelpCompradorClose"
-		cancel="onValueHelpCompradorClose"
-        showClearButton="true" >
+		cancel="onValueHelpCompradorCancel" >
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"

@@ -7,11 +7,9 @@
 		class="sapUiPopupWithPadding"
 		items="{/SortimSet}"
         multiSelect="true"
-        rememberSelections="true"
 		search="onValueHelpSortimentoSearch"
 		confirm="onValueHelpSortimentoClose"
-		cancel="onValueHelpSortimentoClose"
-        showClearButton="true" >
+		cancel="onValueHelpSortimentoCancel" >
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"

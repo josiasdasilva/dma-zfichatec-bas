@@ -7,10 +7,9 @@
 		class="sapUiPopupWithPadding"
 		items="{/LojasSet}"
         multiSelect="true"
-        rememberSelections="true"
 		search="onValueHelpLojasSearch"
 		confirm="onValueHelpLojasClose"
-		cancel="onValueHelpLojasClose">
+		cancel="onValueHelpLojasCancel">
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"

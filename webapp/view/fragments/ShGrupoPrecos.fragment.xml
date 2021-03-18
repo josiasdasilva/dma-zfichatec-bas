@@ -7,10 +7,9 @@
 		class="sapUiPopupWithPadding"
 		items="{/GrupoPrecosSet}"
         multiSelect="true"
-        rememberSelections="true"
 		search="onValueHelpGrpPrecosSearch"
 		confirm="onValueHelpGrpPrecosClose"
-		cancel="onValueHelpGrpPrecosClose">
+		cancel="onValueHelpGrpPrecosCancel">
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"

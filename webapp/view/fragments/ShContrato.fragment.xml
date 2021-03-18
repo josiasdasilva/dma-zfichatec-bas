@@ -7,10 +7,9 @@
 		class="sapUiPopupWithPadding"
 		items="{/ContratoSet}"
         multiSelect="true"
-        rememberSelections="true"
 		search="onValueHelpContratoSearch"
 		confirm="onValueHelpContratoClose"
-		cancel="onValueHelpContratoClose">
+		cancel="onValueHelpContratoCancel">
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"

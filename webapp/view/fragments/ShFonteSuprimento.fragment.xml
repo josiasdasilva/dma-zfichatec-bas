@@ -7,11 +7,9 @@
 		class="sapUiPopupWithPadding"
 		items="{/FSupSet}"
         multiSelect="true"
-        rememberSelections="true"
 		search="onValueHelpFonteSuprimentoSearch"
 		confirm="onValueHelpFonteSuprimentoClose"
-		cancel="onValueHelpFonteSuprimentoClose"
-        showClearButton="true" >
+		cancel="onValueHelpFonteSuprimentoCancel" >
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"
