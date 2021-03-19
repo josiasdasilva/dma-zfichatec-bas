@@ -28,7 +28,9 @@ sap.ui.define([
 		 * @memberOf dma.zfichatec.view.Home
 		 */
 		onBeforeRendering: function() {
-            this.initScreenParams();
+            // this.initScreenParams();
+            this.byId("idMultiInputStatusMaterial1").removeAllTokens();
+            this.byId("idMultiInputStatusMaterial1").addToken(new Token({key: undefined, text: "Liberado"}));
         },
 
         /**
@@ -38,6 +40,7 @@ sap.ui.define([
         handleWizardCompleted: function(oEvt){
             let sValueState;
 
+            // Validação dos MultiInput's obrigatórios
             if(!this.getView().byId("idMultiInputCompradorCod1").getTokens().length &&
                !this.getView().byId("idMultiInputFornecedorCod1").getTokens().length &&
                !this.getView().byId("idMultiInputContrato1").getTokens().length){
@@ -55,7 +58,22 @@ sap.ui.define([
                 return 1;
             }
 
-            MessageToast.show(this.getResourceBundle().getText("em_desenv_msg"));
+            // Validação do CheckBox "Bandeira"
+            if(this.getBandeiraSelectedIndex() === -1){
+                sValueState = sap.ui.core.ValueState.Error;
+            }else{
+                sValueState = sap.ui.core.ValueState.None;
+            }
+            this.getView().byId("idCheckBoxAtacado1").setValueState(sValueState);
+            this.getView().byId("idCheckBoxVarejo1").setValueState(sValueState);
+
+            if(sValueState === sap.ui.core.ValueState.Error){
+                this.getView().byId("idCheckBoxAtacado1").focus();
+                MessageToast.show(this.getResourceBundle().getText("bandeira_obrig_txt"));
+                return 1;
+            }
+
+            // MessageToast.show(this.getResourceBundle().getText("em_desenv_msg"));
             // window.open(this.getModel().sServiceUrl + "/$metadata", "_blank");
             // sap.m.URLHelper.redirect(this.getModel().sServiceUrl + "/$metadata", true /*new window*/);
             // sap.m.URLHelper.redirect("/dmazfichatec/imprimirDetalhe", true /*new window*/);
@@ -341,7 +359,19 @@ sap.ui.define([
             }else if(this.getView().byId("idCheckBoxVarejo1").getSelected()){
                 return 2;
             }else{
-                // Return 3; // ???
+                return -1;
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        makeFilterPath: function(sFieldName, sFieldValue, sOperator, bAnd, sNoValOblig = false){
+            if(sFieldValue || sNoValOblig){
+                return sFieldName + " " + sOperator + " '" + sFieldValue + "' " + ((bAnd) ? "and" : "or") + " ";
+            }else{
+                return "";
             }
         },
 
@@ -390,24 +420,38 @@ sap.ui.define([
 
             sObjectPath += "/$value?$filter=";
 
-            if(sPsvComprador){
-                sObjectPath += "Ekgrp eq '" + sPsvComprador + "' and ";
-            }
-            if(sPsvContrato){
-                sObjectPath += "Ebeln eq '" + sPsvContrato + "' and ";
-            }
+            sObjectPath += this.makeFilterPath("Ekgrp", sPsvComprador, "eq", true);
+            sObjectPath += this.makeFilterPath("Ebeln", sPsvContrato, "eq", true);
+            sObjectPath += this.makeFilterPath("Node3", sPsvDepartamento, "eq", true);
+            sObjectPath += this.makeFilterPath("Sobsl", sPsvFonteSuprimento, "eq", true);
+            sObjectPath += this.makeFilterPath("Lifnr", sPsvFornecedor, "eq", true);
+            sObjectPath += this.makeFilterPath("Grupo", sPsvGrupoPrecos, "eq", true);
+            sObjectPath += this.makeFilterPath("Node6", sPsvHierarquia, "eq", true);
+            sObjectPath += this.makeFilterPath("Werks", sPsvLojas, "eq", true);
+            sObjectPath += this.makeFilterPath("Sortimento", sPsvSortimento, "eq", true);
+            sObjectPath += this.makeFilterPath("Mmsta", ((sPsvStatusMaterial) ? sPsvStatusMaterial : "0"), "eq", true);
+            sObjectPath += this.makeFilterPath("UF", sPsvUf, "eq", true);
+            sObjectPath += this.makeFilterPath("Visao", iVisRelat, "eq", true);
+            sObjectPath += this.makeFilterPath("Bandeira", iBandeira, "eq", true);
+            sObjectPath += this.makeFilterPath("Total_UF", ((bTotalUf) ? "X" : ""), "eq", true, true);
+            sObjectPath += this.makeFilterPath("Total_Grupo", ((bTotalGrupo) ? "X" : ""), "eq", true, true);
+            sObjectPath += this.makeFilterPath("Cross", ((bXDocking) ? "X" : ""), "eq", true, true);
+
+            // debugger;
 
             if(sObjectPath.slice((sObjectPath.length-5), sObjectPath.length) === " and "){
                 sObjectPath = sObjectPath.slice(0, (sObjectPath.length-5));
+            }else if(sObjectPath.slice((sObjectPath.length-4), sObjectPath.length) === " or "){
+                sObjectPath = sObjectPath.slice(0, (sObjectPath.length-4));
             }
 
-            let sUrl = oModel.sServiceUrl + sObjectPath.replaceAll("'", "%27");
+            let sUrl = oModel.sServiceUrl + sObjectPath;
+            sUrl = sUrl.replaceAll("'", "%27");
             sUrl = sUrl.replaceAll("|", "%7C");
             
             let oIframe = this._imprimirDetalheDialog.getAggregation("content")[0];
             oIframe.setContent(
                 "<iframe src='" + sUrl + "' " +
-                // "<iframe src='/sap/opu/odata/sap/ZCOCKPIT_FICHATEC_SRV/PrnFichaSet(%27F04%27)/$value' " +
                 "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
             this._imprimirDetalheDialog.open();
 
@@ -1089,7 +1133,7 @@ sap.ui.define([
          * 
          */
         onValueHelpHierarquiaClose: function (oEvt) {
-            this.onValueHelpClose(oEvt, "idMultiInputNoHierarquia1", this.getFromType().TITLE);
+            this.onValueHelpClose(oEvt, "idMultiInputNoHierarquia1", this.getFromType().DESCRIPTION);
         },
 
         /**
@@ -1344,7 +1388,7 @@ sap.ui.define([
          * 
          */
         onValueHelpStatusMaterialPreFilter: function(oEvt){
-            
+
         },
 
         /**

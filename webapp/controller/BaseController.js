@@ -187,22 +187,26 @@ sap.ui.define([
             return sResult;
         },
 
+        /**
+         * 
+         * 
+         */
         getDateFormatted: function(oValue){
-            const day = oValue.getDate();
-            const month = oValue.getMonth() + 1;
-            const year = oValue.getFullYear();
-            const hours = oValue.getHours();
-            const minutes = oValue.getMinutes();
-            const seconds = oValue.getSeconds();
-            const milliseconds = oValue.getMilliseconds();
+            const sDay = oValue.getDate();
+            const sMonth = oValue.getMonth() + 1;
+            const sYear = oValue.getFullYear();
+            const sHours = oValue.getHours();
+            const sMinutes = oValue.getMinutes();
+            const sSeconds = oValue.getSeconds();
+            const sMilliseconds = oValue.getMilliseconds();
 
             return (
-                year +
-                String(month).padStart(2, '0') +
-                String(day).padStart(2, '0') +
-                String(hours).padStart(2, '0') +
-                String(minutes).padStart(2, '0') +
-                String(seconds).padStart(2, '0')
+                sYear +
+                String(sMonth).padStart(2, '0') +
+                String(sDay).padStart(2, '0') +
+                String(sHours).padStart(2, '0') +
+                String(sMinutes).padStart(2, '0') +
+                String(sSeconds).padStart(2, '0')
             )
         },
 
