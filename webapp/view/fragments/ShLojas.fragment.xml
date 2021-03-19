@@ -16,6 +16,6 @@
 			iconInset="false"
 			title="{Werks}"
 			description="{Nome}"
-			info="{Bandeira}" />
+			info="{UF}" />
 	</SelectDialog>
 </core:FragmentDefinition>

@@ -16,6 +16,6 @@
 			iconInset="false"
 			title="{Node6}"
 			description="{Ltext}"
-			info="" />
+			info="{Node3}" />
 	</SelectDialog>
 </core:FragmentDefinition>

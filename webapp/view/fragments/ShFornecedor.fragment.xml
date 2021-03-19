@@ -16,6 +16,6 @@
 			iconInset="false"
 			title="{Lifnr}"
 			description="{Mcod1}"
-			info="{Stcd1}" />
+			info="{Ekgrp}" />
 	</SelectDialog>
 </core:FragmentDefinition>

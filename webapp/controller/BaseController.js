@@ -2,7 +2,7 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
     "sap/ui/core/routing/History",
-    "sap/m/Token",
+    "sap/m/Token"
 ], function (Controller, History, Token) {
 	"use strict";
 
@@ -95,11 +95,11 @@ sap.ui.define([
          */
         getRadioButtonVisRelatOptions: function(){
             return {
-                "LOJA"          : "1",
-                "GRP_PRECOS"    : "2",
-                "FONTE_SUPR"    : "3",
-                "UF"            : "4",
-                "SORTIM"        : "5"
+                "LOJA"          : "0",
+                "GRP_PRECOS"    : "1",
+                "FONTE_SUPR"    : "2",
+                "UF"            : "3",
+                "SORTIM"        : "4"
             }
         },
 
@@ -168,28 +168,43 @@ sap.ui.define([
             }
         },
 
-		onValueHelpGenericCancelPress: function (oEvt) {
-			oEvt.oSource.close();
-		},
-		onValueHelpGenericAfterClose: function (oEvt) {
-			oEvt.oSource.destroy();
+        /**
+         * 
+         * 
+         */
+        transformMultiInputIntoPsv: function(sId){
+            let aTokens = this.getView().byId(sId).getTokens();
+            let sResult = "";
+
+            for(let iIndexTokens in aTokens){
+                sResult += aTokens[iIndexTokens].getKey() + '|';
+            }
+
+            if(sResult.slice((sResult.length-1),sResult.length) === "|"){
+                sResult = sResult.slice(0,(sResult.length-1));
+            }
+
+            return sResult;
         },
 
-        _createFilterForSelectionSet: function (aSelectionSet) {
-			let aFilters = [];
-			for (let itemFilter of aSelectionSet) {
+        getDateFormatted: function(oValue){
+            const day = oValue.getDate();
+            const month = oValue.getMonth() + 1;
+            const year = oValue.getFullYear();
+            const hours = oValue.getHours();
+            const minutes = oValue.getMinutes();
+            const seconds = oValue.getSeconds();
+            const milliseconds = oValue.getMilliseconds();
 
-				if (itemFilter.getValue && itemFilter.getValue().length > 0) {
-					aFilters.push(new sap.ui.model.Filter({
-						path: itemFilter.mProperties.name,
-						operator: sap.ui.model.FilterOperator.Contains,
-						value1: itemFilter.getValue().toUpperCase()
-					}));
-				}
-
-			}
-			return aFilters;
-		},        
+            return (
+                year +
+                String(month).padStart(2, '0') +
+                String(day).padStart(2, '0') +
+                String(hours).padStart(2, '0') +
+                String(minutes).padStart(2, '0') +
+                String(seconds).padStart(2, '0')
+            )
+        },
 
         /**
 		 * Convenience method for accessing the router in every controller of the application.

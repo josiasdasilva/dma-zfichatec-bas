@@ -10,11 +10,6 @@ sap.ui.define([
 	"use strict";
 	//var sResponsivePaddingClasses = "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer";
 	return BaseController.extend("dma.zfichatec.controller.Home", {
-		// _planningCalendar: null,
-		_aDialogTypes: null,
-		sUname: '',
-		sEkgrp: '',
-        // _idAppntOverSeven: null,
 
         /**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
@@ -312,6 +307,48 @@ sap.ui.define([
          * 
          * 
          */
+        getVisRelatSelectedIndex: function(){
+            switch(true){
+                case this.getView().byId("idRadioButtonVisRelatLoja").getSelected():
+                    return 0;
+                    break;
+                case this.getView().byId("idRadioButtonVisRelatGrpPrecos").getSelected():
+                    return 1;
+                    break;
+                case this.getView().byId("idRadioButtonVisRelatFonteSupr").getSelected():
+                    return 2;
+                    break;
+                case this.getView().byId("idRadioButtonVisRelatUf").getSelected():
+                    return 3;
+                    break;
+                case this.getView().byId("idRadioButtonVisRelatSortim").getSelected():
+                    return 4;
+                    break;
+                default:
+                    break;
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        getBandeiraSelectedIndex: function(){
+            if(this.getView().byId("idCheckBoxAtacado1").getSelected() && this.getView().byId("idCheckBoxVarejo1").getSelected()){
+                return 0;
+            }else if(this.getView().byId("idCheckBoxAtacado1").getSelected()){
+                return 1;
+            }else if(this.getView().byId("idCheckBoxVarejo1").getSelected()){
+                return 2;
+            }else{
+                // Return 3; // ???
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
         onEnviarEmailDetalhe: function(oEvt){
             MessageToast.show(this.getResourceBundle().getText("em_desenv_msg"));
         },
@@ -327,6 +364,54 @@ sap.ui.define([
                 this.getView().addDependent(this._imprimirDetalheDialog);
             }
 
+            let sActualDate         = this.getDateFormatted(new Date());
+
+            let sPsvComprador       = this.transformMultiInputIntoPsv("idMultiInputCompradorCod1");
+            let sPsvContrato        = this.transformMultiInputIntoPsv("idMultiInputContrato1");
+            let sPsvDepartamento    = this.transformMultiInputIntoPsv("idMultiInputDepartamento1");
+            let sPsvFonteSuprimento = this.transformMultiInputIntoPsv("idMultiInputFonteSuprimento1");
+            let sPsvFornecedor      = this.transformMultiInputIntoPsv("idMultiInputFornecedorCod1");
+            let sPsvGrupoPrecos     = this.transformMultiInputIntoPsv("idMultiInputGrpPrecos1");
+            let sPsvHierarquia      = this.transformMultiInputIntoPsv("idMultiInputNoHierarquia1");
+            let sPsvLojas           = this.transformMultiInputIntoPsv("idMultiInputLojas1");
+            let sPsvSortimento      = this.transformMultiInputIntoPsv("idMultiInputSortimento1");
+            let sPsvStatusMaterial  = this.transformMultiInputIntoPsv("idMultiInputStatusMaterial1");
+            let sPsvUf              = this.transformMultiInputIntoPsv("idMultiInputUf1");
+            let iVisRelat           = this.getVisRelatSelectedIndex();
+            let iBandeira           = this.getBandeiraSelectedIndex();
+            let bTotalUf            = this.getView().byId("idCheckBoxTotUf1").getSelected();
+            let bTotalGrupo         = this.getView().byId("idCheckBoxTotGrp1").getSelected();
+            let bXDocking           = this.getView().byId("idCheckBoxSomenteMatXdock1").getSelected();
+
+            let oModel = this.getView().getModel();
+            let sObjectPath = oModel.createKey("/PrnFichaSet", {
+                DateTime: sActualDate
+            });
+
+            sObjectPath += "/$value?$filter=";
+
+            if(sPsvComprador){
+                sObjectPath += "Ekgrp eq '" + sPsvComprador + "' and ";
+            }
+            if(sPsvContrato){
+                sObjectPath += "Ebeln eq '" + sPsvContrato + "' and ";
+            }
+
+            if(sObjectPath.slice((sObjectPath.length-5), sObjectPath.length) === " and "){
+                sObjectPath = sObjectPath.slice(0, (sObjectPath.length-5));
+            }
+
+            let sUrl = oModel.sServiceUrl + sObjectPath.replaceAll("'", "%27");
+            sUrl = sUrl.replaceAll("|", "%7C");
+            
+            let oIframe = this._imprimirDetalheDialog.getAggregation("content")[0];
+            oIframe.setContent(
+                "<iframe src='" + sUrl + "' " +
+                // "<iframe src='/sap/opu/odata/sap/ZCOCKPIT_FICHATEC_SRV/PrnFichaSet(%27F04%27)/$value' " +
+                "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
+            this._imprimirDetalheDialog.open();
+
+/*
             let oModel = this.getView().getModel();
             let sObjectPath = oModel.createKey("/PrnFichaSet", {
                 Ekgrp: 'F04' // Placeholder
@@ -339,46 +424,8 @@ sap.ui.define([
                 // "<iframe src='/sap/opu/odata/sap/ZCOCKPIT_FICHATEC_SRV/PrnFichaSet(%27F04%27)/$value' " +
                 "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
             this._imprimirDetalheDialog.open();
-/*
-            let oModel = this.getView().getModel();
-            let sObjectPath = oModel.createKey("/PrnFichaSet", {
-                Ekgrp: 'F04' // Placeholder
-            })
-            let sUrl = sObjectPath + "/$value";
-
-            let oIframe = this._imprimirDetalheDialog.getAggregation("content")[0];
-            oIframe.setContent(
-                "<iframe src='" + sUrl + "' " +
-                "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
-            this._imprimirDetalheDialog.open();
 */
-/*
-            let oModel = this.getView().getModel();
-            // oModel.read("/PrnFichaSet('F04')", {
-            oModel.read("/CompradorSet('F04')", {
-                    success: function(oRetrievedResult, oResult){
-                        debugger;
-                        let oJsonResult = JSON.parse(oResult.body);
-                        let sUrl = oJsonResult.d.__metadata.uri.slice(0, (oJsonResult.d.__metadata.uri.search("Comprador") - 1));
 
-                        // let oIframe = this._imprimirDetalheDialog.getAggregation("content")[0];
-                        // oIframe.setContent(
-                        //     "<iframe src='https://devsapecc02.grupodma.intra:8000/sap/opu/odata/sap/ZCOCKPIT_FICHATEC_SRV/PrnFichaSet(%27F04%27)/$value' " +
-                        //     "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
-
-                        // oIframe.setContent(
-                        //     "<iframe src='" + sUrl + "/PrnFichaSet('F04')/$value' " +
-                        //     "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
-
-                        this._imprimirDetalheDialog.open();
-
-                    }.bind(this),
-                    error: function(oError, oResult){
-                        debugger;
-                    }.bind(this)
-                }
-            );
-*/
 /*
             let oIframe = this._imprimirDetalheDialog.getAggregation("content")[0];
             oIframe.setContent(
@@ -1244,7 +1291,7 @@ sap.ui.define([
          * 
          */
         onValueHelpSortimentoClose: function (oEvt) {
-            this.onValueHelpClose(oEvt, "idMultiInputSortimento1", this.getFromType().DESCRIPTION);
+            this.onValueHelpClose(oEvt, "idMultiInputSortimento1", this.getFromType().TITLE);
         },
 
         /**
@@ -1305,7 +1352,7 @@ sap.ui.define([
          * 
          */
         onValueHelpStatusMaterialClose: function (oEvt) {
-            this.onValueHelpClose(oEvt, "idMultiInputStatusMaterial1", this.getFromType().TITLE);
+            this.onValueHelpClose(oEvt, "idMultiInputStatusMaterial1", this.getFromType().DESCRIPTION);
         },
 
         /**

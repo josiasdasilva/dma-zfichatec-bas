@@ -31,24 +31,21 @@
 				<content/>
 -->
                     <content>
-
                         <Wizard
                             id="idWizard01"
                             finishButtonText="{i18n>pesquisar_lbl}"
                             complete="handleWizardCompleted">
-
                             <WizardStep id="idWizardStep1"
                                         title="{i18n>tela_inicial_tit}"
                                         validated="true">
-
+                                <!-- COMPRADOR -->
                                 <HBox
                                     alignItems="Start"
                                     justifyContent="Start"
-                                    width="50%">
-                                    
-                                    <!-- COMPRADOR -->
+                                    width="100%">
                                     <Label
                                         text="{i18n>comprador_lbl}:"
+                                        textAlign="End"
                                         width="120px"
                                         class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                     <MultiInput
@@ -65,14 +62,14 @@
 
                                 </HBox>
                                 
+                                <!-- FORNECEDOR -->
                                 <HBox
                                     alignItems="Start"
                                     justifyContent="Start"
-                                    width="50%">
-                                    
-                                    <!-- FORNECEDOR -->
+                                    width="100%">
                                     <Label
                                         text="{i18n>fornecedor_lbl}:"
+                                        textAlign="End"
                                         width="120px"
                                         class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                     <MultiInput
@@ -87,14 +84,14 @@
                                     </MultiInput>
                                 </HBox>
                                 
+                                <!-- CONTRATO -->
                                 <HBox
                                     alignItems="Start"
                                     justifyContent="Start"
-                                    width="50%">
-                                    
-                                    <!-- CONTRATO -->
+                                    width="100%">
                                     <Label
                                         text="{i18n>contrato_lbl}:"
+                                        textAlign="End"
                                         width="120px"
                                         class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                     <MultiInput
@@ -109,7 +106,6 @@
                                         <core:Item key="{Ebeln}" text="{Ebeln}"/>
                                     </MultiInput>
                                 </HBox>
-
                             </WizardStep>
 
                             <WizardStep id="idWizardStep2"
@@ -118,30 +114,7 @@
                                 <HBox
                                     alignItems="Start"
                                     justifyContent="Start"
-                                    width="50%">
-<!--
-                                    <RadioButton
-                                        id="idRadioButtonVisRelatLoja"
-                                        groupName="GroupVisRelat"
-                                        text="{i18n>loja_lbl}"
-                                        class="sapUiMediumMarginEnd"
-                                        selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '1' }"
-                                        select="onRadioButtonSelect" />
-                                    <RadioButton
-                                        id="idRadioButtonVisRelatGrpPrecos"
-                                        groupName="GroupVisRelat"
-                                        text="{i18n>grp_precos_lbl}"
-                                        class="sapUiMediumMarginEnd"
-                                        selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '2' }"
-                                        select="onRadioButtonSelect" />
-                                    <RadioButton
-                                        id="idRadioButtonVisRelatFonteSupr"
-                                        groupName="GroupVisRelat"
-                                        text="{i18n>fonte_supr_lbl}"
-                                        class="sapUiMediumMarginEnd"
-                                        selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '3' }"
-                                        select="onRadioButtonSelect" />
--->
+                                    width="100%">
                                     <RadioButton
                                         id="idRadioButtonVisRelatLoja"
                                         groupName="GroupVisRelat"
@@ -158,27 +131,6 @@
                                         groupName="GroupVisRelat"
                                         text="{i18n>fonte_supr_lbl}"
                                         class="sapUiMediumMarginEnd" />
-                                </HBox>
-
-                                <HBox
-                                    alignItems="Start"
-                                    justifyContent="Start"
-                                    width="50%">
-<!-- 
-                                    <RadioButton
-                                        id="idRadioButtonVisRelatUf"
-                                        groupName="GroupVisRelat"
-                                        text="{i18n>uf_lbl}"
-                                        class="sapUiMediumMarginEnd"
-                                        selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '4' }"
-                                        select="onRadioButtonSelect" />
-                                    <RadioButton
-                                        id="idRadioButtonVisRelatSortim"
-                                        groupName="GroupVisRelat"
-                                        text="{i18n>sortim_lbl}"
-                                        selected="{= ${modelScreenParams>/screen1/GroupVisRelat} === '5' }"
-                                        select="onRadioButtonSelect" />
--->
                                     <RadioButton
                                         id="idRadioButtonVisRelatUf"
                                         groupName="GroupVisRelat"
@@ -197,31 +149,19 @@
                                 <HBox
                                     alignItems="Start"
                                     justifyContent="Start"
-                                    width="50%"
+                                    width="100%"
                                     class="sapUiLargeMarginEnd" >
-                                    
                                     <VBox>
-<!-- 
-                                        <CheckBox
-                                            id="idCheckBoxSomenteMatXdock1"
-                                            text="{i18n>somente_mat_xdock_lbl}"
-                                            selected="{= ${modelScreenParams>/screen1/idCheckBoxSomenteMatXdock1} === true }"
-                                            select="onCheckBoxSelect" />
--->
-                                        <CheckBox
-                                            id="idCheckBoxSomenteMatXdock1"
-                                            text="{i18n>somente_mat_xdock_lbl}"
-                                            selected="false" />
-                                        
+                                        <!-- FONTE DE SUPRIMENTO -->
                                         <HBox
                                             class="sapUiSmallMarginTop" >
-
-                                            <!-- FONTE DE SUPRIMENTO -->
                                             <Label
                                                 text="{i18n>fonte_supr_lbl}:"
+                                                textAlign="End"
+                                                width="195px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
-                                                width="200px"
+                                                width="350px"
                                                 id="idMultiInputFonteSuprimento1"
                                                 suggestionItems="{
                                                     path: '/FSupSet'
@@ -233,15 +173,16 @@
                                             </MultiInput>
                                         </HBox>
 
+                                        <!-- STATUS DO MATERIAL -->
                                         <HBox
                                             class="sapUiTinyMarginTop" >
-                                            
-                                            <!-- STATUS DO MATERIAL -->
                                             <Label
                                                 text="{i18n>status_mat_lbl}: ="
+                                                textAlign="End"
+                                                width="195px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
-                                                width="207px"
+                                                width="350px"
                                                 id="idMultiInputStatusMaterial1"
                                                 suggestionItems="{
                                                     path: '/StatusMatSet'
@@ -249,19 +190,20 @@
                                                 tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpStatusMaterialOpen"
                                                 valueHelpOnly="true" >
-                                                <core:Item key="{MMSTA}" text="{MTSTB}"/>
+                                                <core:Item key="{MTSTA}" text="{MTSTB}"/>
                                             </MultiInput>
                                         </HBox>
 
+                                        <!-- DEPARTAMENTO -->
                                         <HBox
                                             class="sapUiTinyMarginTop" >
-                                            
-                                            <!-- DEPARTAMENTO -->
                                             <Label
                                                 text="{i18n>departamento_lbl}:"
+                                                textAlign="End"
+                                                width="195px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
-                                                width="260px"
+                                                width="350px"
                                                 id="idMultiInputDepartamento1"
                                                 suggestionItems="{
                                                     path: '/DepartamentoSet'
@@ -273,15 +215,16 @@
                                             </MultiInput>
                                         </HBox>
 
+                                        <!-- HIERARQUIA -->
                                         <HBox
                                             class="sapUiTinyMarginTop" >
-                                            
-                                            <!-- HIERARQUIA -->
                                             <Label
                                                 text="{i18n>no_hierarquia_lbl}:"
+                                                textAlign="End"
+                                                width="195px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
-                                                width="235px"
+                                                width="350px"
                                                 id="idMultiInputNoHierarquia1"
                                                 suggestionItems="{
                                                     path: '/HierarquiaSet'
@@ -297,43 +240,17 @@
 
                                     <VBox
                                         class="sapUiLargeMarginBegin" >
-                                        <Label text="{i18n>bandeira_lbl}:" />
-                                        <HBox>
-<!-- 
-                                            <CheckBox
-                                                id="idCheckBoxAtacado1"
-                                                text="{i18n>atacado_lbl}"
-                                                selected="{= ${modelScreenParams>/screen1/idCheckBoxAtacado1} === true }"
-                                                select="onCheckBoxSelect" />
-                                            <CheckBox
-                                                id="idCheckBoxVarejo1"
-                                                text="{i18n>varejo_lbl}"
-                                                selected="{= ${modelScreenParams>/screen1/idCheckBoxVarejo1} === true }"
-                                                select="onCheckBoxSelect" />
--->
-                                            <CheckBox
-                                                id="idCheckBoxAtacado1"
-                                                text="{i18n>atacado_lbl}"
-                                                selected="true" />
-                                            <CheckBox
-                                                id="idCheckBoxVarejo1"
-                                                text="{i18n>varejo_lbl}"
-                                                selected="true" />
-                                        </HBox>
 
-                                        <Label
-                                            text="{i18n>filtros_visoes_lbl}:"
-                                            class="sapUiSmallMarginTop" />
+                                        <!-- UF -->
                                         <HBox
-                                            class="sapUiTinyMarginTop" >
-
-                                            <!-- UF -->
+                                            class="sapUiSmallMarginTop" >
                                             <Label
                                                 text="{i18n>uf_lbl}:"
-                                                width="50px"
+                                                textAlign="End"
+                                                width="120px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
-                                                width="200px"
+                                                width="350px"
                                                 id="idMultiInputUf1"
                                                 suggestionItems="{
                                                     path: '/UFSet'
@@ -343,14 +260,18 @@
                                                 valueHelpOnly="true" >
                                                 <core:Item key="{Bland}" text="{Bland}"/>
                                             </MultiInput>
+                                        </HBox>
 
-                                            <!-- GRUPO DE PREÇOS -->
+                                        <!-- GRUPO DE PREÇOS -->
+                                        <HBox
+                                            class="sapUiTinyMarginTop" >
                                             <Label
-                                                text="{i18n>grp_precos_lbl}:"
-                                                width="170px"
-                                                class="sapUiSmallMarginTop sapUiSmallMarginBegin label_h3" />
+                                                text="{i18n>grp_lbl}:"
+                                                textAlign="End"
+                                                width="120px"
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
-                                                width="200px"
+                                                width="350px"
                                                 id="idMultiInputGrpPrecos1"
                                                 suggestionItems="{
                                                     path: '/GrupoPrecosSet'
@@ -362,16 +283,16 @@
                                             </MultiInput>
                                         </HBox>
 
+                                        <!-- LOJAS -->
                                         <HBox
                                             class="sapUiTinyMarginTop" >
-                                            
-                                            <!-- LOJAS -->
                                             <Label
                                                 text="{i18n>loja_lbl}:"
-                                                width="50px"
+                                                textAlign="End"
+                                                width="120px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
-                                                width="200px"
+                                                width="350px"
                                                 id="idMultiInputLojas1"
                                                 suggestionItems="{
                                                     path: '/LojasSet'
@@ -381,14 +302,18 @@
                                                 valueHelpOnly="true" >
                                                 <core:Item key="{Werks}" text="{Werks}"/>
                                             </MultiInput>
+                                        </HBox>
 
-                                            <!-- SORTIMENTOS -->
+                                        <!-- SORTIMENTOS -->
+                                        <HBox
+                                            class="sapUiTinyMarginTop" >
                                             <Label
                                                 text="{i18n>sortim_lbl}:"
-                                                width="170px"
-                                                class="sapUiSmallMarginTop sapUiSmallMarginBegin label_h3" />
+                                                textAlign="End"
+                                                width="120px"
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <MultiInput
-                                                width="200px"
+                                                width="350px"
                                                 id="idMultiInputSortimento1"
                                                 suggestionItems="{
                                                     path: '/SortimSet'
@@ -399,32 +324,44 @@
                                                 <core:Item key="{Asort}" text="{Name1}"/>
                                             </MultiInput>
                                         </HBox>
-
-                                        <HBox>
-<!-- 
-                                            <CheckBox
-                                                id="idCheckBoxTotUf1"
-                                                text="{i18n>tot_uf_lbl}"
-                                                selected="{= ${modelScreenParams>/screen1/idCheckBoxTotUf1} === true }"
-                                                select="onCheckBoxSelect" />
-                                            <CheckBox
-                                                id="idCheckBoxTotGrp1"
-                                                text="{i18n>tot_grp_lbl}"
-                                                selected="{= ${modelScreenParams>/screen1/idCheckBoxTotGrp1} === true }"
-                                                select="onCheckBoxSelect" />
--->
-                                            <CheckBox
-                                                id="idCheckBoxTotUf1"
-                                                text="{i18n>tot_uf_lbl}"
-                                                selected="false" />
-                                            <CheckBox
-                                                id="idCheckBoxTotGrp1"
-                                                text="{i18n>tot_grp_lbl}"
-                                                selected="false" />
-                                        </HBox>
                                     </VBox>
-
                                 </HBox>
+
+                                <VBox>
+                                    <Label
+                                        text="{i18n>bandeira_lbl}:"
+                                        class="sapUiSmallMarginTop" />
+                                    <HBox>
+                                        <CheckBox
+                                            id="idCheckBoxAtacado1"
+                                            text="{i18n>atacado_lbl}"
+                                            selected="true" />
+                                        <CheckBox
+                                            id="idCheckBoxVarejo1"
+                                            text="{i18n>varejo_lbl}"
+                                            selected="true" />
+                                    </HBox>
+
+                                    <Label
+                                        text="{i18n>totaliz_lbl}:"
+                                        class="sapUiTinyMarginTop" />
+                                    <HBox>
+                                        <CheckBox
+                                            id="idCheckBoxTotUf1"
+                                            text="{i18n>tot_uf_lbl}"
+                                            selected="false" />
+                                        <CheckBox
+                                            id="idCheckBoxTotGrp1"
+                                            text="{i18n>tot_grp_lbl}"
+                                            selected="false" />
+                                    </HBox>
+
+                                    <CheckBox
+                                        id="idCheckBoxSomenteMatXdock1"
+                                        text="{i18n>somente_mat_xdock_lbl}"
+                                        selected="false"
+                                        class="sapUiTinyMarginTop" />
+                                </VBox>
                             </WizardStep>
                         </Wizard>
                     </content>
