@@ -576,6 +576,7 @@ sap.ui.define([
          * 
          */
         onValueHelpContratoPreFilter: function(oEvt){
+/*
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -605,6 +606,16 @@ sap.ui.define([
 
             // Define filters
             this._ShContratoDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
+            // Set previous filter - if "Fornecedor" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+
+            // Define filters
+            this._ShContratoDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
         /**
@@ -628,6 +639,7 @@ sap.ui.define([
          * 
          */
         onValueHelpContratoSearch: function(oEvt){
+/*
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -662,6 +674,18 @@ sap.ui.define([
             }
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            this.buildSingleFilter(aFilters, "Ebeln", FilterOperator.Contains, oEvt);
+
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
+            // Set previous filter - if "Fornecedor" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
 
@@ -691,6 +715,7 @@ sap.ui.define([
          * 
          */
         onValueHelpDepartamentoPreFilter: function(oEvt){
+/*
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -731,6 +756,18 @@ sap.ui.define([
 
             // Define filters
             this._ShDepartamentoDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
+            // Set previous filter - if "Fornecedor" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+            // Set previous filter - if "Contrato" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
+
+            // Define filters
+            this._ShDepartamentoDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
         /**
@@ -754,6 +791,7 @@ sap.ui.define([
          * 
          */
         onValueHelpDepartamentoSearch: function(oEvt){
+/*
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -797,6 +835,20 @@ sap.ui.define([
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
                 aOrFilters = [];
             }
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            this.buildSingleFilter(aFilters, "Node3", FilterOperator.Contains, oEvt);
+
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
+            // Set previous filter - if "Fornecedor" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+            // Set previous filter - if "Contrato" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
@@ -889,6 +941,7 @@ sap.ui.define([
          * 
          */
         onValueHelpFornecedorPreFilter: function(oEvt){
+/*
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -904,6 +957,14 @@ sap.ui.define([
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
                 aOrFilters = [];
             }
+
+            // Define filters
+            this._ShFornecedorDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
 
             // Define filters
             this._ShFornecedorDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -930,6 +991,7 @@ sap.ui.define([
          * 
          */
         onValueHelpFornecedorSearch: function(oEvt){
+/*
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -951,6 +1013,16 @@ sap.ui.define([
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
                 aOrFilters = [];
             }
+
+            oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            this.buildSingleFilter(aFilters, "Lifnr", FilterOperator.Contains, oEvt);
+
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
@@ -982,6 +1054,7 @@ sap.ui.define([
          * 
          */
         onValueHelpGrpPrecosPreFilter: function(oEvt){
+/*
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -997,6 +1070,14 @@ sap.ui.define([
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
                 aOrFilters = [];
             }
+
+            // Define filters
+            this._ShGrpPrecosDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+
+            // Set previous filter - if "UF" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
 
             // Define filters
             this._ShGrpPrecosDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -1023,6 +1104,7 @@ sap.ui.define([
          * 
          */
         onValueHelpGrpPrecosSearch: function(oEvt){
+/*
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -1034,7 +1116,7 @@ sap.ui.define([
             oFilter = new Filter("Bandeira", FilterOperator.Contains, sValue);
             aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
 
-            // Set previous filter - if "Comprador" is filled
+            // Set previous filter - if "UF" is filled
             aValues = this.byId("idMultiInputUf1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
@@ -1044,6 +1126,16 @@ sap.ui.define([
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
                 aOrFilters = [];
             }
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            this.buildSingleFilter(aFilters, "Bandeira", FilterOperator.Contains, oEvt);
+
+            // Set previous filter - if "UF" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
@@ -1075,12 +1167,13 @@ sap.ui.define([
          * 
          */
         onValueHelpHierarquiaPreFilter: function(oEvt){
+/*
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
             let oFilter = {};
 
-            // Set previous filter - if "Comprador" is filled
+            // Set previous filter - if "Comprador" is filled (Multiple)
             aValues = this.byId("idMultiInputCompradorCod1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
@@ -1091,7 +1184,7 @@ sap.ui.define([
                 aOrFilters = [];
             }
 
-            // Set previous filter - if "Fornecedor" is filled
+            // Set previous filter - if "Fornecedor" is filled (Multiple)
             aValues = this.byId("idMultiInputFornecedorCod1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
@@ -1102,7 +1195,7 @@ sap.ui.define([
                 aOrFilters = [];
             }
 
-            // Set previous filter - if "Contrato" is filled
+            // Set previous filter - if "Contrato" is filled (Multiple)
             aValues = this.byId("idMultiInputContrato1").getTokens();
             if (aValues.length) {
                 for(var iIndex in aValues){
@@ -1123,6 +1216,20 @@ sap.ui.define([
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
                 aOrFilters = [];
             }
+
+            // Define filters
+            this._ShHierarquiaDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
+            // Set previous filter - if "Fornecedor" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+            // Set previous filter - if "Contrato" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
+            // Set previous filter - if "Departamento" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputDepartamento1", "Node3", FilterOperator.EQ, false);
 
             // Define filters
             this._ShHierarquiaDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -1149,6 +1256,7 @@ sap.ui.define([
          * 
          */
         onValueHelpHierarquiaSearch: function(oEvt){
+/*
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -1205,6 +1313,22 @@ sap.ui.define([
             }
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            this.buildSingleFilter(aFilters, "Node3", FilterOperator.Contains, oEvt);
+
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
+            // Set previous filter - if "Fornecedor" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+            // Set previous filter - if "Contrato" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
+            // Set previous filter - if "Departamento" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputDepartamento1", "Node3", FilterOperator.EQ, false);
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
 
@@ -1234,6 +1358,7 @@ sap.ui.define([
          * 
          */
         onValueHelpLojasPreFilter: function(oEvt){
+/*
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -1249,6 +1374,14 @@ sap.ui.define([
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
                 aOrFilters = [];
             }
+
+            // Define filters
+            this._ShLojasDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+
+            // Set previous filter - if "UF" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
 
             // Define filters
             this._ShLojasDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -1275,6 +1408,7 @@ sap.ui.define([
          * 
          */
         onValueHelpLojasSearch: function(oEvt){
+/*
             let aFilters    = [],
                 aOrFilters  = [],
                 aValues     = [];
@@ -1296,6 +1430,16 @@ sap.ui.define([
                 aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
                 aOrFilters = [];
             }
+
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            this.buildSingleFilter(aFilters, "Werks", FilterOperator.Contains, oEvt);
+
+            // Set previous filter - if "UF" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },

@@ -211,6 +211,42 @@ sap.ui.define([
         },
 
         /**
+         * 
+         * 
+         */
+        buildSingleFilter: function(aFilters, sFilterFieldName, sOperator, oEvt){
+            let oFilter = {};
+            let sValue;
+
+            // if(JSON.stringify(oEvt) !== "{}" && JSON.stringify(oEvt) !== "[]"){
+            if(Object.keys(oEvt).length > 0 || oEvt.constructor !== Object){
+                sValue = oEvt.getParameter("value").toUpperCase();
+                oFilter = new sap.ui.model.Filter(sFilterFieldName, sOperator, sValue);
+                aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
+            }
+        },
+
+        /**
+         * 
+         * 
+         */
+        buildArrayFilter: function(aFilters, sFieldName, sFilterFieldName, sOperator, bAnd){
+            let aOrFilters  = [],
+                aValues     = [];
+            let oFilter     = {};
+
+            aValues = this.byId(sFieldName).getTokens();
+            if (aValues.length) {
+                for(var iIndex in aValues){
+                    oFilter = new sap.ui.model.Filter(sFilterFieldName, sOperator, aValues[iIndex].getProperty("key"));
+                    aOrFilters.push(oFilter);
+                }
+                aFilters.push(new sap.ui.model.Filter(aOrFilters, bAnd)); // Multiple filter (array) / bAnd = true (AND operator) / bAnd = false (OR operator)
+                aOrFilters = [];
+            }
+        },
+
+        /**
 		 * Convenience method for accessing the router in every controller of the application.
 		 * @public
 		 * @returns {sap.ui.core.routing.Router} the router for this component
