@@ -3,7 +3,7 @@
 	xmlns:core="sap.ui.core"
     xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
 	<SelectDialog
-		title="Lojas"
+		title="{i18n>loja_lbl}"
 		class="sapUiPopupWithPadding"
 		items="{/LojasSet}"
         multiSelect="true"

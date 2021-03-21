@@ -3,7 +3,7 @@
 	xmlns:core="sap.ui.core"
     xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
 	<SelectDialog
-		title="Grupo de Preços"
+		title="{i18n>grp_precos_lbl}"
 		class="sapUiPopupWithPadding"
 		items="{/GrupoPrecosSet}"
         multiSelect="true"

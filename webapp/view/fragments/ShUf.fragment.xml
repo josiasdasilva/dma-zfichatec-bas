@@ -3,7 +3,7 @@
 	xmlns:core="sap.ui.core"
     xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
 	<SelectDialog
-		title="UF"
+		title="{i18n>uf_lbl}"
 		class="sapUiPopupWithPadding"
 		items="{/UFSet}"
         multiSelect="true"

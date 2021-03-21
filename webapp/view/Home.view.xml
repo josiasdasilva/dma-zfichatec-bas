@@ -14,22 +14,6 @@
                     showHeader="false"
                     title="{i18n>appTitle}"
                     enableScrolling="false">
-<!--
-				<FlexBox width="100%" direction="Column" fitContainer="true">
-					<items>
-						<FlexBox width="100%" direction="Column" fitContainer="true">
-							<items>
-								<FlexBox width="100%" justifyContent="Center" height="auto" fitContainer="true" alignContent="Center">
-									<items>
-										<Image width="auto" height="470px" id="img_epa" src="img/background_cockpit.png" densityAware="false"/>
-									</items>
-								</FlexBox>
-							</items>
-						</FlexBox>
-					</items>
-				</FlexBox>
-				<content/>
--->
                     <content>
                         <Wizard
                             id="idWizard01"
