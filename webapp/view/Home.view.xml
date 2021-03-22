@@ -220,6 +220,24 @@
                                             </MultiInput>
                                         </HBox>
 
+                                        <!-- BANDEIRA -->
+                                        <HBox
+                                            class="sapUiTinyMarginTop" >
+                                            <Label
+                                                text="{i18n>bandeira_lbl}:"
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
+                                            <ToggleButton 
+                                                id="idTBAtacado1"
+                                                text="{i18n>atacado_lbl}" 
+                                                enabled="true" 
+                                                pressed="true" />
+                                            <ToggleButton
+                                                id="idTBVarejo1"
+                                                text="{i18n>varejo_lbl}"
+                                                enabled="true" 
+                                                pressed="true" />
+                                        </HBox>
+
                                     </VBox>
 
                                     <VBox
@@ -308,13 +326,32 @@
                                                 <core:Item key="{Asort}" text="{Name1}"/>
                                             </MultiInput>
                                         </HBox>
+
+                                        <!-- TOTALIZADOR -->
+                                        <HBox
+                                            class="sapUiTinyMarginTop" >
+                                            <Label
+                                                text="{i18n>totaliz_lbl}:"
+                                                class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
+                                            <ToggleButton 
+                                                id="idTBTotUf1"
+                                                text="{i18n>tot_uf_lbl}" 
+                                                enabled="true" 
+                                                pressed="true" />
+                                            <ToggleButton
+                                                id="idTBTotGrp1"
+                                                text="{i18n>tot_grp_lbl}"
+                                                enabled="true" 
+                                                pressed="true" />
+                                        </HBox>
+
                                     </VBox>
                                 </HBox>
 
                                 <VBox>
                                     <Label
                                         text="{i18n>bandeira_lbl}:"
-                                        class="sapUiSmallMarginTop" />
+                                        class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                     <HBox>
                                         <CheckBox
                                             id="idCheckBoxAtacado1"
