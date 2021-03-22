@@ -31,7 +31,7 @@ sap.ui.define([
 		onBeforeRendering: function() {
             // this.initScreenParams();
             this.byId("idMultiInputStatusMaterial1").removeAllTokens();
-            this.byId("idMultiInputStatusMaterial1").addToken(new Token({key: undefined, text: "Liberado"}));
+            this.byId("idMultiInputStatusMaterial1").addToken(new Token({key: "00", text: "Liberado"}));
         },
 
 
@@ -67,11 +67,18 @@ sap.ui.define([
             }else{
                 sValueState = sap.ui.core.ValueState.None;
             }
+/*
             this.getView().byId("idCheckBoxAtacado1").setValueState(sValueState);
             this.getView().byId("idCheckBoxVarejo1").setValueState(sValueState);
+*/
+/*
+            this.getView().byId("idTBAtacado1").setValueState(sValueState);
+            this.getView().byId("idTBVarejo1").setValueState(sValueState);
+*/
 
             if(sValueState === sap.ui.core.ValueState.Error){
-                this.getView().byId("idCheckBoxAtacado1").focus();
+                // this.getView().byId("idCheckBoxAtacado1").focus();
+                this.getView().byId("idTBAtacado1").focus();
                 MessageToast.show(this.getResourceBundle().getText("bandeira_obrig_txt"));
                 return 1;
             }
@@ -115,6 +122,7 @@ sap.ui.define([
                 this.getView().byId("idRadioButtonVisRelatLoja").setSelected(true);
                 // Somente Materiais CrossDocking
                 this.getView().byId("idCheckBoxSomenteMatXdock1").setSelected(false);
+/*
                 // Atacado
                 this.getView().byId("idCheckBoxAtacado1").setSelected(true);
                 // Varejo
@@ -123,6 +131,15 @@ sap.ui.define([
                 this.getView().byId("idCheckBoxTotUf1").setSelected(false);
                 // Totalizador por Grupo
                 this.getView().byId("idCheckBoxTotGrp1").setSelected(false);
+*/
+                // Atacado
+                this.getView().byId("idTBAtacado1").setPressed(true);
+                // Varejo
+                this.getView().byId("idTBVarejo1").setPressed(true);
+                // Totalizador por UF
+                this.getView().byId("idTBTotUf1").setPressed(false);
+                // Totalizador por Grupo
+                this.getView().byId("idTBTotGrp1").setPressed(false);
 
                 // Comprador (Clear)
                 this.byId("idMultiInputCompradorCod1").removeAllTokens();
@@ -346,11 +363,21 @@ sap.ui.define([
 
 
         /**
-         * Identifica quais CheckBox de "Bandeira" foram selecionados
+         * Identifica quais Toggle Buttons (descontinuado o CheckBox) de "Bandeira" foram selecionados
          * @public
          * @returns {number} valor de -1 à 2 identificando qual(is) CheckBox foi(ram) selecionado(s)
          */
         getBandeiraSelectedIndex: function(){
+            if(this.getView().byId("idTBAtacado1").getPressed() && this.getView().byId("idTBVarejo1").getPressed()){
+                return 0;
+            }else if(this.getView().byId("idTBAtacado1").getPressed()){
+                return 1;
+            }else if(this.getView().byId("idTBVarejo1").getPressed()){
+                return 2;
+            }else{
+                return -1;
+            }
+/*
             if(this.getView().byId("idCheckBoxAtacado1").getSelected() && this.getView().byId("idCheckBoxVarejo1").getSelected()){
                 return 0;
             }else if(this.getView().byId("idCheckBoxAtacado1").getSelected()){
@@ -360,6 +387,7 @@ sap.ui.define([
             }else{
                 return -1;
             }
+*/
         },
 
 
@@ -420,8 +448,10 @@ sap.ui.define([
             let sPsvUf              = this.transformMultiInputIntoPsv("idMultiInputUf1");
             let iVisRelat           = this.getVisRelatSelectedIndex();
             let iBandeira           = this.getBandeiraSelectedIndex();
-            let bTotalUf            = this.getView().byId("idCheckBoxTotUf1").getSelected();
-            let bTotalGrupo         = this.getView().byId("idCheckBoxTotGrp1").getSelected();
+            // let bTotalUf            = this.getView().byId("idCheckBoxTotUf1").getSelected();
+            // let bTotalGrupo         = this.getView().byId("idCheckBoxTotGrp1").getSelected();
+            let bTotalUf            = this.getView().byId("idTBTotUf1").getPressed();
+            let bTotalGrupo         = this.getView().byId("idTBTotGrp1").getPressed();
             let bXDocking           = this.getView().byId("idCheckBoxSomenteMatXdock1").getSelected();
 
             let oModel = this.getView().getModel();
@@ -1231,6 +1261,33 @@ sap.ui.define([
             this.onValueHelpStatusMaterialPreFilter(oEvt);
 
             this._ShStatusMaterialDialog.open();
+/*
+            if(typeof this.getView().getModel().oData["StatusMatSet('00')"] === "undefined"){
+                this.getView().getModel().read(
+                    // "/StatusMatSet('00')",
+                    "/StatusMatSet",
+                    {
+                        success: function(oRetrievedResult) {
+                            //debugger;
+                            this.onValueHelpRememberSelections("idMultiInputStatusMaterial1", this._ShStatusMaterialDialog);
+
+                            this.onValueHelpStatusMaterialPreFilter(oEvt);
+
+                            this._ShStatusMaterialDialog.open();
+                        }.bind(this),
+                        error: function(oError) {
+                            //
+                        }
+                    }
+                );
+            }else{
+                this.onValueHelpRememberSelections("idMultiInputStatusMaterial1", this._ShStatusMaterialDialog);
+    
+                this.onValueHelpStatusMaterialPreFilter(oEvt);
+    
+                this._ShStatusMaterialDialog.open();
+            }
+*/
         },
 
 
@@ -1279,6 +1336,11 @@ sap.ui.define([
             oFilter = new Filter("MMSTA", FilterOperator.Contains, sValue);
             aFilters.push(oFilter);
 			oBinding.filter(aFilters);
+        },
+
+        onTest1: function(oEvt){
+            debugger;
+            this.onValueHelpRememberSelections("idMultiInputStatusMaterial1", this._ShStatusMaterialDialog);
         },
 
         

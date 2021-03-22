@@ -13,6 +13,13 @@
 font-size: 1.25rem !important;
 }
 
+.sapMRbBLabel {
+    margin-left: .8125rem;
+    line-height: 3rem;
+    height: 3rem;
+    font-size: 1.25rem;
+}
+
 /*
 html.sap-desktop .sapMShellAppWidthLimited .sapMShellCentralBox {
     width: 70%;

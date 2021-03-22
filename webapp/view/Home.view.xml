@@ -103,7 +103,7 @@
                                         id="idRadioButtonVisRelatLoja"
                                         groupName="GroupVisRelat"
                                         text="{i18n>loja_lbl}"
-                                        class="sapUiMediumMarginEnd"
+                                        class="sapUiMediumMarginEnd label_h3"
                                         selected="true" />
                                     <RadioButton
                                         id="idRadioButtonVisRelatGrpPrecos"
@@ -123,7 +123,8 @@
                                     <RadioButton
                                         id="idRadioButtonVisRelatSortim"
                                         groupName="GroupVisRelat"
-                                        text="{i18n>sortim_lbl}" />
+                                        text="{i18n>sortim_lbl}"
+                                        visible="false" />
                                 </HBox>
                             </WizardStep>
 
@@ -225,12 +226,15 @@
                                             class="sapUiTinyMarginTop" >
                                             <Label
                                                 text="{i18n>bandeira_lbl}:"
+                                                textAlign="End"
+                                                width="195px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <ToggleButton 
                                                 id="idTBAtacado1"
                                                 text="{i18n>atacado_lbl}" 
                                                 enabled="true" 
-                                                pressed="true" />
+                                                pressed="true"
+                                                class="sapUiTinyMarginEnd" />
                                             <ToggleButton
                                                 id="idTBVarejo1"
                                                 text="{i18n>varejo_lbl}"
@@ -332,23 +336,27 @@
                                             class="sapUiTinyMarginTop" >
                                             <Label
                                                 text="{i18n>totaliz_lbl}:"
+                                                textAlign="End"
+                                                width="120px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
                                             <ToggleButton 
                                                 id="idTBTotUf1"
                                                 text="{i18n>tot_uf_lbl}" 
                                                 enabled="true" 
-                                                pressed="true" />
+                                                pressed="false"
+                                                class="sapUiTinyMarginEnd" />
                                             <ToggleButton
                                                 id="idTBTotGrp1"
                                                 text="{i18n>tot_grp_lbl}"
                                                 enabled="true" 
-                                                pressed="true" />
+                                                pressed="false" />
                                         </HBox>
 
                                     </VBox>
                                 </HBox>
 
                                 <VBox>
+<!-- 
                                     <Label
                                         text="{i18n>bandeira_lbl}:"
                                         class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
@@ -376,13 +384,14 @@
                                             text="{i18n>tot_grp_lbl}"
                                             selected="false" />
                                     </HBox>
+ -->
 
                                     <CheckBox
                                         id="idCheckBoxSomenteMatXdock1"
                                         text="{i18n>somente_mat_xdock_lbl}"
                                         selected="false"
                                         class="sapUiTinyMarginTop" 
-                                        visible="false"/>
+                                        visible="false" />
                                 </VBox>
                             </WizardStep>
                         </Wizard>
