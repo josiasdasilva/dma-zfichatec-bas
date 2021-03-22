@@ -161,7 +161,7 @@
                                         <HBox
                                             class="sapUiTinyMarginTop" >
                                             <Label
-                                                text="{i18n>status_mat_lbl}: ="
+                                                text="{i18n>status_mat_lbl}"
                                                 textAlign="End"
                                                 width="195px"
                                                 class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
