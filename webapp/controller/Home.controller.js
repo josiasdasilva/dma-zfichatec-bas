@@ -480,8 +480,10 @@ sap.ui.define([
 // Comprador                                                            //
 //----------------------------------------------------------------------//
         /**
-         * 
-         * 
+         * Evento acionado ao abrir o Search Help do campo "idMultiInputCompradorCod1", onde é acionado o
+         * fragmento "ShComprador".
+         * Carrega os dados previamente selecionados no "SelectDialog" e aplica filtro dos campos
+         * que tem interdependência.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -501,8 +503,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputCompradorCod1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -512,8 +513,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica no campo "idMultiInputCompradorCod1" os valores selecionados no "SelectDialog" do fragmento.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -523,8 +523,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão "Cancelar" do "SelectDialog" do campo "idMultiInputCompradorCod1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -534,8 +533,8 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão de pesquisa do "SelectDialog" para o campo "idMultiInputCompradorCod1".
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputCompradorCod1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -555,8 +554,10 @@ sap.ui.define([
 // Contrato                                                             //
 //----------------------------------------------------------------------//
         /**
-         * 
-         * 
+         * Evento acionado ao abrir o Search Help do campo "idMultiInputContrato1", onde é acionado o
+         * fragmento "ShContrato".
+         * Carrega os dados previamente selecionados no "SelectDialog" e aplica filtro dos campos
+         * que tem interdependência.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -576,8 +577,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputContrato1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -595,8 +595,7 @@ sap.ui.define([
 
         
         /**
-         * 
-         * 
+         * Aplica no campo "idMultiInputContrato1" os valores selecionados no "SelectDialog" do fragmento.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -606,8 +605,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão "Cancelar" do "SelectDialog" do campo "idMultiInputContrato1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -617,8 +615,8 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão de pesquisa do "SelectDialog" para o campo "idMultiInputContrato1".
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputContrato1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -638,11 +636,13 @@ sap.ui.define([
 
 
 //----------------------------------------------------------------------//
-// Departamento                                                             //
+// Departamento                                                         //
 //----------------------------------------------------------------------//
         /**
-         * 
-         * 
+         * Evento acionado ao abrir o Search Help do campo "idMultiInputDepartamento1", onde é acionado o
+         * fragmento "ShDepartamento".
+         * Carrega os dados previamente selecionados no "SelectDialog" e aplica filtro dos campos
+         * que tem interdependência.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -662,8 +662,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputDepartamento1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -683,8 +682,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica no campo "idMultiInputDepartamento1" os valores selecionados no "SelectDialog" do fragmento.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -694,8 +692,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão "Cancelar" do "SelectDialog" do campo "idMultiInputDepartamento1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -705,8 +702,8 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão de pesquisa do "SelectDialog" para o campo "idMultiInputDepartamento1".
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputDepartamento1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -731,8 +728,10 @@ sap.ui.define([
 // Fonte de Suprimento                                                  //
 //----------------------------------------------------------------------//
         /**
-         * 
-         * 
+         * Evento acionado ao abrir o Search Help do campo "idMultiInputFonteSuprimento1", onde é acionado o
+         * fragmento "ShFonteSuprimento".
+         * Carrega os dados previamente selecionados no "SelectDialog" e aplica filtro dos campos
+         * que tem interdependência.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -752,8 +751,7 @@ sap.ui.define([
 
         
         /**
-         * 
-         * 
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputFonteSuprimento1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -763,8 +761,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica no campo "idMultiInputFonteSuprimento1" os valores selecionados no "SelectDialog" do fragmento.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -774,8 +771,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão "Cancelar" do "SelectDialog" do campo "idMultiInputFonteSuprimento1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -785,8 +781,8 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão de pesquisa do "SelectDialog" para o campo "idMultiInputFonteSuprimento1".
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputFonteSuprimento1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -803,11 +799,13 @@ sap.ui.define([
 
 
 //----------------------------------------------------------------------//
-// Fornecedor                                                             //
+// Fornecedor                                                           //
 //----------------------------------------------------------------------//
         /**
-         * 
-         * 
+         * Evento acionado ao abrir o Search Help do campo "idMultiInputFornecedorCod1", onde é acionado o
+         * fragmento "ShFornecedor".
+         * Carrega os dados previamente selecionados no "SelectDialog" e aplica filtro dos campos
+         * que tem interdependência.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -827,8 +825,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputFornecedorCod1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -844,8 +841,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica no campo "idMultiInputFornecedorCod1" os valores selecionados no "SelectDialog" do fragmento.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -855,8 +851,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão "Cancelar" do "SelectDialog" do campo "idMultiInputFornecedorCod1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -866,8 +861,8 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão de pesquisa do "SelectDialog" para o campo "idMultiInputFornecedorCod1".
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputFornecedorCod1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -888,8 +883,10 @@ sap.ui.define([
 // Grupos de Preços                                                     //
 //----------------------------------------------------------------------//
         /**
-         * 
-         * 
+         * Evento acionado ao abrir o Search Help do campo "idMultiInputGrpPrecos1", onde é acionado o
+         * fragmento "ShGrupoPrecos".
+         * Carrega os dados previamente selecionados no "SelectDialog" e aplica filtro dos campos
+         * que tem interdependência.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -909,8 +906,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputGrpPrecos1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -926,8 +922,7 @@ sap.ui.define([
 
         
         /**
-         * 
-         * 
+         * Aplica no campo "idMultiInputGrpPrecos1" os valores selecionados no "SelectDialog" do fragmento.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -937,8 +932,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão "Cancelar" do "SelectDialog" do campo "idMultiInputGrpPrecos1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -948,8 +942,8 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão de pesquisa do "SelectDialog" para o campo "idMultiInputGrpPrecos1".
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputGrpPrecos1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -967,11 +961,13 @@ sap.ui.define([
 
 
 //----------------------------------------------------------------------//
-// Hierarquia                                                             //
+// Hierarquia                                                           //
 //----------------------------------------------------------------------//
         /**
-         * 
-         * 
+         * Evento acionado ao abrir o Search Help do campo "idMultiInputNoHierarquia1", onde é acionado o
+         * fragmento "ShHierarquia".
+         * Carrega os dados previamente selecionados no "SelectDialog" e aplica filtro dos campos
+         * que tem interdependência.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -991,8 +987,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputNoHierarquia1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1014,8 +1009,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica no campo "idMultiInputNoHierarquia1" os valores selecionados no "SelectDialog" do fragmento.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1025,8 +1019,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão "Cancelar" do "SelectDialog" do campo "idMultiInputNoHierarquia1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1036,8 +1029,8 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão de pesquisa do "SelectDialog" para o campo "idMultiInputNoHierarquia1".
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputNoHierarquia1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1064,8 +1057,10 @@ sap.ui.define([
 // Lojas                                                                //
 //----------------------------------------------------------------------//
         /**
-         * 
-         * 
+         * Evento acionado ao abrir o Search Help do campo "idMultiInputLojas1", onde é acionado o
+         * fragmento "ShLojas".
+         * Carrega os dados previamente selecionados no "SelectDialog" e aplica filtro dos campos
+         * que tem interdependência.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1085,8 +1080,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputLojas1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1102,8 +1096,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica no campo "idMultiInputLojas1" os valores selecionados no "SelectDialog" do fragmento.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1113,8 +1106,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão "Cancelar" do "SelectDialog" do campo "idMultiInputLojas1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1124,8 +1116,8 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão de pesquisa do "SelectDialog" para o campo "idMultiInputLojas1".
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputLojas1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1146,8 +1138,10 @@ sap.ui.define([
 // Sortimento                                                           //
 //----------------------------------------------------------------------//
         /**
-         * 
-         * 
+         * Evento acionado ao abrir o Search Help do campo "idMultiInputSortimento1", onde é acionado o
+         * fragmento "ShSortimento".
+         * Carrega os dados previamente selecionados no "SelectDialog" e aplica filtro dos campos
+         * que tem interdependência.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1167,8 +1161,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputSortimento1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1178,8 +1171,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica no campo "idMultiInputSortimento1" os valores selecionados no "SelectDialog" do fragmento.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1189,8 +1181,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão "Cancelar" do "SelectDialog" do campo "idMultiInputSortimento1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1200,8 +1191,8 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão de pesquisa do "SelectDialog" para o campo "idMultiInputSortimento1".
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputSortimento1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1221,8 +1212,10 @@ sap.ui.define([
 // Status do Material                                                   //
 //----------------------------------------------------------------------//
         /**
-         * 
-         * 
+         * Evento acionado ao abrir o Search Help do campo "idMultiInputStatusMaterial1", onde é acionado o
+         * fragmento "ShStatusMaterial".
+         * Carrega os dados previamente selecionados no "SelectDialog" e aplica filtro dos campos
+         * que tem interdependência.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1242,8 +1235,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputStatusMaterial1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1253,8 +1245,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica no campo "idMultiInputStatusMaterial1" os valores selecionados no "SelectDialog" do fragmento.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1264,8 +1255,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão "Cancelar" do "SelectDialog" do campo "idMultiInputStatusMaterial1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1275,8 +1265,8 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão de pesquisa do "SelectDialog" para o campo "idMultiInputStatusMaterial1".
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputStatusMaterial1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1296,8 +1286,10 @@ sap.ui.define([
 // UF                                                                   //
 //----------------------------------------------------------------------//
         /**
-         * 
-         * 
+         * Evento acionado ao abrir o Search Help do campo "idMultiInputUf1", onde é acionado o
+         * fragmento "ShUf".
+         * Carrega os dados previamente selecionados no "SelectDialog" e aplica filtro dos campos
+         * que tem interdependência.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1317,8 +1309,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputUf1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1328,8 +1319,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Aplica no campo "idMultiInputUf1" os valores selecionados no "SelectDialog" do fragmento.
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1339,8 +1329,7 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão "Cancelar" do "SelectDialog" do campo "idMultiInputUf1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
@@ -1350,8 +1339,8 @@ sap.ui.define([
 
 
         /**
-         * 
-         * 
+         * Evento acionado ao clicar no botão de pesquisa do "SelectDialog" para o campo "idMultiInputUf1".
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputUf1".
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
