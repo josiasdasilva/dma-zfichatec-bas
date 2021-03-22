@@ -344,7 +344,8 @@
                                         id="idCheckBoxSomenteMatXdock1"
                                         text="{i18n>somente_mat_xdock_lbl}"
                                         selected="false"
-                                        class="sapUiTinyMarginTop" />
+                                        class="sapUiTinyMarginTop" 
+                                        visible="false"/>
                                 </VBox>
                             </WizardStep>
                         </Wizard>
