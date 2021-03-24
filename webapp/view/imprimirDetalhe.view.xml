@@ -14,7 +14,16 @@
                 navButtonPress="onNavBack"
                 showNavButton="true">
                 <content>
-                    <core:HTML id="idFrame01"/>
+                    <core:HTML
+                        id="idFrame01" />
+                    <Label
+                        text="{i18n>email_lbl}:"
+                        textAlign="End"
+                        class="sapUiSmallMarginTop sapUiSmallMarginBegin sapUiSMallMarginEnd label_h3" />
+                    <Input
+                        id="idInputEmail1"
+                        width="400px"
+                        class="sapUiSmallMarginBegin sapUiSmallMarginEnd" />
                     <Button
                         text="Enviar por e-mail"
                         press="onEnviarEmailDetalhe"

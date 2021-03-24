@@ -124,7 +124,7 @@
                                         id="idRadioButtonVisRelatSortim"
                                         groupName="GroupVisRelat"
                                         text="{i18n>sortim_lbl}"
-                                        visible="false" />
+                                        visible="true" />
                                 </HBox>
                             </WizardStep>
 

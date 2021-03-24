@@ -247,6 +247,20 @@ sap.ui.define([
         },
 
         /**
+		 * 
+		 * @public
+         * @param {string} sEmail - 
+		 * @returns {boolean} 
+		 */
+        _validEmail: function(sEmail){
+			// The following Regex is NOT a completely correct one and only used for demonstration purposes.
+			// RFC 5322 cannot even checked by a Regex and the Regex for RFC 822 is very long and complex.
+            let rexMail = /^\w+[\w-+\.]*\@\w+([-\.]\w+)*\.[a-zA-Z]{2,}$/;
+            
+            return sEmail.match(rexMail);
+        },
+
+        /**
 		 * Convenience method for accessing the router in every controller of the application.
 		 * @public
 		 * @returns {sap.ui.core.routing.Router} the router for this component

@@ -17,8 +17,8 @@ sap.ui.define([
 		 * @memberOf dma.zfichatec.view.Home
 		 */
 		onInit: function () {
-			var sRootPath = jQuery.sap.getModulePath("dma.zfichatec");
-			var sImagePath = sRootPath + "/img/background_cockpit.png";
+			let sRootPath = jQuery.sap.getModulePath("dma.zfichatec");
+			let sImagePath = sRootPath + "/img/background_cockpit.png";
             // this.byId("img_epa").setSrc(sImagePath); /* popula dados da Agenda */
         },
         
@@ -427,11 +427,15 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onImprimirDetalheOpen: function(oEvt){
+/*
             // Cria o fragmento
             if (!this._imprimirDetalheDialog) {
                 this._imprimirDetalheDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.imprimirDetalhe", this);
                 this.getView().addDependent(this._imprimirDetalheDialog);
             }
+*/
+            let oModelScreenParams  = this.getView().getModel("modelScreenParams");
+            let oJsonScreenParams = {};
 
             let sActualDate         = this.getDateFormatted(new Date());
 
@@ -470,7 +474,8 @@ sap.ui.define([
             sObjectPath += this.makeFilterPath("Node6", sPsvHierarquia, "eq", true);
             sObjectPath += this.makeFilterPath("Werks", sPsvLojas, "eq", true);
             sObjectPath += this.makeFilterPath("Sortimento", sPsvSortimento, "eq", true);
-            sObjectPath += this.makeFilterPath("Mmsta", ((sPsvStatusMaterial) ? sPsvStatusMaterial : "0"), "eq", true);
+            // sObjectPath += this.makeFilterPath("Mmsta", ((sPsvStatusMaterial) ? sPsvStatusMaterial : "0"), "eq", true);
+            sObjectPath += this.makeFilterPath("Mmsta", sPsvStatusMaterial, "eq", true);
             sObjectPath += this.makeFilterPath("UF", sPsvUf, "eq", true);
             sObjectPath += this.makeFilterPath("Visao", iVisRelat, "eq", true);
             sObjectPath += this.makeFilterPath("Bandeira", iBandeira, "eq", true);
@@ -484,15 +489,25 @@ sap.ui.define([
                 sObjectPath = sObjectPath.slice(0, (sObjectPath.length-4));
             }
 
+            oJsonScreenParams.prnFichaSetFilterDecoded = sObjectPath.slice(sObjectPath.search("filter=")+7, sObjectPath.length);
+
             let sUrl = oModel.sServiceUrl + sObjectPath;
+            oJsonScreenParams.prnFichaSetFullpathFilterDecoded = sUrl;
+
             sUrl = sUrl.replaceAll("'", "%27");
             sUrl = sUrl.replaceAll("|", "%7C");
-            
+            oJsonScreenParams.prnFichaSetFullpathFilterEncoded = sUrl;
+
+            oModelScreenParams.setData(oJsonScreenParams);
+
+/*
             let oIframe = this._imprimirDetalheDialog.getAggregation("content")[0];
             oIframe.setContent(
                 "<iframe src='" + sUrl + "' " +
                 "style='border: none;height:" + (window.innerHeight - 160) + "px;width:100%'></iframe>");
             this._imprimirDetalheDialog.open();
+*/
+            this.getOwnerComponent().getRouter().navTo("routeImprimirDetalhe");
         },
 
 
