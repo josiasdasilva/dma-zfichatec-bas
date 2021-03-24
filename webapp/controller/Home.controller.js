@@ -473,7 +473,8 @@ sap.ui.define([
             sObjectPath += this.makeFilterPath("Grupo", sPsvGrupoPrecos, "eq", true);
             sObjectPath += this.makeFilterPath("Node6", sPsvHierarquia, "eq", true);
             sObjectPath += this.makeFilterPath("Werks", sPsvLojas, "eq", true);
-            sObjectPath += this.makeFilterPath("Sortimento", sPsvSortimento, "eq", true);
+            // sObjectPath += this.makeFilterPath("Sortimento", sPsvSortimento, "eq", true);
+            sObjectPath += this.makeFilterPath("Asort", sPsvSortimento, "eq", true);
             // sObjectPath += this.makeFilterPath("Mmsta", ((sPsvStatusMaterial) ? sPsvStatusMaterial : "0"), "eq", true);
             sObjectPath += this.makeFilterPath("Mmsta", sPsvStatusMaterial, "eq", true);
             sObjectPath += this.makeFilterPath("UF", sPsvUf, "eq", true);

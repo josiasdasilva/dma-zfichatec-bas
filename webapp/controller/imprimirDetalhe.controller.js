@@ -6,59 +6,33 @@ sap.ui.define([
 	"use strict";
 
     return BaseController.extend("dma.zfichatec.controller.imprimirDetalhe", {
+        /**
+		 * Called when a controller is instantiated and its View controls (if available) are already created.
+		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
+		 * @memberOf dma.zfichatec.view.imprimirDetalhe
+		 */
         onInit: function(oEvt){
             // let oRouter = this.getOwnerComponent().getRouterFor(this);
             let oRouter = this.getRouter();
             oRouter.attachRouteMatched(this.handleRouteMatched, this);
-/*
-            let oIframe = this.getView().byId("idFrame01");
-            oIframe.setContent(
-                "<iframe src='https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf' " +
-                "height='80%' width='100%' style='border: none;'></iframe>");
-*/
         },
 
 
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 		 * (NOT before the first rendering! onInit() is used for that one!).
-		 * @memberOf dma.zfichatec.view.Home
+		 * @memberOf dma.zfichatec.view.imprimirDetalhe
 		 */
 		onBeforeRendering: function() {
-            // this.callPdfPrint();
 
-/*
-            let oModelServ = this.getView().getModel();
-            debugger;
-            // /sap/opu/odata/sap/ZCOCKPIT_FICHATEC_SRV/PrnFichaSet(%2720210322222306%27)/$value?$filter=Ekgrp%20eq%20%27F04%27%20and%20Mmsta%20eq%20%270%27%20and%20Total_UF%20eq%20%27%27%20and%20Total_Grupo%20eq%20%27%27%20and%20Cross%20eq%20%27%27
-            // /sap/opu/odata/sap/ZCOCKPIT_FICHATEC_SRV/PrnFichaSet(%2720210322224038%27)/$value?$filter=Ekgrp%20eq%20%27F04%27%20and%20Ebeln%20eq%20%274600000194%27%20and%20Lifnr%20eq%20%2710008950%27%20and%20Mmsta%20eq%20%2700%27%20and%20Total_UF%20eq%20%27%27%20and%20Total_Grupo%20eq%20%27%27%20and%20Cross%20eq%20%27%27
-            let sPath = "/PrnFichaSet(%2720210322224038%27)/$value?$filter=Ekgrp eq 'F04' and Ebeln eq '4600000194' and Lifnr eq '10008950' and Mmsta eq '00' and Total_UF eq '' and Total_Grupo eq '' and Cross eq ''";
-            oModelServ.read(
-                sPath,
-                null,
-                null,
-                function(oDataRetrieved, oResponse){
-                    debugger;
-                },
-                function(oError){
-                    debugger;
-                }
-
-                // {
-                //     urlParameters: {
-                //         "$filter": "Ekgrp eq 'F04' and Ebeln eq '4600000194' and Lifnr eq '10008950' and Mmsta eq '00' and Total_UF eq '' and Total_Grupo eq '' and Cross eq ''"
-                //     },
-                //     success: function(oDataRetrieved){
-                //         debugger;
-                //     },
-                //     error: function(oError){
-                //         debugger;
-                //     }
-                // }
-            );
-*/
         },
 
+
+        /**
+         * 
+         * @public
+         * 
+         */
         handleRouteMatched: function(oEvt){
             // console.log(oEvt.getParameter("name"));
             if(oEvt.getParameter("name") !== "routeImprimirDetalhe"){
@@ -67,11 +41,19 @@ sap.ui.define([
             this.callPdfPrint();
         },
 
+
+        /**
+         * 
+         * @public
+         * 
+         */
         callPdfPrint: function(){
             let oIframe             = this.getView().byId("idFrame01");
             let oModelServ          = this.getView().getModel();
             let oModelScreenParams  = this.getView().getModel("modelScreenParams");
             let oDataScreenParams   = oModelScreenParams.getData();
+            let sObjectPath         = "",
+                sUrl                = "";
 
             this.getView().setBusy(true);
 
@@ -87,22 +69,59 @@ sap.ui.define([
                         },
                         success: function(oDataRetrieved){
                             // debugger;
-                            
+                            if(oDataRetrieved.results.length > 0){
+                                sObjectPath = oModelServ.createKey("/PrnFichaSet", {
+                                    Guid: oDataRetrieved.results[0].Guid
+                                });
+                                
+                                sUrl = oModelServ.sServiceUrl + sObjectPath + "/$value";
+
+                                sUrl = sUrl.replaceAll("'", "%27");
+                                sUrl = sUrl.replaceAll("|", "%7C");
+
+                                oIframe.setContent(
+                                    "<iframe src='" + sUrl + "' " +
+                                    "height='93%' width='100%' style='border: none;' />");
+                            }else{
+
+                            }
+/*
                             oIframe.setContent(
                                 "<iframe src='https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf' " +
                                 "height='93%' width='100%' style='border: none;' />");
+*/
                             this.getView().setBusy(false);
                         }.bind(this),
                         error: function(oError){
                             // debugger;
+                            MessageBox.error(
+                                this._oResourceBundle.getText("errorText"),
+                                {
+                                    id: "serviceErrorMessageBox1",
+                                    details: "Erro ao acessar o serviço de geração do PDF:\n" + oError.message + "\n" + oError.responseText,
+                                    styleClass: this._oComponent.getContentDensityClass(),
+                                    actions: [MessageBox.Action.CLOSE],
+/*
+                                    onClose: function () {
+                                        this._bMessageOpen = false;
+                                    }.bind(this)
+*/
+                                }
+                            );
                             this.getView().setBusy(false);
-                        }
+                        }.bind(this)
                     }
                 );
             }
 
         },
 
+
+        /**
+         * 
+         * @public
+         * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
+         */
         onEnviarEmailDetalhe: function(oEvt){
             if(!this._validEmail(this.getView().byId("idInputEmail1").getValue())){
                 this.getView().byId("idInputEmail1").setValueState(sap.ui.core.ValueState.Error);
