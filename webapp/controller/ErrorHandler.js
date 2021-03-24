@@ -19,7 +19,7 @@ sap.ui.define([
 			this._oModel = oComponent.getModel();
 			// this._bMessageOpen = false;
 			this._bMessageOpen = true; // Temporário
-			this._sErrorText = this._oResourceBundle.getText("errorText");
+			this._sErrorText = this._oResourceBundle.getText("error_text");
 
 			this._oModel.attachMetadataFailed(function (oEvent) {
 				var oParams = oEvent.getParameters();
