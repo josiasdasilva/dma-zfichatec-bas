@@ -343,7 +343,7 @@
                                                 id="idTBTotUf1"
                                                 text="{i18n>tot_uf_lbl}" 
                                                 enabled="true" 
-                                                pressed="false"
+                                                pressed="true"
                                                 class="sapUiTinyMarginEnd" />
                                             <ToggleButton
                                                 id="idTBTotGrp1"
