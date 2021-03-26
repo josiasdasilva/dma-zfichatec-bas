@@ -29,6 +29,35 @@ sap.ui.define([
 		 * @memberOf dma.zfichatec.view.Home
 		 */
 		onBeforeRendering: function() {
+            // Cria o fragmento "Comprador" (ajuda de pesquisa)
+            if (!this._ShCompradorDialog) {
+                this._ShCompradorDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShComprador", this);
+                this.getView().addDependent(this._ShCompradorDialog);
+            }
+            this.getView().getModel().read(
+                "/UsuarioSet",
+                {
+                    success: function(oRetrievedResult) {
+                        if(!oRetrievedResult.results[0].Ekgrp){
+                            return;
+                        }
+
+                        this.byId("idMultiInputCompradorCod1").removeAllTokens();
+                        this.byId("idMultiInputCompradorCod1").addToken(
+                            new Token(
+                                {
+                                    key: oRetrievedResult.results[0].Ekgrp,
+                                    text: oRetrievedResult.results[0].Ekgrp
+                                }
+                            )
+                        );
+                    }.bind(this),
+                    error: function(oError) {
+                        //
+                    }
+                }
+            );
+
             // Cria o fragmento "Status do Material" (ajuda de pesquisa)
             if (!this._ShStatusMaterialDialog) {
                 this._ShStatusMaterialDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShStatusMaterial", this);
