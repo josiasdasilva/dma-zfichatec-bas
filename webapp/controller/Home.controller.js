@@ -29,6 +29,11 @@ sap.ui.define([
 		 * @memberOf dma.zfichatec.view.Home
 		 */
 		onBeforeRendering: function() {
+            // Cria o fragmento "Status do Material" (ajuda de pesquisa)
+            if (!this._ShStatusMaterialDialog) {
+                this._ShStatusMaterialDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShStatusMaterial", this);
+                this.getView().addDependent(this._ShStatusMaterialDialog);
+            }
             // this.initScreenParams();
             this.byId("idMultiInputStatusMaterial1").removeAllTokens();
             this.byId("idMultiInputStatusMaterial1").addToken(new Token({key: "00", text: "Liberado"}));

@@ -72,6 +72,21 @@ sap.ui.define([
                         success: function(oDataRetrieved){
                             // debugger;
                             if(oDataRetrieved.results.length > 0){
+                                if(oDataRetrieved.results[0].Guid === "00000000000000000000000000000000"){
+                                    MessageBox.information(
+                                        this.getResourceBundle().getText("info_pdf_no_values"),
+                                        {
+                                            title: this.getResourceBundle().getText("info_text"),
+                                            styleClass: this.getOwnerComponent().getContentDensityClass(),
+                                            actions: [MessageBox.Action.CLOSE],
+                                            onClose: function () {
+                                                this.onNavBack();
+                                            }.bind(this)
+                                        }
+                                    );
+                                    return;
+                                }
+
                                 sObjectPath = oModelServ.createKey("/PrnFichaSet", {
                                     Guid: oDataRetrieved.results[0].Guid
                                 });
