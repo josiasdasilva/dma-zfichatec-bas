@@ -7,7 +7,7 @@
 		class="sapUiPopupWithPadding"
 		items="{/StatusMatSet}"
         multiSelect="true"
-		search="onValueHelpStatusMaterialSearch"
+		liveChange="onValueHelpStatusMaterialSearch"
 		confirm="onValueHelpStatusMaterialClose"
 		cancel="onValueHelpStatusMaterialCancel" >
 		<StandardListItem

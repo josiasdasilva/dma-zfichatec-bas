@@ -16,6 +16,8 @@ sap.ui.define([
             // let oRouter = this.getOwnerComponent().getRouterFor(this);
             let oRouter = this.getRouter();
             oRouter.attachRouteMatched(this.handleRouteMatched, this);
+            
+            this.sGuid = "";
         },
 
 
@@ -70,7 +72,6 @@ sap.ui.define([
                             "$filter": oDataScreenParams.prnFichaSetFilterDecoded
                         },
                         success: function(oDataRetrieved){
-                            // debugger;
                             if(oDataRetrieved.results.length > 0){
                                 if(oDataRetrieved.results[0].Guid === "00000000000000000000000000000000"){
                                     MessageBox.information(
@@ -87,8 +88,10 @@ sap.ui.define([
                                     return;
                                 }
 
+                                this.sGuid = oDataRetrieved.results[0].Guid;
+
                                 sObjectPath = oModelServ.createKey("/PrnFichaSet", {
-                                    Guid: oDataRetrieved.results[0].Guid
+                                    Guid: this.sGuid
                                 });
                                 
                                 sUrl = oModelServ.sServiceUrl + sObjectPath + "/$value";
@@ -122,7 +125,6 @@ sap.ui.define([
                             this.getView().setBusy(false);
                         }.bind(this),
                         error: function(oError){
-                            // debugger;
                             MessageBox.error(
                                 this.getResourceBundle().getText("error_pdf_service", [ oError.message, oError.responseText ]),
                                 {
@@ -157,7 +159,67 @@ sap.ui.define([
                 return;
             }
             this.getView().byId("idInputEmail1").setValueState(sap.ui.core.ValueState.None);
-            MessageToast.show(this.getResourceBundle().getText("em_desenv_msg"));
+            // MessageToast.show(this.getResourceBundle().getText("em_desenv_msg"));
+
+            if(this.sGuid){
+                let oModelServ = this.getView().getModel();
+                let sFilter = "",
+                    sObjectPath = oModelServ.createKey("/EmailFichaTecSet", {
+                    Guid: this.sGuid
+                });
+
+                sFilter += "Email eq '" + this.getView().byId("idInputEmail1").getValue() + "'";
+
+                oModelServ.read(
+                    sObjectPath,
+                    {
+                        urlParameters: {
+                            "$filter": sFilter
+                        },
+                        success: function(oDataRetrieved){
+// debugger;
+                            if(oDataRetrieved.results[0].Sent === "OK"){
+                                MessageBox.success(
+                                    this.getResourceBundle().getText("success_sent_email"),
+                                    {
+                                        title: this.getResourceBundle().getText("success_text"),
+                                        styleClass: this.getOwnerComponent().getContentDensityClass(),
+                                        onClose: null
+                                    }
+                                );
+                            }else{
+                                MessageBox.error(
+                                    this.getResourceBundle().getText("error_sent_email"),
+                                    {
+                                        title: this.getResourceBundle().getText("error_text"),
+                                        styleClass: this.getOwnerComponent().getContentDensityClass(),
+                                        actions: [MessageBox.Action.CLOSE],
+                                        onClose: function (oEvt) {
+                                            this.getView().byId("idInputEmail1").setValue("");
+                                        }.bind(this)
+                                    }
+                                );
+                            }
+                        }.bind(this),
+                        error: function(oError){
+// debugger;
+                            MessageBox.error(
+                                this.getResourceBundle().getText("error_sent_email"),
+                                {
+                                    title: this.getResourceBundle().getText("error_text"),
+                                    styleClass: this.getOwnerComponent().getContentDensityClass(),
+                                    actions: [MessageBox.Action.CLOSE],
+                                    onClose: function (oEvt) {
+                                        this.getView().byId("idInputEmail1").setValue("");
+                                    }.bind(this)
+                                }
+                            );
+                        }.bind(this)
+                    }
+                );
+            }else{
+
+            }
         }
     });
 });

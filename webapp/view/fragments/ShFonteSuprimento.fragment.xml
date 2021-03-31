@@ -7,7 +7,7 @@
 		class="sapUiPopupWithPadding"
 		items="{/FSupSet}"
         multiSelect="true"
-		search="onValueHelpFonteSuprimentoSearch"
+		liveChange="onValueHelpFonteSuprimentoSearch"
 		confirm="onValueHelpFonteSuprimentoClose"
 		cancel="onValueHelpFonteSuprimentoCancel" >
 		<StandardListItem

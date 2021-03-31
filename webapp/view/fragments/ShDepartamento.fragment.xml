@@ -7,7 +7,7 @@
 		class="sapUiPopupWithPadding"
 		items="{/DepartamentoSet}"
         multiSelect="true"
-		search="onValueHelpDepartamentoSearch"
+		liveChange="onValueHelpDepartamentoSearch"
 		confirm="onValueHelpDepartamentoClose"
 		cancel="onValueHelpDepartamentoCancel">
 		<StandardListItem

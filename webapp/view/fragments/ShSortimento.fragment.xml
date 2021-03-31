@@ -7,7 +7,7 @@
 		class="sapUiPopupWithPadding"
 		items="{/SortimSet}"
         multiSelect="true"
-		search="onValueHelpSortimentoSearch"
+		liveChange="onValueHelpSortimentoSearch"
 		confirm="onValueHelpSortimentoClose"
 		cancel="onValueHelpSortimentoCancel" >
 		<StandardListItem
