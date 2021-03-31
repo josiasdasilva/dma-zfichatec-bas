@@ -625,20 +625,18 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpCompradorSearch: function(oEvt){
-            let aFilters    = [],
-                aOrFilters  = [];
+            let aFilters    = [];
             let oBinding    = oEvt.getSource().getBinding("items"),
                 oFilter     = {};
             let sValue      = oEvt.getParameter("value").toUpperCase();
 
             oFilter = new Filter("Ekgrp", FilterOperator.Contains, sValue);
-            aOrFilters.push(oFilter);
+            aFilters.push(oFilter);
 
             oFilter = new Filter("Nome", FilterOperator.Contains, sValue);
-            aOrFilters.push(oFilter);
+            aFilters.push(oFilter);
 
-            aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
-            oBinding.filter(aFilters);
+            oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
         },
 
 
@@ -713,23 +711,17 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpContratoSearch: function(oEvt){
-            let aFilters    = [],
-                aAndFilters = [],
-                aOrFilters  = [];
+            let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
-            this.buildSingleFilter(aOrFilters, "Ebeln", FilterOperator.Contains, oEvt);
-            this.buildSingleFilter(aOrFilters, "Mcod1", FilterOperator.Contains, oEvt);
-            aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            this.buildSingleFilter(aFilters, "Ebeln", FilterOperator.Contains, oEvt);
+            this.buildSingleFilter(aFilters, "Mcod1", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "Comprador" is filled (Multiple)
-            this.buildArrayFilter(aAndFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
             // Set previous filter - if "Fornecedor" is filled (Multiple)
-            this.buildArrayFilter(aAndFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
-            if(aAndFilters.length > 0){
-                aFilters.push(new Filter(aAndFilters, true)); // Multiple filter (array), parameter "true" = AND operator
-            }
-
+            this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+            
             oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
@@ -807,24 +799,18 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpDepartamentoSearch: function(oEvt){
-            let aFilters    = [],
-                aAndFilters = [],
-                aOrFilters  = [];
+            let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
-            this.buildSingleFilter(aOrFilters, "Node3", FilterOperator.Contains, oEvt);
-            this.buildSingleFilter(aOrFilters, "Ltext", FilterOperator.Contains, oEvt);
-            aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            this.buildSingleFilter(aFilters, "Node3", FilterOperator.Contains, oEvt);
+            this.buildSingleFilter(aFilters, "Ltext", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "Comprador" is filled (Multiple)
-            this.buildArrayFilter(aAndFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
             // Set previous filter - if "Fornecedor" is filled (Multiple)
-            this.buildArrayFilter(aAndFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+            this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
             // Set previous filter - if "Contrato" is filled (Multiple)
-            this.buildArrayFilter(aAndFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
-            if(aAndFilters.length > 0){
-                aFilters.push(new Filter(aAndFilters, true)); // Multiple filter (array), parameter "true" = AND operator
-            }
+            this.buildArrayFilter(aFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
@@ -893,20 +879,18 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpFonteSuprimentoSearch: function(oEvt){
-            let aFilters    = [],
-                aOrFilters  = [];
+            let aFilters    = [];
             let oBinding    = oEvt.getSource().getBinding("items"),
                 oFilter     = {};
             let sValue      = oEvt.getParameter("value").toUpperCase();
 
             oFilter = new Filter("Sobsl", FilterOperator.Contains, sValue);
-            aOrFilters.push(oFilter);
+            aFilters.push(oFilter);
 
             oFilter = new Filter("Ltext", FilterOperator.Contains, sValue);
-            aOrFilters.push(oFilter);
+            aFilters.push(oFilter);
 
-            aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
-			oBinding.filter(aFilters);
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
         },
 
 
@@ -979,20 +963,14 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpFornecedorSearch: function(oEvt){
-            let aFilters    = [],
-                aAndFilters = [],
-                aOrFilters  = [];
+            let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
-            this.buildSingleFilter(aOrFilters, "Lifnr", FilterOperator.Contains, oEvt);
-            this.buildSingleFilter(aOrFilters, "Mcod1", FilterOperator.Contains, oEvt);
-            aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            this.buildSingleFilter(aFilters, "Lifnr", FilterOperator.Contains, oEvt);
+            this.buildSingleFilter(aFilters, "Mcod1", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "Comprador" is filled (Multiple)
-            this.buildArrayFilter(aAndFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
-            if(aAndFilters.length > 0){
-                aFilters.push(new Filter(aAndFilters, true)); // Multiple filter (array), parameter "true" = AND operator
-            }
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
@@ -1067,20 +1045,14 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpGrpPrecosSearch: function(oEvt){
-            let aFilters    = [],
-                aAndFilters = [],
-                aOrFilters  = [];
+            let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
-            this.buildSingleFilter(aOrFilters, "Bandeira", FilterOperator.Contains, oEvt);
-            this.buildSingleFilter(aOrFilters, "Descricao", FilterOperator.Contains, oEvt);
-            aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            this.buildSingleFilter(aFilters, "Bandeira", FilterOperator.Contains, oEvt);
+            this.buildSingleFilter(aFilters, "Descricao", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "UF" is filled (Multiple)
-            this.buildArrayFilter(aAndFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
-            if(aAndFilters.length > 0){
-                aFilters.push(new Filter(aAndFilters, true)); // Multiple filter (array), parameter "true" = AND operator
-            }
+            this.buildArrayFilter(aFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
@@ -1161,26 +1133,20 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpHierarquiaSearch: function(oEvt){
-            let aFilters    = [],
-                aAndFilters = [],
-                aOrFilters  = [];
+            let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
-            this.buildSingleFilter(aOrFilters, "Node3", FilterOperator.Contains, oEvt);
-            this.buildSingleFilter(aOrFilters, "Ltext", FilterOperator.Contains, oEvt);
-            aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            this.buildSingleFilter(aFilters, "Node3", FilterOperator.Contains, oEvt);
+            this.buildSingleFilter(aFilters, "Ltext", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "Comprador" is filled (Multiple)
-            this.buildArrayFilter(aAndFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
             // Set previous filter - if "Fornecedor" is filled (Multiple)
-            this.buildArrayFilter(aAndFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+            this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
             // Set previous filter - if "Contrato" is filled (Multiple)
-            this.buildArrayFilter(aAndFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
+            this.buildArrayFilter(aFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
             // Set previous filter - if "Departamento" is filled (Multiple)
-            this.buildArrayFilter(aAndFilters, "idMultiInputDepartamento1", "Node3", FilterOperator.EQ, false);
-            if(aAndFilters.length > 0){
-                aFilters.push(new Filter(aAndFilters, true)); // Multiple filter (array), parameter "true" = AND operator
-            }
+            this.buildArrayFilter(aFilters, "idMultiInputDepartamento1", "Node3", FilterOperator.EQ, false);
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
@@ -1255,20 +1221,14 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpLojasSearch: function(oEvt){
-            let aFilters    = [],
-                aAndFilters = [],
-                aOrFilters  = [];
+            let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
-            this.buildSingleFilter(aOrFilters, "Werks", FilterOperator.Contains, oEvt);
-            this.buildSingleFilter(aOrFilters, "Nome", FilterOperator.Contains, oEvt);
-            aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array), parameter "false" = OR operator
+            this.buildSingleFilter(aFilters, "Werks", FilterOperator.Contains, oEvt);
+            this.buildSingleFilter(aFilters, "Nome", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "UF" is filled (Multiple)
-            this.buildArrayFilter(aAndFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
-            if(aAndFilters.length > 0){
-                aFilters.push(new Filter(aAndFilters, true)); // Multiple filter (array), parameter "true" = AND operator
-            }
+            this.buildArrayFilter(aFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
 
 			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
@@ -1337,20 +1297,18 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpSortimentoSearch: function(oEvt){
-            let aFilters    = [],
-                aOrFilters  = [];
+            let aFilters    = [];
 			let oBinding    = oEvt.getSource().getBinding("items"),
                 oFilter     = {};
             let sValue      = oEvt.getParameter("value").toUpperCase();
 
             oFilter = new Filter("Asort", FilterOperator.Contains, sValue);
-            aOrFilters.push(oFilter);
+            aFilters.push(oFilter);
 
             oFilter = new Filter("Name1", FilterOperator.Contains, sValue);
-            aOrFilters.push(oFilter);
+            aFilters.push(oFilter);
 
-            aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
-			oBinding.filter(aFilters);
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
         },
         
 
@@ -1417,20 +1375,18 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpStatusMaterialSearch: function(oEvt){
-            let aFilters    = [],
-                aOrFilters  = [];
+            let aFilters    = [];
 			let oBinding    = oEvt.getSource().getBinding("items"),
                 oFilter     = {};
             let sValue      = oEvt.getParameter("value").toUpperCase();
 
             oFilter = new Filter("MMSTA", FilterOperator.Contains, sValue);
-            aOrFilters.push(oFilter);
+            aFilters.push(oFilter);
 
             oFilter = new Filter("MTSTB", FilterOperator.Contains, sValue);
-            aOrFilters.push(oFilter);
+            aFilters.push(oFilter);
 
-            aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
-			oBinding.filter(aFilters);
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
         },
 
         
@@ -1497,20 +1453,18 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpUfSearch: function(oEvt){
-            let aFilters    = [],
-                aOrFilters  = [];
+            let aFilters    = [];
 			let oBinding    = oEvt.getSource().getBinding("items"),
                 oFilter     = {};
             let sValue      = oEvt.getParameter("value").toUpperCase();
 
             oFilter = new Filter("Bland", FilterOperator.Contains, sValue);
-            aOrFilters.push(oFilter);
+            aFilters.push(oFilter);
 
             oFilter = new Filter("Bezei", FilterOperator.Contains, sValue);
-            aOrFilters.push(oFilter);
+            aFilters.push(oFilter);
 
-            aFilters.push(new Filter(aOrFilters, false)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
-			oBinding.filter(aFilters);
+			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
         },
 
 
