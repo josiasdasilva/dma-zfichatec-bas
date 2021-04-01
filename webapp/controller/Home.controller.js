@@ -630,13 +630,18 @@ sap.ui.define([
                 oFilter     = {};
             let sValue      = oEvt.getParameter("value").toUpperCase();
 
-            oFilter = new Filter("Ekgrp", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
+            if(sValue){
+                // oFilter = new Filter("Ekgrp", FilterOperator.Contains, sValue);
+                // aFilters.push(oFilter);
 
-            oFilter = new Filter("Nome", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
+                oFilter = new Filter("Nome", FilterOperator.Contains, sValue);
+                aFilters.push(oFilter);
 
-            oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
+                // oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
+                oBinding.filter(aFilters);
+            }else{
+                oBinding.filter([]);
+            }
         },
 
 
@@ -715,14 +720,18 @@ sap.ui.define([
             let oBinding = oEvt.getSource().getBinding("items");
 
             this.buildSingleFilter(aFilters, "Ebeln", FilterOperator.Contains, oEvt);
-            this.buildSingleFilter(aFilters, "Mcod1", FilterOperator.Contains, oEvt);
+            // this.buildSingleFilter(aFilters, "Mcod1", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "Comprador" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
             // Set previous filter - if "Fornecedor" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
             
-            oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            }else{
+                oBinding.filter([]);
+            }
         },
 
 
@@ -802,7 +811,7 @@ sap.ui.define([
             let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
-            this.buildSingleFilter(aFilters, "Node3", FilterOperator.Contains, oEvt);
+            // this.buildSingleFilter(aFilters, "Node3", FilterOperator.Contains, oEvt);
             this.buildSingleFilter(aFilters, "Ltext", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "Comprador" is filled (Multiple)
@@ -812,7 +821,11 @@ sap.ui.define([
             // Set previous filter - if "Contrato" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
 
-			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            }else{
+                oBinding.filter([]);
+            }
         },
 
 
@@ -884,13 +897,18 @@ sap.ui.define([
                 oFilter     = {};
             let sValue      = oEvt.getParameter("value").toUpperCase();
 
-            oFilter = new Filter("Sobsl", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
+            if(sValue){
+                // oFilter = new Filter("Sobsl", FilterOperator.Contains, sValue);
+                // aFilters.push(oFilter);
 
-            oFilter = new Filter("Ltext", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
+                oFilter = new Filter("Ltext", FilterOperator.Contains, sValue);
+                aFilters.push(oFilter);
 
-			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
+                // oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
+                oBinding.filter(aFilters);
+            }else{
+                oBinding.filter([]);
+            }
         },
 
 
@@ -966,13 +984,17 @@ sap.ui.define([
             let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
-            this.buildSingleFilter(aFilters, "Lifnr", FilterOperator.Contains, oEvt);
+            // this.buildSingleFilter(aFilters, "Lifnr", FilterOperator.Contains, oEvt);
             this.buildSingleFilter(aFilters, "Mcod1", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "Comprador" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
 
-			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            }else{
+                oBinding.filter([]);
+            }
         },
 
 
@@ -1049,12 +1071,16 @@ sap.ui.define([
             let oBinding = oEvt.getSource().getBinding("items");
 
             this.buildSingleFilter(aFilters, "Bandeira", FilterOperator.Contains, oEvt);
-            this.buildSingleFilter(aFilters, "Descricao", FilterOperator.Contains, oEvt);
+            // this.buildSingleFilter(aFilters, "Descricao", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "UF" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
 
-			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            }else{
+                oBinding.filter([]);
+            }
         },
 
 
@@ -1136,7 +1162,7 @@ sap.ui.define([
             let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
-            this.buildSingleFilter(aFilters, "Node3", FilterOperator.Contains, oEvt);
+            // this.buildSingleFilter(aFilters, "Node3", FilterOperator.Contains, oEvt);
             this.buildSingleFilter(aFilters, "Ltext", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "Comprador" is filled (Multiple)
@@ -1148,7 +1174,11 @@ sap.ui.define([
             // Set previous filter - if "Departamento" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputDepartamento1", "Node3", FilterOperator.EQ, false);
 
-			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            }else{
+                oBinding.filter([]);
+            }
         },
 
 
@@ -1224,13 +1254,17 @@ sap.ui.define([
             let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
-            this.buildSingleFilter(aFilters, "Werks", FilterOperator.Contains, oEvt);
+            // this.buildSingleFilter(aFilters, "Werks", FilterOperator.Contains, oEvt);
             this.buildSingleFilter(aFilters, "Nome", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "UF" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
 
-			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            }else{
+                oBinding.filter([]);
+            }
         },
 
 
@@ -1302,13 +1336,17 @@ sap.ui.define([
                 oFilter     = {};
             let sValue      = oEvt.getParameter("value").toUpperCase();
 
-            oFilter = new Filter("Asort", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
+            // oFilter = new Filter("Asort", FilterOperator.Contains, sValue);
+            // aFilters.push(oFilter);
 
             oFilter = new Filter("Name1", FilterOperator.Contains, sValue);
             aFilters.push(oFilter);
 
-			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
+            }else{
+                oBinding.filter([]);
+            }
         },
         
 
@@ -1380,13 +1418,18 @@ sap.ui.define([
                 oFilter     = {};
             let sValue      = oEvt.getParameter("value").toUpperCase();
 
-            oFilter = new Filter("MMSTA", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
-
-            oFilter = new Filter("MTSTB", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
-
-			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
+            if(sValue){
+                // oFilter = new Filter("Mmsta", FilterOperator.Contains, sValue);
+                // aFilters.push(oFilter);
+    
+                oFilter = new Filter("Mtstb", FilterOperator.Contains, sValue);
+                aFilters.push(oFilter);
+                
+                // oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
+                oBinding.filter(aFilters);
+            }else{
+                oBinding.filter([]);
+            }
         },
 
         
@@ -1458,13 +1501,18 @@ sap.ui.define([
                 oFilter     = {};
             let sValue      = oEvt.getParameter("value").toUpperCase();
 
-            oFilter = new Filter("Bland", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
+            if(sValue){
+                oFilter = new Filter("Bland", FilterOperator.Contains, sValue);
+                aFilters.push(oFilter);
 
-            oFilter = new Filter("Bezei", FilterOperator.Contains, sValue);
-            aFilters.push(oFilter);
+                // oFilter = new Filter("Bezei", FilterOperator.Contains, sValue);
+                // aFilters.push(oFilter);
 
-			oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
+                // oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
+                oBinding.filter(aFilters);
+            }else{
+                oBinding.filter([]);
+            }
         },
 
 

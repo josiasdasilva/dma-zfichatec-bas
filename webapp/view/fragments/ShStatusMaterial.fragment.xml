@@ -14,8 +14,8 @@
 			icon=""
 			iconDensityAware="false"
 			iconInset="false"
-			title="{MMSTA}"
-			description="{MTSTB}"
+			title="{Mmsta}"
+			description="{Mtstb}"
 			info="" />
 	</SelectDialog>
 </core:FragmentDefinition>

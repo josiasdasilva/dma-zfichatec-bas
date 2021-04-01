@@ -221,8 +221,10 @@ sap.ui.define([
             // if(JSON.stringify(oEvt) !== "{}" && JSON.stringify(oEvt) !== "[]"){
             if(Object.keys(oEvt).length > 0 || oEvt.constructor !== Object){
                 sValue = oEvt.getParameter("value").toUpperCase();
-                oFilter = new sap.ui.model.Filter(sFilterFieldName, sOperator, sValue);
-                aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
+                if(sValue){
+                    oFilter = new sap.ui.model.Filter(sFilterFieldName, sOperator, sValue);
+                    aFilters.push(oFilter); // Single filter (not array), don't need operator AND or OR
+                }
             }
         },
 

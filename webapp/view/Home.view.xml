@@ -175,7 +175,7 @@
                                                 tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpStatusMaterialOpen"
                                                 valueHelpOnly="true" >
-                                                <core:Item key="{MTSTA}" text="{MTSTB}"/>
+                                                <core:Item key="{Mmsta}" text="{Mtstb}"/>
                                             </MultiInput>
                                         </HBox>
 
