@@ -63,7 +63,8 @@
                                             path: '/FornecedorSet'
                                         }"
                                         tokenChange="onTokenChangeMultiInput"
-                                        valueHelpRequest="onValueHelpFornecedorOpen" >
+                                        valueHelpRequest="onValueHelpFornecedorOpen"
+                                        valueHelpOnly="true" >
                                         <core:Item key="{Lifnr}" text="{Lifnr}"/>
                                     </MultiInput>
                                 </HBox>
@@ -222,6 +223,7 @@
                                         </HBox>
 
                                         <!-- BANDEIRA -->
+<!-- 
                                         <HBox
                                             class="sapUiTinyMarginTop" >
                                             <Label
@@ -242,6 +244,25 @@
                                                 pressed="true" />
                                         </HBox>
 
+                                        <Label
+                                            text="{i18n>bandeira_lbl}:"
+                                            class="sapUiSmallMarginTop" />
+-->
+                                        <HBox>
+                                            <Label
+                                                text=""
+                                                width="200px" />
+                                            <VBox>
+                                                <CheckBox
+                                                    id="idCheckBoxAtacado1"
+                                                    text="{i18n>atacado_lbl}"
+                                                    selected="true" />
+                                                <CheckBox
+                                                    id="idCheckBoxVarejo1"
+                                                    text="{i18n>varejo_lbl}"
+                                                    selected="true" />
+                                            </VBox>
+                                        </HBox>
                                     </VBox>
 
                                     <VBox
@@ -332,6 +353,7 @@
                                         </HBox>
 
                                         <!-- TOTALIZADOR -->
+<!-- 
                                         <HBox
                                             class="sapUiTinyMarginTop" >
                                             <Label
@@ -352,6 +374,25 @@
                                                 pressed="false" />
                                         </HBox>
 
+                                        <Label
+                                            text="{i18n>totaliz_lbl}:"
+                                            class="sapUiTinyMarginTop" />
+-->
+                                        <HBox>
+                                            <Label
+                                                text=""
+                                                width="125px" />
+                                            <VBox>
+                                                <CheckBox
+                                                    id="idCheckBoxTotUf1"
+                                                    text="{i18n>tot_uf_lbl}"
+                                                    selected="false" />
+                                                <CheckBox
+                                                    id="idCheckBoxTotGrp1"
+                                                    text="{i18n>tot_grp_lbl}"
+                                                    selected="false" />
+                                            </VBox>
+                                        </HBox>
                                     </VBox>
                                 </HBox>
 
@@ -385,7 +426,6 @@
                                             selected="false" />
                                     </HBox>
  -->
-
                                     <CheckBox
                                         id="idCheckBoxSomenteMatXdock1"
                                         text="{i18n>somente_mat_xdock_lbl}"
