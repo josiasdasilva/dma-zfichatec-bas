@@ -386,7 +386,7 @@
                                                 <CheckBox
                                                     id="idCheckBoxTotUf1"
                                                     text="{i18n>tot_uf_lbl}"
-                                                    selected="false" />
+                                                    selected="true" />
                                                 <CheckBox
                                                     id="idCheckBoxTotGrp1"
                                                     text="{i18n>tot_grp_lbl}"
