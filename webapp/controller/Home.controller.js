@@ -396,6 +396,58 @@ sap.ui.define([
         
 
         /**
+         * Constrói um objeto JSON para armazenar a configuração dos campos (utilizada pelo método "buildArrayFilterMass") para
+         * o terceiro Grupo de Filtros da tela
+         * @public
+         * @param {array} aFieldNameExclude - Array com o ID dos MultiInputs que devem ser desconsiderados do JSON
+         * @returns {array} Array de objetos JSON com os dados necessários para o parâmetro do método "buildArrayFilterMass"
+         */
+        // _buildJsonFieldNameGroup3: function(sFieldNameExclude = ""){
+        _buildJsonFieldNameGroup3: function(aFieldNameExclude = []){
+            let aFieldsConf = [];
+            let sFindResult = "";
+
+            aFieldsConf.push({fieldName: "idMultiInputCompradorCod1", filterFieldName: "Ekgrp", operator: FilterOperator.EQ, and: false});
+            aFieldsConf.push({fieldName: "idMultiInputFornecedorCod1", filterFieldName: "Lifnr", operator: FilterOperator.EQ, and: false});
+            aFieldsConf.push({fieldName: "idMultiInputContrato1", filterFieldName: "Ebeln", operator: FilterOperator.EQ, and: false});
+            aFieldsConf.push({fieldName: "idMultiInputFonteSuprimento1", filterFieldName: "Sobsl", operator: FilterOperator.EQ, and: false});
+            aFieldsConf.push({fieldName: "idMultiInputStatusMaterial1", filterFieldName: "Mmsta", operator: FilterOperator.EQ, and: false});
+            aFieldsConf.push({fieldName: "idMultiInputDepartamento1", filterFieldName: "Node3", operator: FilterOperator.EQ, and: false});
+            aFieldsConf.push({fieldName: "idMultiInputNoHierarquia1", filterFieldName: "Node6", operator: FilterOperator.EQ, and: false});
+            aFieldsConf.push({fieldName: "idMultiInputUf1", filterFieldName: "UF", operator: FilterOperator.EQ, and: false});
+            aFieldsConf.push({fieldName: "idMultiInputGrpPrecos1", filterFieldName: "Bandeira", operator: FilterOperator.EQ, and: false});
+            aFieldsConf.push({fieldName: "idMultiInputLojas1", filterFieldName: "Werks", operator: FilterOperator.EQ, and: false});
+
+/*
+            if(sFieldNameExclude){
+                for(let iIndex in aFieldsConf){
+                    if(aFieldsConf[iIndex].fieldName === sFieldNameExclude){
+                        delete aFieldsConf[iIndex];
+                        break;
+                    }
+                }
+            }
+*/
+            if(aFieldNameExclude.length > 0){
+                for(let iIndex in aFieldsConf){
+                    sFindResult = "";
+                    sFindResult = aFieldNameExclude.find(
+                        (value) => {
+                            return value === aFieldsConf[iIndex].fieldName;
+                        }
+                    );
+
+                    if(sFindResult){
+                        delete aFieldsConf[iIndex];
+                    }
+                }
+            }
+
+            return aFieldsConf;
+        },
+
+
+        /**
          * Identifica qual Radio Button da "Visão de Relatório" foi selecionado
          * @public
          * @returns {number} Valor de 0 à 4 identificando qual Radio Button da "Visão de Relatório" foi selecionado
@@ -1237,9 +1289,8 @@ sap.ui.define([
         onValueHelpLojasPreFilter: function(oEvt){
             let aFilters = [];
 
-            // Set previous filter - if "UF" is filled (Multiple)
-            this.buildArrayFilter(aFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
-
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputLojas1"]));
+            
             // Define filters
             this._ShLojasDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
@@ -1278,8 +1329,7 @@ sap.ui.define([
             // this.buildSingleFilter(aFilters, "Werks", FilterOperator.Contains, oEvt);
             this.buildSingleFilter(aFilters, "Nome", FilterOperator.Contains, oEvt);
 
-            // Set previous filter - if "UF" is filled (Multiple)
-            this.buildArrayFilter(aFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputLojas1"]));
 
             if(aFilters.length > 0){
                 oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator

@@ -9,7 +9,8 @@ sap.ui.define([
 	return Controller.extend("dma.zfichatec.controller.BaseController", {
         /**
          * (DESCONTINUADO)
-         * 
+         * Inicializa os dados para o modelo "modelScreenParams" (utilizado para os filtros de seleção)
+         * @public
          */
         initScreenParams: function(){
             let oModelScreenParams = this.getModel("modelScreenParams");
@@ -65,33 +66,44 @@ sap.ui.define([
             oModelScreenParams.setData(oJson);
         },
 
+
         /**
          * (DESCONTINUADO)
-         * 
+         * Obtém uma propriedade específica do modelo "modelScreenParams" (utilizado para os filtros de seleção)
+         * @public
+         * @returns {string} Valor de uma propriedade específica do modelo "modelScreenParams"
          */
         getScreenParam: function(sScreenName, sProperty){
             return this.getModel("modelScreenParams").getData()[sScreenName][sProperty];
         },
 
+
         /**
          * (DESCONTINUADO)
-         * 
+         * Obtém todas as propriedades do modelo "modelScreenParams" (utilizado para os filtros de seleção)
+         * @public
+         * @returns {JSON} Objeto JSON com todas as prorpiedades do modelo "modelScreenParams"
          */
         getScreenParams: function(sScreenName){
             return this.getModel("modelScreenParams").getData()[sScreenName];
         },
 
+        
         /**
          * (DESCONTINUADO)
-         * 
+         * Efetua refresh no modelo "modelScreenParams" (utilizado para os filtros de seleção)
+         * @public
          */
         refreshScreenModel: function(){
             this.getModel("modelScreenParams").refresh(true);
         },
 
+
         /**
          * (DESCONTINUADO)
-         * 
+         * Retorna os códigos definidos para cada RadioButton
+         * @public
+         * @returns {JSON} Objeto JSON com os códigos para cada RadioButton
          */
         getRadioButtonVisRelatOptions: function(){
             return {
@@ -103,9 +115,11 @@ sap.ui.define([
             }
         },
 
+
         /**
-         * 
-         * 
+         * Retorna os possíveis tipos para utilizar no Token
+         * @public
+         * @returns {JSON} Objeto JSON com os possíveis tipos para Tokens
          */
         getFromType: function(){
             return {
@@ -114,9 +128,14 @@ sap.ui.define([
             }
         },
 
+
         /**
-         * 
-         * 
+         * Acionado quando o SelectDialog é fechado, efetuando a lógica de atualizar os dados no MultiInput
+         * @public
+         * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
+         * @param {string} sId - ID do MultiInput
+         * @param {string} sTextGetFrom - Define qual propriedade vai ser utilizada na propriedade "text" do
+         * Token (valor padrão = this.getFromType().DESCRIPTION)
          */
         onValueHelpClose: function(oEvt, sId, sTextGetFrom = this.getFromType().DESCRIPTION){
             let aSelectedItems = oEvt.getParameter("selectedItems");
@@ -151,9 +170,12 @@ sap.ui.define([
             }
         },
 
+
         /**
-         * 
-         * 
+         * Obtém os dados do MultiInput e atualiza quais dados da lista no SelectDialog estão selecionados
+         * @public
+         * @param {string} sId - ID do MultiInput
+         * @param {sap.ui.core.Control} oDialog - Objeto de dialog
          */
         onValueHelpRememberSelections: function(sId, oDialog){
             let aInput = this.getView().byId(sId).getTokens();
@@ -168,9 +190,12 @@ sap.ui.define([
             }
         },
 
+
         /**
-         * 
-         * 
+         * Transforma os dados do MultiInput para um string separado por Pipes "|"
+         * @public
+         * @param {string} sId - ID do MultiInput
+         * @returns {string} Valores separados por Pipes "|"
          */
         transformMultiInputIntoPsv: function(sId){
             let aTokens = this.getView().byId(sId).getTokens();
@@ -187,9 +212,12 @@ sap.ui.define([
             return sResult;
         },
 
+
         /**
-         * 
-         * 
+         * Retorna uma data formatada
+         * @public
+         * @param {Date} oValue - Data que deve ser formatada
+         * @returns {string} Data formatada
          */
         getDateFormatted: function(oValue){
             const sDay = oValue.getDate();
@@ -210,9 +238,14 @@ sap.ui.define([
             )
         },
 
+
         /**
-         * 
-         * 
+         * Constrói um objeto de filtro
+         * @public
+         * @param {array} aFilters - Array com os objetos de filtro (sap.ui.model.Filter)
+         * @param {string} sFilterFieldName - Nome do campo no serviço
+         * @param {sap.ui.model.FilterOperator} sOperator - Operador lógico
+         * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         buildSingleFilter: function(aFilters, sFilterFieldName, sOperator, oEvt){
             let oFilter = {};
@@ -228,9 +261,15 @@ sap.ui.define([
             }
         },
 
+
         /**
-         * 
-         * 
+         * Constrói um array com os objetos de filtro
+         * @public
+         * @param {array} aFilters - Array com os objetos de filtro (sap.ui.model.Filter)
+         * @param {string} sFieldName - ID do MultiInput
+         * @param {string} sFilterFieldName - Nome do campo no serviço
+         * @param {sap.ui.model.FilterOperator} sOperator - Operador lógico
+         * @param {boolean} bAnd - Valor true para considerar o operador AND e false para o operador OR no filtro
          */
         buildArrayFilter: function(aFilters, sFieldName, sFilterFieldName, sOperator, bAnd){
             let aOrFilters  = [],
@@ -248,11 +287,44 @@ sap.ui.define([
             }
         },
 
+
         /**
-		 * 
+         * Constrói um array com os objetos de filtro (em massa)
+         * @public
+         * @param {array} aFilters - Array com os objetos de filtro (sap.ui.model.Filter)
+         * @param {array} oFilterConf - Array de objetos JSON com os dados utilizados para criar o filtro:
+         * Estrutura do objeto JSON:
+         * >> fieldName = ID do MultiInput
+         * >> filterFieldName = Nome do campo no serviço
+         * >> operator = Operador lógico (sap.ui.model.FilterOperator)
+         * >> and = Valor true para considerar o operador AND e false para o operador OR no filtro (boolean)
+         */
+        buildArrayFilterMass: function(aFilters, oFilterConf){
+            let aOrFilters  = [],
+                aValues     = [];
+            let oFilter     = {};
+
+            if(Object.keys(oFilterConf).length > 0 || oFilterConf.constructor !== Object){
+                for(let iIndexFilterConf in oFilterConf){
+                    aValues = this.byId(oFilterConf[iIndexFilterConf].fieldName).getTokens();
+                    if (aValues.length) {
+                        for(var iIndexValues in aValues){
+                            oFilter = new sap.ui.model.Filter(oFilterConf[iIndexFilterConf].filterFieldName, oFilterConf[iIndexFilterConf].operator, aValues[iIndexValues].getProperty("key"));
+                            aOrFilters.push(oFilter);
+                        }
+                        aFilters.push(new sap.ui.model.Filter(aOrFilters, ((typeof oFilterConf[iIndexFilterConf].and !== "undefined") ? oFilterConf[iIndexFilterConf].and : true))); // Multiple filter (array) / bAnd = true (AND operator) / bAnd = false (OR operator)
+                        aOrFilters = [];
+                    }
+                }
+            }
+        },
+
+
+        /**
+		 * Verifica se o e-mail é válido
 		 * @public
-         * @param {string} sEmail - 
-		 * @returns {boolean} 
+         * @param {string} sEmail - Endereço de e-mail
+		 * @returns {boolean} Retorna true caso seja um e-mail válido
 		 */
         _validEmail: function(sEmail){
 			// The following Regex is NOT a completely correct one and only used for demonstration purposes.
@@ -262,6 +334,7 @@ sap.ui.define([
             return sEmail.match(rexMail);
         },
 
+        
         /**
 		 * Convenience method for accessing the router in every controller of the application.
 		 * @public
@@ -270,6 +343,7 @@ sap.ui.define([
 		getRouter: function () {
 			return this.getOwnerComponent().getRouter();
 		},
+
 
         /**
 		 * Convenience method for getting the view model by name in every controller of the application.
@@ -280,6 +354,7 @@ sap.ui.define([
 		getModel: function (sName) {
 			return this.getView().getModel(sName);
 		},
+
 
         /**
 		 * Convenience method for setting the view model in every controller of the application.
@@ -292,6 +367,7 @@ sap.ui.define([
 			return this.getView().setModel(oModel, sName);
 		},
 
+
 		/**
 		 * Convenience method for getting the resource bundle.
 		 * @public
@@ -301,13 +377,26 @@ sap.ui.define([
 			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
 		},
 
+
+		/**
+		 * Get specific text from resource bundle (I18N)
+		 * @public
+		 * @returns {string} Text from I18N
+		 */
         getText: function(sText){
 			return this.getResourceBundle().getText(sText);
 		},
 
+
+		/**
+		 * Get specific text from resource bundle (I18N) with parameters
+		 * @public
+		 * @returns {string} Text from I18N with parameters
+		 */
         getTextWithParams: function(sText, aParams){
 			return this.getResourceBundle().getText(sText,aParams);
 		},
+
 
         /**
 		 * Event handler for navigating back.
