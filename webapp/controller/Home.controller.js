@@ -1143,8 +1143,8 @@ sap.ui.define([
             let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
-            this.buildSingleFilter(aFilters, "Bandeira", FilterOperator.Contains, oEvt);
-            // this.buildSingleFilter(aFilters, "Descricao", FilterOperator.Contains, oEvt);
+            // this.buildSingleFilter(aFilters, "Bandeira", FilterOperator.Contains, oEvt);
+            this.buildSingleFilter(aFilters, "Descricao", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "UF" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
