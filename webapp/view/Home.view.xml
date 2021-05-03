@@ -69,6 +69,29 @@
                                     </MultiInput>
                                 </HBox>
                                 
+                                <!-- MATERIAL -->
+                                <HBox
+                                    alignItems="Start"
+                                    justifyContent="Start"
+                                    width="100%">
+                                    <Label
+                                        text="{i18n>material_lbl}:"
+                                        textAlign="End"
+                                        width="120px"
+                                        class="sapUiSmallMarginTop sapUiSmallMarginEnd label_h3" />
+                                    <MultiInput
+                                        width="550px"
+                                        id="idMultiInputMaterial1"
+                                        suggestionItems="{
+                                            path: '/MaterialSet'
+                                        }"
+                                        tokenChange="onTokenChangeMultiInput"
+                                        valueHelpRequest="onValueHelpMaterialOpen"
+                                        valueHelpOnly="true" >
+                                        <core:Item key="{Matnr}" text="{Matnr}"/>
+                                    </MultiInput>
+                                </HBox>
+
                                 <!-- CONTRATO -->
                                 <HBox
                                     alignItems="Start"
@@ -431,7 +454,7 @@
                                         text="{i18n>somente_mat_xdock_lbl}"
                                         selected="false"
                                         class="sapUiTinyMarginTop" 
-                                        visible="false" />
+                                        visible="true" />
                                 </VBox>
                             </WizardStep>
                         </Wizard>

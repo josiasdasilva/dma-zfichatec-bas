@@ -756,6 +756,8 @@ sap.ui.define([
             this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
             // Set previous filter - if "Fornecedor" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+            // Set previous filter - if "Material" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputMaterial1", "Matnr", FilterOperator.EQ, false);
 
             // Define filters
             this._ShContratoDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -791,7 +793,7 @@ sap.ui.define([
         onValueHelpContratoSearch: function(oEvt){
             let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
-
+            
             this.buildSingleFilter(aFilters, "Ebeln", FilterOperator.Contains, oEvt);
             // this.buildSingleFilter(aFilters, "Mcod1", FilterOperator.Contains, oEvt);
 
@@ -799,6 +801,8 @@ sap.ui.define([
             this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
             // Set previous filter - if "Fornecedor" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+            // Set previous filter - if "Material" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputMaterial1", "Matnr", FilterOperator.EQ, false);
             
             if(aFilters.length > 0){
                 oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -1070,7 +1074,96 @@ sap.ui.define([
             }
         },
 
+        
+//----------------------------------------------------------------------//
+// Material                                                             //
+//----------------------------------------------------------------------//
+        /**
+         * Evento acionado ao abrir o Search Help do campo "idMultiInputMaterial1", onde é acionado o
+         * fragmento "ShMaterial".
+         * Carrega os dados previamente selecionados no "SelectDialog" e aplica filtro dos campos
+         * que tem interdependência.
+         * @public
+         * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
+         */
+        onValueHelpMaterialOpen: function(oEvt){
+            // Cria o fragmento (ajuda de pesquisa)
+            if (!this._ShMaterialDialog) {
+                this._ShMaterialDialog = sap.ui.xmlfragment("dma.zfichatec.view.fragments.ShMaterial", this);
+                this.getView().addDependent(this._ShMaterialDialog);
+            }
 
+            this.onValueHelpRememberSelections("idMultiInputMaterial1", this._ShMaterialDialog);
+
+            this.onValueHelpMaterialPreFilter(oEvt);
+
+            this._ShMaterialDialog.open();
+        },
+
+
+        /**
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputMaterial1".
+         * @public
+         * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
+         */
+        onValueHelpMaterialPreFilter: function(oEvt){
+            let aFilters = [];
+
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
+            // Set previous filter - if "Fornecedor" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+
+            // Define filters
+            this._ShMaterialDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+        },
+
+
+        /**
+         * Aplica no campo "idMultiInputMaterial1" os valores selecionados no "SelectDialog" do fragmento.
+         * @public
+         * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
+         */
+        onValueHelpMaterialClose: function (oEvt) {
+            this.onValueHelpClose(oEvt, "idMultiInputMaterial1", this.getFromType().TITLE);
+        },
+
+
+        /**
+         * Evento acionado ao clicar no botão "Cancelar" do "SelectDialog" do campo "idMultiInputMaterial1".
+         * @public
+         * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
+         */
+        onValueHelpMaterialCancel: function (oEvt) {
+
+        },
+
+
+        /**
+         * Evento acionado ao clicar no botão de pesquisa do "SelectDialog" para o campo "idMultiInputMaterial1".
+         * Aplica os filtros dos campos que tem interdependência para o campo "idMultiInputMaterial1".
+         * @public
+         * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
+         */
+        onValueHelpMaterialSearch: function(oEvt){
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            this.buildSingleFilter(aFilters, "Matnr", FilterOperator.Contains, oEvt);
+
+            // Set previous filter - if "Comprador" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
+            // Set previous filter - if "Fornecedor" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            }else{
+                oBinding.filter([]);
+            }
+        },
+
+        
 //----------------------------------------------------------------------//
 // Grupos de Preços                                                     //
 //----------------------------------------------------------------------//

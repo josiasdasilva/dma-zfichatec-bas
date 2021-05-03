@@ -3,19 +3,19 @@
 	xmlns:core="sap.ui.core"
     xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
 	<SelectDialog
-		title="{i18n>fornecedor_lbl}"
+		title="{i18n>material_lbl}"
 		class="sapUiPopupWithPadding"
-		items="{/FornecedorSet}"
-        multiSelect="false"
-		liveChange="onValueHelpFornecedorSearch"
-		confirm="onValueHelpFornecedorClose"
-		cancel="onValueHelpFornecedorCancel">
+		items="{/MaterialSet}"
+        multiSelect="true"
+		liveChange="onValueHelpMaterialSearch"
+		confirm="onValueHelpMaterialClose"
+		cancel="onValueHelpMaterialCancel">
 		<StandardListItem
 			icon=""
 			iconDensityAware="false"
 			iconInset="false"
-			title="{Lifnr}"
-			description="{Mcod1}"
-			info="{Ekgrp}" />
+			title="{Matnr}"
+			description="{Maktx}"
+			info="" />
 	</SelectDialog>
 </core:FragmentDefinition>

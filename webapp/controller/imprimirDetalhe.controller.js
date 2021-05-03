@@ -168,6 +168,8 @@ sap.ui.define([
                     Guid: this.sGuid
                 });
 
+                this.getView().setBusy(true);
+
                 sFilter += "Email eq '" + this.getView().byId("idInputEmail1").getValue() + "'";
 
                 oModelServ.read(
@@ -177,8 +179,7 @@ sap.ui.define([
                             "$filter": sFilter
                         },
                         success: function(oDataRetrieved){
-// debugger;
-                            if(oDataRetrieved.results[0].Sent === "OK"){
+                            if(oDataRetrieved.Sent === "OK"){
                                 MessageBox.success(
                                     this.getResourceBundle().getText("success_sent_email"),
                                     {
@@ -200,9 +201,10 @@ sap.ui.define([
                                     }
                                 );
                             }
+
+                            this.getView().setBusy(false);
                         }.bind(this),
                         error: function(oError){
-// debugger;
                             MessageBox.error(
                                 this.getResourceBundle().getText("error_sent_email"),
                                 {
@@ -214,6 +216,8 @@ sap.ui.define([
                                     }.bind(this)
                                 }
                             );
+
+                            this.getView().setBusy(false);
                         }.bind(this)
                     }
                 );
