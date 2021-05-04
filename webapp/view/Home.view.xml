@@ -70,6 +70,7 @@
                                 </HBox>
                                 
                                 <!-- MATERIAL -->
+<!--
                                 <HBox
                                     alignItems="Start"
                                     justifyContent="Start"
@@ -91,6 +92,7 @@
                                         <core:Item key="{Matnr}" text="{Matnr}"/>
                                     </MultiInput>
                                 </HBox>
+-->
 
                                 <!-- CONTRATO -->
                                 <HBox
