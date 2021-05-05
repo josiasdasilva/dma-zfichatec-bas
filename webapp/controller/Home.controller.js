@@ -183,6 +183,8 @@ sap.ui.define([
                 this.getView().byId("idRadioButtonVisRelatLoja").setSelected(true);
                 // Somente Materiais CrossDocking
                 this.getView().byId("idCheckBoxSomenteMatXdock1").setSelected(false);
+                // Não exibir materiais CrossDocking
+                this.getView().byId("idCheckBoxNaoExibirMatXdock1").setSelected(false);
 
                 // Atacado
                 this.getView().byId("idCheckBoxAtacado1").setSelected(true);
@@ -524,6 +526,27 @@ sap.ui.define([
 
 
         /**
+         * Utilizado para controlar os CheckBoxes de CrossDocking, evitando que ambos sejam selecionados simultaneamente
+         * @public
+         * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
+         */
+        onCheckBoxXDockingSelect: function(oEvt){
+            let sId = oEvt.getParameter("id");
+            let bSelected = oEvt.getParameter("selected");
+            
+            if(sId.search("idCheckBoxSomenteMatXdock1") >= 0){
+                if(bSelected && this.getView().byId("idCheckBoxNaoExibirMatXdock1").getSelected()){
+                    this.getView().byId("idCheckBoxNaoExibirMatXdock1").setSelected(false);
+                }
+            }else if(sId.search("idCheckBoxNaoExibirMatXdock1") >= 0){
+                if(bSelected && this.getView().byId("idCheckBoxSomenteMatXdock1").getSelected()){
+                    this.getView().byId("idCheckBoxSomenteMatXdock1").setSelected(false);
+                }
+            }
+        },
+
+
+        /**
          * Chama o serviço que envia o PDF gerado para o e-mail digitado na tela (Em desenvolvimento)
          * @public
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
@@ -569,7 +592,9 @@ sap.ui.define([
             let bTotalGrupo         = this.getView().byId("idCheckBoxTotGrp1").getSelected();
             // let bTotalUf            = this.getView().byId("idTBTotUf1").getPressed();
             // let bTotalGrupo         = this.getView().byId("idTBTotGrp1").getPressed();
-            let bXDocking           = this.getView().byId("idCheckBoxSomenteMatXdock1").getSelected();
+            // let bXDocking           = this.getView().byId("idCheckBoxSomenteMatXdock1").getSelected();
+            let bSomenteXDocking    = this.getView().byId("idCheckBoxSomenteMatXdock1").getSelected();
+            let bNaoExibXDocking    = this.getView().byId("idCheckBoxNaoExibirMatXdock1").getSelected();
 
             let oModel = this.getView().getModel();
             let sObjectPath = oModel.createKey("/PrnFichaSet", {
@@ -595,8 +620,11 @@ sap.ui.define([
             sObjectPath += this.makeFilterPath("Bandeira", iBandeira, "eq", true, true);
             sObjectPath += this.makeFilterPath("Total_UF", ((bTotalUf) ? "X" : ""), "eq", true, true);
             sObjectPath += this.makeFilterPath("Total_Grupo", ((bTotalGrupo) ? "X" : ""), "eq", true, true);
-            sObjectPath += this.makeFilterPath("Cross", ((bXDocking) ? "X" : ""), "eq", true, true);
-
+            // sObjectPath += this.makeFilterPath("Cross", ((bXDocking) ? "X" : ""), "eq", true, true);
+            if(bSomenteXDocking || bNaoExibXDocking){
+                sObjectPath += this.makeFilterPath("Cross", "ZCRO", ((bSomenteXDocking) ? "eq" : "ne" ), true, true);
+            }
+            
             if(sObjectPath.slice((sObjectPath.length-5), sObjectPath.length) === " and "){
                 sObjectPath = sObjectPath.slice(0, (sObjectPath.length-5));
             }else if(sObjectPath.slice((sObjectPath.length-4), sObjectPath.length) === " or "){

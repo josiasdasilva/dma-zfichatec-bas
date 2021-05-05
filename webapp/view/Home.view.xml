@@ -286,6 +286,11 @@
                                                     id="idCheckBoxVarejo1"
                                                     text="{i18n>varejo_lbl}"
                                                     selected="true" />
+                                                <CheckBox
+                                                    id="idCheckBoxSomenteMatXdock1"
+                                                    text="{i18n>somente_mat_xdock_lbl}"
+                                                    select="onCheckBoxXDockingSelect"
+                                                    selected="false" />
                                             </VBox>
                                         </HBox>
                                     </VBox>
@@ -416,6 +421,11 @@
                                                     id="idCheckBoxTotGrp1"
                                                     text="{i18n>tot_grp_lbl}"
                                                     selected="false" />
+                                                <CheckBox
+                                                    id="idCheckBoxNaoExibirMatXdock1"
+                                                    text="{i18n>nao_exibir_mat_xdock_lbl}"
+                                                    select="onCheckBoxXDockingSelect"
+                                                    selected="false" />
                                             </VBox>
                                         </HBox>
                                     </VBox>
@@ -451,12 +461,14 @@
                                             selected="false" />
                                     </HBox>
  -->
+<!--
                                     <CheckBox
                                         id="idCheckBoxSomenteMatXdock1"
                                         text="{i18n>somente_mat_xdock_lbl}"
                                         selected="false"
                                         class="sapUiTinyMarginTop" 
                                         visible="true" />
+-->
                                 </VBox>
                             </WizardStep>
                         </Wizard>
