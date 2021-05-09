@@ -185,6 +185,8 @@ sap.ui.define([
                 this.getView().byId("idCheckBoxSomenteMatXdock1").setSelected(false);
                 // Não exibir materiais CrossDocking
                 this.getView().byId("idCheckBoxNaoExibirMatXdock1").setSelected(false);
+                // Fornecedor Regular
+                this.getView().byId("idCheckBoxFornecedorRegular1").setSelected(false);
 
                 // Atacado
                 this.getView().byId("idCheckBoxAtacado1").setSelected(true);
@@ -580,6 +582,7 @@ sap.ui.define([
             let sPsvDepartamento    = this.transformMultiInputIntoPsv("idMultiInputDepartamento1");
             let sPsvFonteSuprimento = this.transformMultiInputIntoPsv("idMultiInputFonteSuprimento1");
             let sPsvFornecedor      = this.transformMultiInputIntoPsv("idMultiInputFornecedorCod1");
+            let bFornecedorRegular  = this.getView().byId("idCheckBoxFornecedorRegular1").getSelected();
             let sPsvGrupoPrecos     = this.transformMultiInputIntoPsv("idMultiInputGrpPrecos1");
             let sPsvHierarquia      = this.transformMultiInputIntoPsv("idMultiInputNoHierarquia1");
             let sPsvLojas           = this.transformMultiInputIntoPsv("idMultiInputLojas1");
@@ -618,6 +621,7 @@ sap.ui.define([
             sObjectPath += this.makeFilterPath("UF", sPsvUf, "eq", true);
             sObjectPath += this.makeFilterPath("Visao", iVisRelat, "eq", true);
             sObjectPath += this.makeFilterPath("Bandeira", iBandeira, "eq", true, true);
+            sObjectPath += this.makeFilterPath("Regular", ((bFornecedorRegular) ? "X" : ""), "eq", true, true);
             sObjectPath += this.makeFilterPath("Total_UF", ((bTotalUf) ? "X" : ""), "eq", true, true);
             sObjectPath += this.makeFilterPath("Total_Grupo", ((bTotalGrupo) ? "X" : ""), "eq", true, true);
             // sObjectPath += this.makeFilterPath("Cross", ((bXDocking) ? "X" : ""), "eq", true, true);

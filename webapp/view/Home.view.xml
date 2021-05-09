@@ -67,6 +67,11 @@
                                         valueHelpOnly="true" >
                                         <core:Item key="{Lifnr}" text="{Lifnr}"/>
                                     </MultiInput>
+                                    <CheckBox
+                                        id="idCheckBoxFornecedorRegular1"
+                                        text="{i18n>regular_lbl}"
+                                        selected="false"
+                                        class="sapUiSmallMarginBegin" />
                                 </HBox>
                                 
                                 <!-- MATERIAL -->
