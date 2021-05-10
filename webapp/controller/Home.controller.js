@@ -218,6 +218,8 @@ sap.ui.define([
                 this.byId("idMultiInputFornecedorCod1").removeAllTokens();
                 // Grupo de Preços (Clear)
                 this.byId("idMultiInputGrpPrecos1").removeAllTokens();
+                // Material (Clear)
+                this.byId("idMultiInputMaterial1").removeAllTokens();
                 // Hierarquia (Clear)
                 this.byId("idMultiInputNoHierarquia1").removeAllTokens();
                 // Lojas (Clear)
@@ -586,6 +588,7 @@ sap.ui.define([
             let sPsvGrupoPrecos     = this.transformMultiInputIntoPsv("idMultiInputGrpPrecos1");
             let sPsvHierarquia      = this.transformMultiInputIntoPsv("idMultiInputNoHierarquia1");
             let sPsvLojas           = this.transformMultiInputIntoPsv("idMultiInputLojas1");
+            let sPsvMaterial        = this.transformMultiInputIntoPsv("idMultiInputMaterial1");
             let sPsvSortimento      = this.transformMultiInputIntoPsv("idMultiInputSortimento1");
             let sPsvStatusMaterial  = this.transformMultiInputIntoPsv("idMultiInputStatusMaterial1");
             let sPsvUf              = this.transformMultiInputIntoPsv("idMultiInputUf1");
@@ -614,6 +617,7 @@ sap.ui.define([
             sObjectPath += this.makeFilterPath("Grupo", sPsvGrupoPrecos, "eq", true);
             sObjectPath += this.makeFilterPath("Node6", sPsvHierarquia, "eq", true);
             sObjectPath += this.makeFilterPath("Werks", sPsvLojas, "eq", true);
+            sObjectPath += this.makeFilterPath("Matnr", sPsvMaterial, "eq", true);
             // sObjectPath += this.makeFilterPath("Sortimento", sPsvSortimento, "eq", true);
             sObjectPath += this.makeFilterPath("Asort", sPsvSortimento, "eq", true);
             // sObjectPath += this.makeFilterPath("Mmsta", ((sPsvStatusMaterial) ? sPsvStatusMaterial : "0"), "eq", true);
@@ -970,7 +974,13 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpFonteSuprimentoPreFilter: function(oEvt){
-            
+            let aFilters = [];
+
+            // Set previous filter - if "Material" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputMaterial1", "Matnr", FilterOperator.EQ, false);
+
+            // Define filters
+            this._ShFonteSuprimentoDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
 
@@ -1001,6 +1011,7 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpFonteSuprimentoSearch: function(oEvt){
+/*
             let aFilters    = [];
             let oBinding    = oEvt.getSource().getBinding("items"),
                 oFilter     = {};
@@ -1015,6 +1026,21 @@ sap.ui.define([
 
                 // oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
                 oBinding.filter(aFilters);
+            }else{
+                oBinding.filter([]);
+            }
+*/
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            // this.buildSingleFilter(aFilters, "Lifnr", FilterOperator.Contains, oEvt);
+            this.buildSingleFilter(aFilters, "Ltext", FilterOperator.Contains, oEvt);
+
+            // Set previous filter - if "Material" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputMaterial1", "Matnr", FilterOperator.EQ, false);
+
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
             }else{
                 oBinding.filter([]);
             }
