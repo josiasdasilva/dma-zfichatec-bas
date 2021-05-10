@@ -1145,6 +1145,10 @@ sap.ui.define([
             this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
             // Set previous filter - if "Fornecedor" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+            // Set previous filter - if "Loja" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputLojas1", "Werks", FilterOperator.EQ, false);
+            // Set previous filter - if "Contrato" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
 
             // Define filters
             this._ShMaterialDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -1181,12 +1185,16 @@ sap.ui.define([
             let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
-            this.buildSingleFilter(aFilters, "Matnr", FilterOperator.Contains, oEvt);
+            this.buildSingleFilter(aFilters, "Maktx", FilterOperator.Contains, oEvt);
 
             // Set previous filter - if "Comprador" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputCompradorCod1", "Ekgrp", FilterOperator.EQ, false);
             // Set previous filter - if "Fornecedor" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
+            // Set previous filter - if "Loja" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputLojas1", "Werks", FilterOperator.EQ, false);
+            // Set previous filter - if "Contrato" is filled (Multiple)
+            this.buildArrayFilter(aFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
 
             if(aFilters.length > 0){
                 oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
