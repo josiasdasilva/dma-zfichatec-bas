@@ -302,18 +302,40 @@ sap.ui.define([
         buildArrayFilterMass: function(aFilters, oFilterConf){
             let aOrFilters  = [],
                 aValues     = [];
+            let bValue      = false;
             let oFilter     = {};
 
             if(Object.keys(oFilterConf).length > 0 || oFilterConf.constructor !== Object){
                 for(let iIndexFilterConf in oFilterConf){
-                    aValues = this.byId(oFilterConf[iIndexFilterConf].fieldName).getTokens();
-                    if (aValues.length) {
-                        for(var iIndexValues in aValues){
-                            oFilter = new sap.ui.model.Filter(oFilterConf[iIndexFilterConf].filterFieldName, oFilterConf[iIndexFilterConf].operator, aValues[iIndexValues].getProperty("key"));
-                            aOrFilters.push(oFilter);
-                        }
-                        aFilters.push(new sap.ui.model.Filter(aOrFilters, ((typeof oFilterConf[iIndexFilterConf].and !== "undefined") ? oFilterConf[iIndexFilterConf].and : true))); // Multiple filter (array) / bAnd = true (AND operator) / bAnd = false (OR operator)
-                        aOrFilters = [];
+                    switch(oFilterConf[iIndexFilterConf].fieldType){
+                        case "Input":
+                            
+                            break;
+                        
+                        case "MultiInput":
+                            aValues = this.byId(oFilterConf[iIndexFilterConf].fieldName).getTokens();
+
+                            if (aValues.length) {
+                                for(var iIndexValues in aValues){
+                                    oFilter = new sap.ui.model.Filter(oFilterConf[iIndexFilterConf].filterFieldName, oFilterConf[iIndexFilterConf].operator, aValues[iIndexValues].getProperty("key"));
+                                    aOrFilters.push(oFilter);
+                                }
+                                aFilters.push(new sap.ui.model.Filter(aOrFilters, ((typeof oFilterConf[iIndexFilterConf].and !== "undefined") ? oFilterConf[iIndexFilterConf].and : true))); // Multiple filter (array) / .and = true (AND operator) / .and = false (OR operator)
+                                aOrFilters = [];
+                            }
+                            break;
+                        
+                        case "CheckBox":
+                        case "RadioButton":
+                            bValue = this.byId(oFilterConf[iIndexFilterConf].fieldName).getSelected();
+                            
+                            aFilters.push(
+                                new sap.ui.model.Filter(oFilterConf[iIndexFilterConf].filterFieldName, oFilterConf[iIndexFilterConf].operator, bValue)
+                            ); // Multiple filter (array) / .and = true (AND operator) / .and = false (OR operator)
+                            break;
+                        
+                        default:
+                            break;
                     }
                 }
             }

@@ -86,6 +86,7 @@ sap.ui.define([
             // Validação dos MultiInput's obrigatórios
             if(!this.getView().byId("idMultiInputCompradorCod1").getTokens().length &&
                !this.getView().byId("idMultiInputFornecedorCod1").getTokens().length &&
+               !this.getView().byId("idMultiInputMaterial1").getTokens().length &&
                !this.getView().byId("idMultiInputContrato1").getTokens().length){
                 sValueState = sap.ui.core.ValueState.Error;
             }else{
@@ -93,6 +94,7 @@ sap.ui.define([
             }
             this.getView().byId("idMultiInputCompradorCod1").setValueState(sValueState);
             this.getView().byId("idMultiInputFornecedorCod1").setValueState(sValueState);
+            this.getView().byId("idMultiInputMaterial1").setValueState(sValueState);
             this.getView().byId("idMultiInputContrato1").setValueState(sValueState);
 
             if(sValueState === sap.ui.core.ValueState.Error){
@@ -269,6 +271,10 @@ sap.ui.define([
             if(sId.search("idMultiInputCompradorCod1") >= 0){
                 // Fornecedor (Clear)
                 this.byId("idMultiInputFornecedorCod1").removeAllTokens();
+                // Fornecedor Regular (Clear)
+                this.byId("idCheckBoxFornecedorRegular1").setSelected(false);
+                // Material (Clear)
+                this.byId("idMultiInputMaterial1").removeAllTokens();
                 // Contrato (Clear)
                 this.byId("idMultiInputContrato1").removeAllTokens();
                 // Departamento (Clear)
@@ -290,6 +296,8 @@ sap.ui.define([
 
             // Fornecedor
             }else if(sId.search("idMultiInputFornecedorCod1") >= 0){
+                // Material (Clear)
+                this.byId("idMultiInputMaterial1").removeAllTokens();
                 // Contrato (Clear)
                 this.byId("idMultiInputContrato1").removeAllTokens();
                 // Departamento (Clear)
@@ -413,16 +421,19 @@ sap.ui.define([
             let aFieldsConf = [];
             let sFindResult = "";
 
-            aFieldsConf.push({fieldName: "idMultiInputCompradorCod1", filterFieldName: "Ekgrp", operator: FilterOperator.EQ, and: false});
-            aFieldsConf.push({fieldName: "idMultiInputFornecedorCod1", filterFieldName: "Lifnr", operator: FilterOperator.EQ, and: false});
-            aFieldsConf.push({fieldName: "idMultiInputContrato1", filterFieldName: "Ebeln", operator: FilterOperator.EQ, and: false});
-            aFieldsConf.push({fieldName: "idMultiInputFonteSuprimento1", filterFieldName: "Sobsl", operator: FilterOperator.EQ, and: false});
-            aFieldsConf.push({fieldName: "idMultiInputStatusMaterial1", filterFieldName: "Mmsta", operator: FilterOperator.EQ, and: false});
-            aFieldsConf.push({fieldName: "idMultiInputDepartamento1", filterFieldName: "Node3", operator: FilterOperator.EQ, and: false});
-            aFieldsConf.push({fieldName: "idMultiInputNoHierarquia1", filterFieldName: "Node6", operator: FilterOperator.EQ, and: false});
-            aFieldsConf.push({fieldName: "idMultiInputUf1", filterFieldName: "UF", operator: FilterOperator.EQ, and: false});
-            aFieldsConf.push({fieldName: "idMultiInputGrpPrecos1", filterFieldName: "Bandeira", operator: FilterOperator.EQ, and: false});
-            aFieldsConf.push({fieldName: "idMultiInputLojas1", filterFieldName: "Werks", operator: FilterOperator.EQ, and: false});
+            aFieldsConf.push({fieldName: "idMultiInputCompradorCod1", filterFieldName: "Ekgrp", operator: FilterOperator.EQ, and: false, fieldType: "MultiInput"});
+            aFieldsConf.push({fieldName: "idMultiInputFornecedorCod1", filterFieldName: "Lifnr", operator: FilterOperator.EQ, and: false, fieldType: "MultiInput"});
+            aFieldsConf.push({fieldName: "idCheckBoxFornecedorRegular1", filterFieldName: "Regular", operator: FilterOperator.EQ, and: false, fieldType: "CheckBox"});
+            aFieldsConf.push({fieldName: "idMultiInputMaterial1", filterFieldName: "Ebeln", operator: FilterOperator.EQ, and: false, fieldType: "MultiInput"});
+            aFieldsConf.push({fieldName: "idMultiInputContrato1", filterFieldName: "Ebeln", operator: FilterOperator.EQ, and: false, fieldType: "MultiInput"});
+            aFieldsConf.push({fieldName: "idMultiInputFonteSuprimento1", filterFieldName: "Sobsl", operator: FilterOperator.EQ, and: false, fieldType: "MultiInput"});
+            aFieldsConf.push({fieldName: "idMultiInputStatusMaterial1", filterFieldName: "Mmsta", operator: FilterOperator.EQ, and: false, fieldType: "MultiInput"});
+            aFieldsConf.push({fieldName: "idMultiInputDepartamento1", filterFieldName: "Node3", operator: FilterOperator.EQ, and: false, fieldType: "MultiInput"});
+            aFieldsConf.push({fieldName: "idMultiInputNoHierarquia1", filterFieldName: "Node6", operator: FilterOperator.EQ, and: false, fieldType: "MultiInput"});
+            aFieldsConf.push({fieldName: "idMultiInputUf1", filterFieldName: "UF", operator: FilterOperator.EQ, and: false, fieldType: "MultiInput"});
+            aFieldsConf.push({fieldName: "idMultiInputGrpPrecos1", filterFieldName: "Bandeira", operator: FilterOperator.EQ, and: false, fieldType: "MultiInput"});
+            aFieldsConf.push({fieldName: "idMultiInputLojas1", filterFieldName: "Werks", operator: FilterOperator.EQ, and: false, fieldType: "MultiInput"});
+            aFieldsConf.push({fieldName: "idMultiInputSortimento1", filterFieldName: "Asort", operator: FilterOperator.EQ, and: false, fieldType: "MultiInput"});
 
 /*
             if(sFieldNameExclude){
@@ -976,8 +987,11 @@ sap.ui.define([
         onValueHelpFonteSuprimentoPreFilter: function(oEvt){
             let aFilters = [];
 
+/*
             // Set previous filter - if "Material" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputMaterial1", "Matnr", FilterOperator.EQ, false);
+*/
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputFonteSuprimento1"]));
 
             // Define filters
             this._ShFonteSuprimentoDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -1036,8 +1050,11 @@ sap.ui.define([
             // this.buildSingleFilter(aFilters, "Lifnr", FilterOperator.Contains, oEvt);
             this.buildSingleFilter(aFilters, "Ltext", FilterOperator.Contains, oEvt);
 
+/*
             // Set previous filter - if "Material" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputMaterial1", "Matnr", FilterOperator.EQ, false);
+*/
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputFonteSuprimento1"]));
 
             if(aFilters.length > 0){
                 oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
