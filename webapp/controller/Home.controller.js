@@ -891,6 +891,7 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpDepartamentoPreFilter: function(oEvt){
+/*
             let aFilters = [];
 
             // Set previous filter - if "Comprador" is filled (Multiple)
@@ -899,6 +900,13 @@ sap.ui.define([
             this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
             // Set previous filter - if "Contrato" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
+
+            // Define filters
+            this._ShDepartamentoDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputDepartamento1"]));
 
             // Define filters
             this._ShDepartamentoDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -932,6 +940,7 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpDepartamentoSearch: function(oEvt){
+/*
             let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
@@ -944,6 +953,19 @@ sap.ui.define([
             this.buildArrayFilter(aFilters, "idMultiInputFornecedorCod1", "Lifnr", FilterOperator.EQ, false);
             // Set previous filter - if "Contrato" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
+
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            }else{
+                oBinding.filter([]);
+            }
+*/
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            this.buildSingleFilter(aFilters, "Ltext", FilterOperator.Contains, oEvt);
+
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputDepartamento1"]));
 
             if(aFilters.length > 0){
                 oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -1279,10 +1301,18 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpGrpPrecosPreFilter: function(oEvt){
+/*
             let aFilters = [];
 
             // Set previous filter - if "UF" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
+
+            // Define filters
+            this._ShGrpPrecosDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputGrpPrecos1"]));
 
             // Define filters
             this._ShGrpPrecosDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -1316,6 +1346,7 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpGrpPrecosSearch: function(oEvt){
+/*
             let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
@@ -1324,6 +1355,19 @@ sap.ui.define([
 
             // Set previous filter - if "UF" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputUf1", "UF", FilterOperator.EQ, false);
+
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            }else{
+                oBinding.filter([]);
+            }
+*/
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            this.buildSingleFilter(aFilters, "Descricao", FilterOperator.Contains, oEvt);
+
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputGrpPrecos1"]));
 
             if(aFilters.length > 0){
                 oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -1365,6 +1409,7 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpHierarquiaPreFilter: function(oEvt){
+/*
             let aFilters = [];
 
             // Set previous filter - if "Comprador" is filled (Multiple)
@@ -1375,6 +1420,13 @@ sap.ui.define([
             this.buildArrayFilter(aFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
             // Set previous filter - if "Departamento" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputDepartamento1", "Node3", FilterOperator.EQ, false);
+
+            // Define filters
+            this._ShHierarquiaDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+*/
+            let aFilters = [];
+
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputNoHierarquia1"]));
 
             // Define filters
             this._ShHierarquiaDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -1408,6 +1460,7 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpHierarquiaSearch: function(oEvt){
+/*
             let aFilters = [];
             let oBinding = oEvt.getSource().getBinding("items");
 
@@ -1422,6 +1475,19 @@ sap.ui.define([
             this.buildArrayFilter(aFilters, "idMultiInputContrato1", "Ebeln", FilterOperator.EQ, false);
             // Set previous filter - if "Departamento" is filled (Multiple)
             this.buildArrayFilter(aFilters, "idMultiInputDepartamento1", "Node3", FilterOperator.EQ, false);
+
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
+            }else{
+                oBinding.filter([]);
+            }
+*/
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            this.buildSingleFilter(aFilters, "Ltext", FilterOperator.Contains, oEvt);
+
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputNoHierarquia1"]));
 
             if(aFilters.length > 0){
                 oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
@@ -1547,7 +1613,12 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpSortimentoPreFilter: function(oEvt){
-            
+            let aFilters = [];
+
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputSortimento1"]));
+
+            // Define filters
+            this._ShSortimentoDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
 
@@ -1578,6 +1649,7 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpSortimentoSearch: function(oEvt){
+/*
             let aFilters    = [];
 			let oBinding    = oEvt.getSource().getBinding("items"),
                 oFilter     = {};
@@ -1591,6 +1663,19 @@ sap.ui.define([
 
             if(aFilters.length > 0){
                 oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
+            }else{
+                oBinding.filter([]);
+            }
+*/
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            this.buildSingleFilter(aFilters, "Name1", FilterOperator.Contains, oEvt);
+
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputSortimento1"]));
+
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
             }else{
                 oBinding.filter([]);
             }
@@ -1629,7 +1714,12 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpStatusMaterialPreFilter: function(oEvt){
+            let aFilters = [];
 
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputStatusMaterial1"]));
+            
+            // Define filters
+            this._ShStatusMaterialDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
 
@@ -1660,6 +1750,7 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpStatusMaterialSearch: function(oEvt){
+/*
             let aFilters    = [];
 			let oBinding    = oEvt.getSource().getBinding("items"),
                 oFilter     = {};
@@ -1674,6 +1765,19 @@ sap.ui.define([
                 
                 // oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
                 oBinding.filter(aFilters);
+            }else{
+                oBinding.filter([]);
+            }
+*/
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            this.buildSingleFilter(aFilters, "Mtstb", FilterOperator.Contains, oEvt);
+
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputStatusMaterial1"]));
+
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
             }else{
                 oBinding.filter([]);
             }
@@ -1712,7 +1816,12 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpUfPreFilter: function(oEvt){
+            let aFilters = [];
+
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputUf1"]));
             
+            // Define filters
+            this._ShUfDialog.getBinding("items").filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
         },
 
 
@@ -1743,6 +1852,7 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvt - Dados do evento acionado
          */
         onValueHelpUfSearch: function(oEvt){
+/*
             let aFilters    = [];
 			let oBinding    = oEvt.getSource().getBinding("items"),
                 oFilter     = {};
@@ -1757,6 +1867,19 @@ sap.ui.define([
 
                 // oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array) / Second parameter (true = AND operator / false = OR operator)
                 oBinding.filter(aFilters);
+            }else{
+                oBinding.filter([]);
+            }
+*/
+            let aFilters = [];
+            let oBinding = oEvt.getSource().getBinding("items");
+
+            this.buildSingleFilter(aFilters, "Bland", FilterOperator.Contains, oEvt);
+
+            this.buildArrayFilterMass(aFilters, this._buildJsonFieldNameGroup3(["idMultiInputUf1"]));
+
+            if(aFilters.length > 0){
+                oBinding.filter(new Filter(aFilters, true)); // Multiple filter (array), parameter "true" = AND operator
             }else{
                 oBinding.filter([]);
             }
