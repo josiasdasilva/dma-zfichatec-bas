@@ -198,6 +198,8 @@ sap.ui.define([
                 this.getView().byId("idCheckBoxTotUf1").setSelected(false);
                 // Totalizador por Grupo
                 this.getView().byId("idCheckBoxTotGrp1").setSelected(false);
+                // Quebra por Fornecedor
+                this.getView().byId("idCheckBoxQuebraFornecedor1").setSelected(true);
 /*
                 // Atacado
                 this.getView().byId("idTBAtacado1").setPressed(true);
@@ -607,6 +609,7 @@ sap.ui.define([
             let iBandeira           = this.getBandeiraSelectedIndex();
             let bTotalUf            = this.getView().byId("idCheckBoxTotUf1").getSelected();
             let bTotalGrupo         = this.getView().byId("idCheckBoxTotGrp1").getSelected();
+            let bQuebraFornec       = this.getView().byId("idCheckBoxQuebraFornecedor1").getSelected();
             // let bTotalUf            = this.getView().byId("idTBTotUf1").getPressed();
             // let bTotalGrupo         = this.getView().byId("idTBTotGrp1").getPressed();
             // let bXDocking           = this.getView().byId("idCheckBoxSomenteMatXdock1").getSelected();
@@ -639,6 +642,7 @@ sap.ui.define([
             sObjectPath += this.makeFilterPath("Regular", ((bFornecedorRegular) ? "X" : ""), "eq", true, true);
             sObjectPath += this.makeFilterPath("Total_UF", ((bTotalUf) ? "X" : ""), "eq", true, true);
             sObjectPath += this.makeFilterPath("Total_Grupo", ((bTotalGrupo) ? "X" : ""), "eq", true, true);
+            sObjectPath += this.makeFilterPath("Quebra_Forn", ((bQuebraFornec) ? "X" : ""), "eq", true, true);
             // sObjectPath += this.makeFilterPath("Cross", ((bXDocking) ? "X" : ""), "eq", true, true);
             if(bSomenteXDocking || bNaoExibXDocking){
                 sObjectPath += this.makeFilterPath("Cross", "ZCRO", ((bSomenteXDocking) ? "eq" : "ne" ), true, true);

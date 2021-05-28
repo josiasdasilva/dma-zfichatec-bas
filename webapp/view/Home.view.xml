@@ -294,6 +294,11 @@
                                                     text="{i18n>somente_mat_xdock_lbl}"
                                                     select="onCheckBoxXDockingSelect"
                                                     selected="false" />
+                                                <CheckBox
+                                                    id="idCheckBoxNaoExibirMatXdock1"
+                                                    text="{i18n>nao_exibir_mat_xdock_lbl}"
+                                                    select="onCheckBoxXDockingSelect"
+                                                    selected="false" />
                                             </VBox>
                                         </HBox>
                                     </VBox>
@@ -424,11 +429,18 @@
                                                     id="idCheckBoxTotGrp1"
                                                     text="{i18n>tot_grp_lbl}"
                                                     selected="false" />
+<!--
                                                 <CheckBox
                                                     id="idCheckBoxNaoExibirMatXdock1"
                                                     text="{i18n>nao_exibir_mat_xdock_lbl}"
                                                     select="onCheckBoxXDockingSelect"
                                                     selected="false" />
+-->
+                                                <CheckBox
+                                                    id="idCheckBoxQuebraFornecedor1"
+                                                    text="{i18n>quebra_fornecedor_lbl}"
+                                                    select=""
+                                                    selected="true" />
                                             </VBox>
                                         </HBox>
                                     </VBox>
