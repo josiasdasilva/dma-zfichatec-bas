@@ -35,9 +35,6 @@
                                     <MultiInput
                                         width="550px"
                                         id="idMultiInputCompradorCod1"
-                                        suggestionItems="{
-                                            path: '/CompradorSet'
-                                        }"
                                         tokenChange="onTokenChangeMultiInput"
                                         valueHelpRequest="onValueHelpCompradorOpen"
                                         valueHelpOnly="true" >
@@ -59,9 +56,6 @@
                                     <MultiInput
                                         width="550px"
                                         id="idMultiInputFornecedorCod1"
-                                        suggestionItems="{
-                                            path: '/FornecedorSet'
-                                        }"
                                         tokenChange="onTokenChangeMultiInput"
                                         valueHelpRequest="onValueHelpFornecedorOpen"
                                         valueHelpOnly="true" >
@@ -87,9 +81,6 @@
                                     <MultiInput
                                         width="550px"
                                         id="idMultiInputMaterial1"
-                                        suggestionItems="{
-                                            path: '/MaterialSet'
-                                        }"
                                         tokenChange="onTokenChangeMultiInput"
                                         valueHelpRequest="onValueHelpMaterialOpen"
                                         valueHelpOnly="true" >
@@ -110,9 +101,6 @@
                                     <MultiInput
                                         width="550px"
                                         id="idMultiInputContrato1"
-                                        suggestionItems="{
-                                            path: '/ContratoSet'
-                                        }"
                                         tokenChange="onTokenChangeMultiInput"
                                         valueHelpRequest="onValueHelpContratoOpen"
                                         valueHelpOnly="true" >
@@ -177,9 +165,6 @@
                                             <MultiInput
                                                 width="350px"
                                                 id="idMultiInputFonteSuprimento1"
-                                                suggestionItems="{
-                                                    path: '/FSupSet'
-                                                }"
                                                 tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpFonteSuprimentoOpen"
                                                 valueHelpOnly="true" >
@@ -198,9 +183,6 @@
                                             <MultiInput
                                                 width="350px"
                                                 id="idMultiInputStatusMaterial1"
-                                                suggestionItems="{
-                                                    path: '/StatusMatSet'
-                                                }"
                                                 tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpStatusMaterialOpen"
                                                 valueHelpOnly="true" >
@@ -219,9 +201,6 @@
                                             <MultiInput
                                                 width="350px"
                                                 id="idMultiInputDepartamento1"
-                                                suggestionItems="{
-                                                    path: '/DepartamentoSet'
-                                                }"
                                                 tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpDepartamentoOpen"
                                                 valueHelpOnly="true" >
@@ -240,9 +219,6 @@
                                             <MultiInput
                                                 width="350px"
                                                 id="idMultiInputNoHierarquia1"
-                                                suggestionItems="{
-                                                    path: '/HierarquiaSet'
-                                                }"
                                                 tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpHierarquiaOpen"
                                                 valueHelpOnly="true" >
@@ -317,9 +293,6 @@
                                             <MultiInput
                                                 width="350px"
                                                 id="idMultiInputUf1"
-                                                suggestionItems="{
-                                                    path: '/UFSet'
-                                                }"
                                                 tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpUfOpen"
                                                 valueHelpOnly="true" >
@@ -338,9 +311,6 @@
                                             <MultiInput
                                                 width="350px"
                                                 id="idMultiInputGrpPrecos1"
-                                                suggestionItems="{
-                                                    path: '/GrupoPrecosSet'
-                                                }"
                                                 tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpGrpPrecosOpen"
                                                 valueHelpOnly="true" >
@@ -359,9 +329,6 @@
                                             <MultiInput
                                                 width="350px"
                                                 id="idMultiInputLojas1"
-                                                suggestionItems="{
-                                                    path: '/LojasSet'
-                                                }"
                                                 tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpLojasOpen"
                                                 valueHelpOnly="true" >
@@ -380,9 +347,6 @@
                                             <MultiInput
                                                 width="350px"
                                                 id="idMultiInputSortimento1"
-                                                suggestionItems="{
-                                                    path: '/SortimSet'
-                                                }"
                                                 tokenChange="onTokenChangeMultiInput"
                                                 valueHelpRequest="onValueHelpSortimentoOpen"
                                                 valueHelpOnly="true" >
