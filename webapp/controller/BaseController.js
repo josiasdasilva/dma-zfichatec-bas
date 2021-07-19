@@ -138,6 +138,7 @@ sap.ui.define([
          * Token (valor padrão = this.getFromType().DESCRIPTION)
          */
         onValueHelpClose: function(oEvt, sId, sTextGetFrom = this.getFromType().DESCRIPTION){
+/*
             let aSelectedItems = oEvt.getParameter("selectedItems");
             let enumFromType = this.getFromType();
             let oMultiInput = this.byId(sId);
@@ -162,6 +163,39 @@ sap.ui.define([
                         new Token(
                             {
                                 key: oItem.getTitle(),
+                                text: sTextGetFromValue
+                            }
+                        )
+                    );
+                });
+            }
+*/
+            let aSelectedContexts   = oEvt.getParameter("selectedContexts");
+            let enumFromType        = this.getFromType();
+            let oModel              = this.getView().getModel(),
+                oMultiInput         = this.byId(sId),
+                oSelectedItem       = oEvt.getParameter("selectedItem");
+            let sTextGetFromValue;
+
+            oMultiInput.removeAllTokens();
+
+            if(aSelectedContexts && aSelectedContexts.length > 0){
+                aSelectedContexts.forEach(function(oItem){
+                    switch(sTextGetFrom){
+                        case enumFromType.TITLE:
+                            sTextGetFromValue = oModel.getProperty(oItem.getPath())[oSelectedItem.getBinding("title").getPath()];
+                            break;
+                        case enumFromType.DESCRIPTION:
+                            sTextGetFromValue = oModel.getProperty(oItem.getPath())[oSelectedItem.getBinding("description").getPath()];
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                    oMultiInput.addToken(
+                        new Token(
+                            {
+                                key: oModel.getProperty(oItem.getPath())[oSelectedItem.getBinding("title").getPath()],
                                 text: sTextGetFromValue
                             }
                         )
